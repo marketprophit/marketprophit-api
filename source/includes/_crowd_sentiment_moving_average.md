@@ -14,9 +14,9 @@ curl "http://localhost:3000/real-time/crowd-sentiment-moving-average?ticker=AAPL
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2057
-ETag: W/"809-3305609055"
-Date: Tue, 17 Jun 2014 00:03:36 GMT
+Content-Length: 2147
+ETag: W/"863-1914113589"
+Date: Tue, 17 Jun 2014 00:07:02 GMT
 Connection: keep-alive
 
 
@@ -70,9 +70,9 @@ curl "http://localhost:3000/historical/crowd-sentiment-moving-average?ticker=AAP
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 454744
-ETag: W/"6f058-381163313"
-Date: Tue, 17 Jun 2014 00:03:43 GMT
+Content-Length: 454745
+ETag: W/"6f059-1919415900"
+Date: Tue, 17 Jun 2014 00:07:05 GMT
 Connection: keep-alive
 
 
@@ -83,11 +83,6 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-06-10T04:05:00.000Z",
-    "ticker": "AAPL",
-    "average_sentiment": 0.5588891356923279
-  },
-  {
     "ts": "2014-06-10T04:06:00.000Z",
     "ticker": "AAPL",
     "average_sentiment": -0.0547738272972733
@@ -96,6 +91,11 @@ Connection: keep-alive
     "ts": "2014-06-10T04:07:00.000Z",
     "ticker": "AAPL",
     "average_sentiment": 0.3146097069007635
+  },
+  {
+    "ts": "2014-06-10T04:09:00.000Z",
+    "ticker": "AAPL",
+    "average_sentiment": -0.4427044086014045
   }
 ]
 ```
@@ -129,7 +129,7 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 269
 ETag: W/"10d-2604592247"
-Date: Tue, 17 Jun 2014 00:03:37 GMT
+Date: Tue, 17 Jun 2014 00:07:05 GMT
 Connection: keep-alive
 
 

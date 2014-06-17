@@ -1,11 +1,11 @@
 
-# Crowd Sentiment
+# Crowd Sentiment Z-Score Moving Average
 
 
-## Crowd Sentiment
+## Crowd Sentiment Z-Score Moving Average
 
 ```shell
-curl "http://localhost:3000/real-time/crowd-sentiment?ticker=AAPL"
+curl "http://localhost:3000/real-time/crowd-sentiment-z-score-moving-average?ticker=AAPL"
 ```
 
 > Returns response headers such as:
@@ -16,7 +16,7 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2147
 ETag: W/"863-1914113589"
-Date: Tue, 17 Jun 2014 00:06:53 GMT
+Date: Tue, 17 Jun 2014 00:07:06 GMT
 Connection: keep-alive
 
 
@@ -48,7 +48,7 @@ Realtime intraday data
 
 ### HTTP Request
 
-`GET http://localhost:3000/real-time/crowd-sentiment`
+`GET http://localhost:3000/real-time/crowd-sentiment-z-score-moving-average`
 
 ### Query Parameters
 
@@ -58,10 +58,10 @@ ticker | 3-4 character long alphanumeric stock ticker symbol | yes | none
 
 
 
-## Historical Crowd Sentiment
+## Historical Crowd Sentiment Z-Score Moving Average
 
 ```shell
-curl "http://localhost:3000/historical/crowd-sentiment?ticker=AAPL"
+curl "http://localhost:3000/historical/crowd-sentiment-z-score-moving-average?ticker=AAPL"
 ```
 
 > Returns response headers such as:
@@ -72,7 +72,7 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 454745
 ETag: W/"6f059-1919415900"
-Date: Tue, 17 Jun 2014 00:06:58 GMT
+Date: Tue, 17 Jun 2014 00:07:14 GMT
 Connection: keep-alive
 
 
@@ -104,7 +104,7 @@ Historical intraday data
 
 ### HTTP Request
 
-`GET http://localhost:3000/historical/crowd-sentiment`
+`GET http://localhost:3000/historical/crowd-sentiment-z-score-moving-average`
 
 ### Query Parameters
 
@@ -115,10 +115,10 @@ start_ts | ISO-8601 timestamp | no | 1 week ago
 end_ts | ISO-8601 timestamp | no | now
 
 
-## Daily Crowd Sentiment
+## Daily Crowd Sentiment Z-Score Moving Average
 
 ```shell
-curl "http://localhost:3000/historical/daily-crowd-sentiment?ticker=AAPL"
+curl "http://localhost:3000/historical/daily-crowd-sentiment-z-score-moving-average?ticker=AAPL"
 ```
 
 > Returns response headers such as:
@@ -129,7 +129,7 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 269
 ETag: W/"10d-2604592247"
-Date: Tue, 17 Jun 2014 00:07:01 GMT
+Date: Tue, 17 Jun 2014 00:07:07 GMT
 Connection: keep-alive
 
 
@@ -161,7 +161,7 @@ Daily crowd sentiment historical data
 
 ### HTTP Request
 
-`GET http://localhost:3000/historical/daily-crowd-sentiment`
+`GET http://localhost:3000/historical/daily-crowd-sentiment-z-score-moving-average`
 
 ### Query Parameters
 
