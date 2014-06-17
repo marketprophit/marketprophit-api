@@ -14,9 +14,9 @@ curl "http://localhost:3000/real-time/crowd-sentiment-z-score?ticker=AAPL"
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2147
-ETag: W/"863-1914113589"
-Date: Tue, 17 Jun 2014 00:07:05 GMT
+Content-Length: 2681
+ETag: W/"a79-3003475523"
+Date: Tue, 17 Jun 2014 01:04:13 GMT
 Connection: keep-alive
 
 
@@ -27,19 +27,19 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-06-16T23:08:00.000Z",
+    "ts": "2014-06-17T00:07:00.000Z",
     "ticker": "AAPL",
-    "average_sentiment": -0.8149697415548554
+    "average_sentiment": 0.7478053746695877
   },
   {
-    "ts": "2014-06-16T23:09:00.000Z",
+    "ts": "2014-06-17T00:08:00.000Z",
     "ticker": "AAPL",
-    "average_sentiment": -0.2057233327523651
+    "average_sentiment": -0.1728300447416489
   },
   {
-    "ts": "2014-06-16T23:11:00.000Z",
+    "ts": "2014-06-17T00:09:00.000Z",
     "ticker": "AAPL",
-    "average_sentiment": 0.2654409791205912
+    "average_sentiment": 0.5574118689786793
   }
 ]
 ```
@@ -70,9 +70,9 @@ curl "http://localhost:3000/historical/crowd-sentiment-z-score?ticker=AAPL"
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 454745
-ETag: W/"6f059-1919415900"
-Date: Tue, 17 Jun 2014 00:07:14 GMT
+Content-Length: 454649
+ETag: W/"6eff9-728414898"
+Date: Tue, 17 Jun 2014 01:04:27 GMT
 Connection: keep-alive
 
 
@@ -83,19 +83,19 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-06-10T04:06:00.000Z",
+    "ts": "2014-06-10T05:06:00.000Z",
     "ticker": "AAPL",
-    "average_sentiment": -0.0547738272972733
+    "average_sentiment": -0.0926739636427333
   },
   {
-    "ts": "2014-06-10T04:07:00.000Z",
+    "ts": "2014-06-10T05:07:00.000Z",
     "ticker": "AAPL",
-    "average_sentiment": 0.3146097069007635
+    "average_sentiment": -0.68822041321747
   },
   {
-    "ts": "2014-06-10T04:09:00.000Z",
+    "ts": "2014-06-10T05:08:00.000Z",
     "ticker": "AAPL",
-    "average_sentiment": -0.4427044086014045
+    "average_sentiment": -0.1052495304217032
   }
 ]
 ```
@@ -129,7 +129,7 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 269
 ETag: W/"10d-2604592247"
-Date: Tue, 17 Jun 2014 00:07:05 GMT
+Date: Tue, 17 Jun 2014 01:04:14 GMT
 Connection: keep-alive
 
 
