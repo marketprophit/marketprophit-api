@@ -30,7 +30,8 @@ By default, all `/real-time/` prefixed `GET` endpoints have support for websocke
 
   function connectSocket(token) {
     var socket = io.connect('<%= url %>', {
-      query: 'token=' + token
+      query: 'token=' + token,
+      secure: true
     })
     socket
     .on('connect', function() {

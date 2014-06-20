@@ -30,7 +30,8 @@ By default, all `/real-time/` prefixed `GET` endpoints have support for websocke
 
   function connectSocket(token) {
     var socket = io.connect('https://open.marketprophit.com', {
-      query: 'token=' + token
+      query: 'token=' + token,
+      secure: true
     })
     socket
     .on('connect', function() {
@@ -150,8 +151,8 @@ HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 239
-Set-Cookie: igloo=s%3AobZZUZcgGKA1piz80d4ouoOT.5sSxs69rGSJDz8fcelSyXeTzeHlUOcre%2BZ%2FGF6c69D0; Path=/; Expires=Sat, 21 Jun 2014 17:51:59 GMT; HttpOnly
-Date: Fri, 20 Jun 2014 17:51:59 GMT
+set-cookie: igloo=s%3A9sNKlO6-PqSX79xbEP8c5eVa-gZqNUwT.aadtHpeI4JQh33Caqwyl9KjwLNv0cr8l9ucsgA9Bkfw; Path=/; Expires=Sat, 21 Jun 2014 21:31:37 GMT; HttpOnly
+Date: Fri, 20 Jun 2014 21:31:37 GMT
 Connection: keep-alive
 
 
@@ -161,7 +162,7 @@ Connection: keep-alive
 
 ```json
 {
-  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAbWFya2V0cHJvcGhpdC5jb20iLCJhcGkiOiJza19saXZlX2ZYZ0Rncnk4MTRxd2FrTDQxS0RaaW40NyIsImlhdCI6MTQwMzI4NjcxOSwiZXhwIjoxNDAzMjkwMzE5fQ.GHBngK9myDjB15-NBzKsH_Lk8cDgdGh2SmXglhmN8q8"
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAbWFya2V0cHJvcGhpdC5jb20iLCJhcGkiOiJza19saXZlX2ZYZ0Rncnk4MTRxd2FrTDQxS0RaaW40NyIsImlhdCI6MTQwMzI5OTg5OCwiZXhwIjoxNDAzMzAzNDk4fQ.AtHoDOchHbl8Jozogak76_8axxOWM6sf2m1Yp11H81U"
 }
 ```
 
