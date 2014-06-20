@@ -36,20 +36,20 @@ By default, all `/real-time/` prefixed `GET` endpoints have support for websocke
     socket
     .on('connect', function() {
       console.log('connected and authenticated')
-      socket.emit('subscribe', {
-        path: '/real-time/crowd-sentiment',
-        method: 'get',
-        params: {
-          ticker: 'AAPL'
-        }
-      }, function(err) {
-        if (err) return console.error(err)
-        console.log(
-          'subscribed to: %s %s',
-          'GET',
-          '/real-time/crowd-sentiment'
-        )
-      })
+    })
+    .emit('subscribe', {
+      path: '/real-time/crowd-sentiment',
+      method: 'get',
+      params: {
+        ticker: 'AAPL'
+      }
+    }, function(err) {
+      if (err) return console.error(err)
+      console.log(
+        'subscribed to: %s %s',
+        'GET',
+        '/real-time/crowd-sentiment'
+      )
     })
     .on('disconnect', function() {
       console.log('disconnected')
