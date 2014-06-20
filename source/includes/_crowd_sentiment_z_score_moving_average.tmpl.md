@@ -5,7 +5,7 @@
 ## Crowd Sentiment Z-Score Moving Average
 
 ```shell
-curl "<%= url %>/real-time/crowd-sentiment-z-score-moving-average?ticker=<%= ticker %>"
+curl <%- auth %> "<%= url %>/real-time/crowd-sentiment-z-score-moving-average?ticker=<%= ticker %>"
 ```
 
 > Returns response headers such as:
@@ -37,7 +37,7 @@ ticker | 3-4 character long alphanumeric stock ticker symbol | yes | none
 ## Historical Crowd Sentiment Z-Score Moving Average
 
 ```shell
-curl "<%= url %>/historical/crowd-sentiment-z-score-moving-average?ticker=<%= ticker %>"
+curl <%- auth %> "<%= url %>/historical/crowd-sentiment-z-score-moving-average?ticker=<%= ticker %>"
 ```
 
 > Returns response headers such as:
@@ -70,7 +70,7 @@ end_ts | ISO-8601 timestamp | no | now
 ## Daily Crowd Sentiment Z-Score Moving Average
 
 ```shell
-curl "<%= url %>/historical/daily-crowd-sentiment-z-score-moving-average?ticker=<%= ticker %>"
+curl <%- auth %> "<%= url %>/historical/daily-crowd-sentiment-z-score-moving-average?ticker=<%= ticker %>"
 ```
 
 > Returns response headers such as:
@@ -85,7 +85,7 @@ curl "<%= url %>/historical/daily-crowd-sentiment-z-score-moving-average?ticker=
 <%- curl('/historical/daily-crowd-sentiment-z-score-moving-average?ticker=' + ticker) %>
 ```
 
-Daily crowd sentiment historical data
+Daily crowd sentiment z-score moving average historical data
 
 ### HTTP Request
 

@@ -1,30 +1,30 @@
 
-# Crowd Sentiment
+# Tweet Buzz
 
 
-## Crowd Sentiment
+## Tweet Buzz
 
 ```shell
-curl <%- auth %> "<%= url %>/real-time/crowd-sentiment?ticker=<%= ticker %>"
+curl <%- auth %> "<%= url %>/real-time/tweet-buzz?ticker=<%= ticker %>"
 ```
 
 > Returns response headers such as:
 
 ```bash
-<%- curl('/real-time/crowd-sentiment?ticker=' + ticker + ' -s -D- -o/dev/null') %>
+<%- curl('/real-time/tweet-buzz?ticker=' + ticker + ' -s -D- -o/dev/null') %>
 ```
 
 > Returns response such as (limited `results` for brevity):
 
 ```json
-<%- curl('/real-time/crowd-sentiment?ticker=' + ticker) %>
+<%- curl('/real-time/tweet-buzz?ticker=' + ticker) %>
 ```
 
 Realtime intraday data
 
 ### HTTP Request
 
-`GET <%= url %>/real-time/crowd-sentiment`
+`GET <%= url %>/real-time/tweet-buzz`
 
 ### Query Parameters
 
@@ -34,29 +34,29 @@ ticker | 3-4 character long alphanumeric stock ticker symbol | yes | none
 
 
 
-## Historical Crowd Sentiment
+## Historical Tweet Buzz
 
 ```shell
-curl <%- auth %> "<%= url %>/historical/crowd-sentiment?ticker=<%= ticker %>"
+curl <%- auth %> "<%= url %>/historical/tweet-buzz?ticker=<%= ticker %>"
 ```
 
 > Returns response headers such as:
 
 ```bash
-<%- curl('/historical/crowd-sentiment?ticker=' + ticker + ' -s -D- -o/dev/null') %>
+<%- curl('/historical/tweet-buzz?ticker=' + ticker + ' -s -D- -o/dev/null') %>
 ```
 
 > Returns response such as (limited `results` for brevity):
 
 ```json
-<%- curl('/historical/crowd-sentiment?ticker=' + ticker) %>
+<%- curl('/historical/tweet-buzz?ticker=' + ticker) %>
 ```
 
 Historical intraday data
 
 ### HTTP Request
 
-`GET <%= url %>/historical/crowd-sentiment`
+`GET <%= url %>/historical/tweet-buzz`
 
 ### Query Parameters
 
@@ -67,29 +67,29 @@ start_ts | ISO-8601 timestamp | no | 1 week ago
 end_ts | ISO-8601 timestamp | no | now
 
 
-## Daily Crowd Sentiment
+## Daily Tweet Buzz
 
 ```shell
-curl <%- auth %> "<%= url %>/historical/daily-crowd-sentiment?ticker=<%= ticker %>"
+curl <%- auth %> "<%= url %>/historical/daily-tweet-buzz?ticker=<%= ticker %>"
 ```
 
 > Returns response headers such as:
 
 ```bash
-<%- curl('/historical/daily-crowd-sentiment?ticker=' + ticker + ' -s -D- -o/dev/null') %>
+<%- curl('/historical/daily-tweet-buzz?ticker=' + ticker + ' -s -D- -o/dev/null') %>
 ```
 
 > Returns response such as (limited `results` for brevity):
 
 ```json
-<%- curl('/historical/daily-crowd-sentiment?ticker=' + ticker) %>
+<%- curl('/historical/daily-tweet-buzz?ticker=' + ticker) %>
 ```
 
-Daily crowd sentiment historical data
+Daily tweet buzz historical data
 
 ### HTTP Request
 
-`GET <%= url %>/historical/daily-crowd-sentiment`
+`GET <%= url %>/historical/daily-tweet-buzz`
 
 ### Query Parameters
 

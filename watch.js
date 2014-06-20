@@ -3,22 +3,28 @@
 
 var path = require('path')
 var fs = require('fs')
-
+var util = require('util')
 var readdirp = require('readdirp')
+
 var tmpl = path.join(__dirname, 'source', 'index.template.md')
 var index = path.join(__dirname, 'source', 'index.md')
 
-var url = process.env.NODE_ENV === 'production' ? 'http://open.marketprophit.com' : 'http://localhost:3000'
+var url = process.env.NODE_ENV === 'production' ? 'https://open.marketprophit.com' : 'http://localhost:3000'
+
+var apiKey = 'sk_live_fXgDgry814qwakL41KDZin47'
+var auth = '-u "' + apiKey + ':"'
 
 var aejs = require('async-ejs').add('curl', function(str, callback) {
   var exec = require('child_process').exec
-  exec('curl ' + url + str, {
+  exec(util.format('curl -k %s %s%s', auth, url, str), {
     maxBuffer: Infinity
   }, function(err, stdout) {
     if (err) return callback(err)
     try {
       stdout = JSON.parse(stdout)
-      callback(null, JSON.stringify(stdout.slice(0, 3), null, 2))
+      if (stdout instanceof Array)
+        stdout = stdout.slice(0, 3)
+      callback(null, JSON.stringify(stdout, null, 2))
     } catch(e) {
       callback(null, stdout)
     }
@@ -34,9 +40,14 @@ stream.on('data', function(entry) {
 
   aejs.renderFile(entry.path, {
     ticker: 'AAPL',
-    url: url
+    url: url,
+    auth: auth,
+    apiKey: apiKey
   }, function(err, result) {
-    if (err) throw err
+    if (err) {
+      console.error(err)
+      process.exit(0)
+    }
     fs.writeFile(entry.path.replace('.tmpl.md', '.md'), result, function(err) {
       if (err) throw err
     })

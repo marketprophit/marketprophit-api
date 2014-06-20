@@ -5,7 +5,7 @@
 ## Market Prophit Sentiment Moving Average
 
 ```shell
-curl "<%= url %>/real-time/market-prophit-sentiment-moving-average?ticker=<%= ticker %>"
+curl <%- auth %> "<%= url %>/real-time/market-prophit-sentiment-moving-average?ticker=<%= ticker %>"
 ```
 
 > Returns response headers such as:
@@ -37,7 +37,7 @@ ticker | 3-4 character long alphanumeric stock ticker symbol | yes | none
 ## Historical Market Prophit Sentiment Moving Average
 
 ```shell
-curl "<%= url %>/historical/market-prophit-sentiment-moving-average?ticker=<%= ticker %>"
+curl <%- auth %> "<%= url %>/historical/market-prophit-sentiment-moving-average?ticker=<%= ticker %>"
 ```
 
 > Returns response headers such as:
@@ -70,7 +70,7 @@ end_ts | ISO-8601 timestamp | no | now
 ## Daily Market Prophit Sentiment Moving Average
 
 ```shell
-curl "<%= url %>/historical/daily-market-prophit-sentiment-moving-average?ticker=<%= ticker %>"
+curl <%- auth %> "<%= url %>/historical/daily-market-prophit-sentiment-moving-average?ticker=<%= ticker %>"
 ```
 
 > Returns response headers such as:
@@ -85,7 +85,7 @@ curl "<%= url %>/historical/daily-market-prophit-sentiment-moving-average?ticker
 <%- curl('/historical/daily-market-prophit-sentiment-moving-average?ticker=' + ticker) %>
 ```
 
-Daily market prophit sentiment historical data
+Daily market prophit sentiment moving average historical data
 
 ### HTTP Request
 

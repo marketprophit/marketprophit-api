@@ -1,11 +1,11 @@
 
-# Market Prophit Sentiment Moving Average
+# Market Prophit Sentiment Z-Score
 
 
-## Market Prophit Sentiment Moving Average
+## Market Prophit Sentiment Z-Score
 
 ```shell
-curl -u "sk_live_fXgDgry814qwakL41KDZin47:" "https://open.marketprophit.com/real-time/market-prophit-sentiment-moving-average?ticker=AAPL"
+curl -u "sk_live_fXgDgry814qwakL41KDZin47:" "https://open.marketprophit.com/real-time/market-prophit-sentiment-z-score?ticker=AAPL"
 ```
 
 > Returns response headers such as:
@@ -16,8 +16,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 4869
 ETag: W/"1305-3183917410"
-Set-Cookie: igloo=s%3AX0FNpjIZq7qh4DUzJn1TypmF.OR7c38%2B20NZYvsPP4mqJhTWo2dZPh%2FXtNw2s0fh3gtc; Path=/; Expires=Sat, 21 Jun 2014 17:52:04 GMT; HttpOnly
-Date: Fri, 20 Jun 2014 17:52:04 GMT
+Set-Cookie: igloo=s%3AM7MAkUhuyqeZFXQt4XxHmozl.%2BwrN%2FOoFsCp761NPyFZRVtZXIg0V7cks%2BeQ%2FwN5fpmw; Path=/; Expires=Sat, 21 Jun 2014 17:52:01 GMT; HttpOnly
+Date: Fri, 20 Jun 2014 17:52:01 GMT
 Connection: keep-alive
 
 
@@ -49,7 +49,7 @@ Realtime intraday data
 
 ### HTTP Request
 
-`GET https://open.marketprophit.com/real-time/market-prophit-sentiment-moving-average`
+`GET https://open.marketprophit.com/real-time/market-prophit-sentiment-z-score`
 
 ### Query Parameters
 
@@ -59,10 +59,10 @@ ticker | 3-4 character long alphanumeric stock ticker symbol | yes | none
 
 
 
-## Historical Market Prophit Sentiment Moving Average
+## Historical Market Prophit Sentiment Z-Score
 
 ```shell
-curl -u "sk_live_fXgDgry814qwakL41KDZin47:" "https://open.marketprophit.com/historical/market-prophit-sentiment-moving-average?ticker=AAPL"
+curl -u "sk_live_fXgDgry814qwakL41KDZin47:" "https://open.marketprophit.com/historical/market-prophit-sentiment-z-score?ticker=AAPL"
 ```
 
 > Returns response headers such as:
@@ -73,8 +73,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 349123
 ETag: W/"553c3-1911107334"
-Set-Cookie: igloo=s%3ATwEZIDEDELhpa2vksAm5v9gO.Y09asgWpvWmwpZTswLdzLrwJIMJZcHgM%2BHd290YdUvM; Path=/; Expires=Sat, 21 Jun 2014 17:52:26 GMT; HttpOnly
-Date: Fri, 20 Jun 2014 17:52:26 GMT
+Set-Cookie: igloo=s%3AA1TOFDNa3zO1JbZGCHnW4PIN.GF3JgdRl5Dbh1K%2B186%2Fj6weyOA2toI0C%2BSUTJXkQL%2Bc; Path=/; Expires=Sat, 21 Jun 2014 17:52:19 GMT; HttpOnly
+Date: Fri, 20 Jun 2014 17:52:19 GMT
 Connection: keep-alive
 
 
@@ -106,7 +106,7 @@ Historical intraday data
 
 ### HTTP Request
 
-`GET https://open.marketprophit.com/historical/market-prophit-sentiment-moving-average`
+`GET https://open.marketprophit.com/historical/market-prophit-sentiment-z-score`
 
 ### Query Parameters
 
@@ -117,10 +117,10 @@ start_ts | ISO-8601 timestamp | no | 1 week ago
 end_ts | ISO-8601 timestamp | no | now
 
 
-## Daily Market Prophit Sentiment Moving Average
+## Daily Market Prophit Sentiment Z-Score
 
 ```shell
-curl -u "sk_live_fXgDgry814qwakL41KDZin47:" "https://open.marketprophit.com/historical/daily-market-prophit-sentiment-moving-average?ticker=AAPL"
+curl -u "sk_live_fXgDgry814qwakL41KDZin47:" "https://open.marketprophit.com/historical/daily-market-prophit-sentiment-z-score?ticker=AAPL"
 ```
 
 > Returns response headers such as:
@@ -131,8 +131,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 345
 ETag: W/"159-1909259470"
-Set-Cookie: igloo=s%3Al6iBudfDOdEh5qAU06FUo7uI.bNfppEkpcms2QgB2GJ36F%2B9omkbPVEf7lJUFU%2FBty%2BI; Path=/; Expires=Sat, 21 Jun 2014 17:52:11 GMT; HttpOnly
-Date: Fri, 20 Jun 2014 17:52:11 GMT
+Set-Cookie: igloo=s%3AgyWRPFhMoVbiuCKb3BArbVBs.V5v3lCQKkS%2B4PPA%2Fxzo1qqAU983%2B4M2JiXwMEa5vwfw; Path=/; Expires=Sat, 21 Jun 2014 17:52:04 GMT; HttpOnly
+Date: Fri, 20 Jun 2014 17:52:04 GMT
 Connection: keep-alive
 
 
@@ -160,11 +160,11 @@ Connection: keep-alive
 ]
 ```
 
-Daily market prophit sentiment moving average historical data
+Daily market prophit sentiment z-score historical data
 
 ### HTTP Request
 
-`GET https://open.marketprophit.com/historical/daily-market-prophit-sentiment-moving-average`
+`GET https://open.marketprophit.com/historical/daily-market-prophit-sentiment-z-score`
 
 ### Query Parameters
 
