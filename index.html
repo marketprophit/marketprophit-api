@@ -1,0 +1,3269 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Market Prophit API</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script src="javascripts/all.js" type="text/javascript"></script>
+
+      <script>
+        $(function() {
+          setupLanguages(["shell"]);
+        });
+      </script>
+  </head>
+
+  <body class="index">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><i>Developer Keys Coming Soon</i></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+          <h1 id='introduction'>Introduction</h1>
+<p>Welcome to the Market Prophit API!  You can use our API to access Market Prophit API endpoints, which can get information on crowd sentiment, market prophit sentiment, z-scores, moving averages, tweet volume, and/or tweet buzz in our database.</p>
+
+<p>We have language bindings only in Shell right now.  You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+
+          <h1 id='authentication'>Authentication</h1>
+<p>All requests must use standard <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">HTTP Basic Auth</a> headers with the <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">HTTPS</a> protocol.</p>
+
+<p>You don&rsquo;t need to provide a password for Basic Auth; simply use your secret API key as the Basic Auth user.</p>
+
+<p>Remember, your secret API key is <em>secret</em>, so do not share it with anyone.</p>
+
+          <h1 id='response-formats'>Response Formats</h1>
+<p><aside class="notice">By default, the Market Prophit API uses the HTTP request header <code class="prettyprint">Accepts</code> to determine response formats.  However, you can also affix <code class="prettyprint">.json</code>, <code class="prettyprint">.csv</code>, or <code class="prettyprint">.xml</code> to any endpoint to return those respective response formats (this overrides the <code class="prettyprint">Accepts</code> header).</aside></p>
+
+<table><thead>
+<tr>
+<th>Accepts</th>
+<th>Affixed</th>
+<th>Response</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>none</td>
+<td>none</td>
+<td>JSON response</td>
+</tr>
+<tr>
+<td>text/html</td>
+<td>none</td>
+<td>Pretty JSON (indented 2 spaces) and wrapped with <code class="prettyprint">&lt;pre&gt;&lt;code&gt;</code></td>
+</tr>
+<tr>
+<td>application/json</td>
+<td>.json</td>
+<td>JSON response</td>
+</tr>
+<tr>
+<td>application/xml</td>
+<td>.xml</td>
+<td>XML response with results as <code class="prettyprint">&lt;row&gt;</code> attributes wrapped in <code class="prettyprint">&lt;rows&gt;</code> attribute</td>
+</tr>
+<tr>
+<td>text/csv</td>
+<td>.csv</td>
+<td>CSV file delimited by &ldquo;;&rdquo; with first line of underscored column names</td>
+</tr>
+</tbody></table>
+
+          <h1 id='errors'>Errors</h1>
+<p>The Market Prophit API uses the following error codes:</p>
+<h2 id='codes'>Codes</h1>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>Missing a required parameter and/or invalid parameter provided</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+<td>Invalid API key</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+<td>Restricted endpoint</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found</td>
+<td>Requested endpoint does not exist</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable</td>
+<td>Invalid response format requested</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+<td>Internal problem, try again later</td>
+</tr>
+</tbody></table>
+<h2 id='types'>Types</h1>
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>invalid_request_error</td>
+<td>An invalid request was made</td>
+</tr>
+<tr>
+<td>api_error</td>
+<td>An error with the Market Prophit API occured</td>
+</tr>
+</tbody></table>
+
+          <h1 id='websockets'>Websockets</h1>
+<p>In order to communicate with websockets, you must follow these requirements:</p>
+
+<p>By default, all <code class="prettyprint">/real-time/</code> prefixed <code class="prettyprint">GET</code> endpoints have support for websockets.</p>
+
+<ul>
+<li><p>Use a <a href="http://socket.io">socket.io</a> API wrapper (or an alternative if available):</p>
+
+<ul>
+<li><a href="https://github.com/Automattic/socket.io-client">Node.js</a></li>
+<li><a href="https://github.com/lyondhill/socket.io-ruby-client">Ruby</a></li>
+<li><a href="https://pypi.python.org/pypi/socketIO-client">Python</a></li>
+<li><a href="https://github.com/Gottox/socket.io-java-client">Java</a></li>
+<li><a href="https://metacpan.org/pod/AnyEvent::PocketIO::Client">Perl</a></li>
+</ul></li>
+<li><p>Retrieve a JSON Web Token (&ldquo;JWT&rdquo;) to be passed as <code class="prettyprint">token</code> in the request query object</p></li>
+<li><p>Bind and/or emit events as necessary</p></li>
+</ul>
+<h2 id='websocket-events'>Websocket Events</h1>
+<blockquote>
+<p>Example using client-side JavaScript (through use of jQuery and socket.io):</p>
+</blockquote>
+<pre class="highlight javascript">
+<span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="cm">/*globals io*/</span>
+
+  <span class="kd">function</span> <span class="nx">connectSocket</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">socket</span> <span class="o">=</span> <span class="nx">io</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s1">'https://open.marketprophit.com'</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">query</span><span class="p">:</span> <span class="s1">'token='</span> <span class="o">+</span> <span class="nx">token</span><span class="p">,</span>
+      <span class="na">secure</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">})</span>
+    <span class="nx">socket</span>
+    <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'connect'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'connected and authenticated'</span><span class="p">)</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">'subscribe'</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">path</span><span class="p">:</span> <span class="s1">'/real-time/crowd-sentiment'</span><span class="p">,</span>
+      <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
+      <span class="na">params</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">ticker</span><span class="p">:</span> <span class="s1">'AAPL'</span>
+      <span class="p">}</span>
+    <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+        <span class="s1">'subscribed to: %s %s'</span><span class="p">,</span>
+        <span class="s1">'GET'</span><span class="p">,</span>
+        <span class="s1">'/real-time/crowd-sentiment'</span>
+      <span class="p">)</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'disconnect'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'disconnected'</span><span class="p">)</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'err'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'err'</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'res'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'res'</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span>
+    <span class="p">})</span>
+    <span class="c1">// after 3 minutes unsubscribe us
+</span>    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">'unsubscribe'</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">path</span><span class="p">:</span> <span class="s1">'/real-time/crowd-sentiment'</span><span class="p">,</span>
+        <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+        <span class="na">params</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">ticker</span><span class="p">:</span> <span class="s1">'APPL'</span>
+        <span class="p">}</span>
+      <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+          <span class="s1">'unsubscribed from: %s %s'</span><span class="p">,</span>
+          <span class="s1">'GET'</span><span class="p">,</span>
+          <span class="s1">'/real-time/crowd-sentiment'</span>
+        <span class="p">)</span>
+      <span class="p">})</span>
+    <span class="p">},</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+      <span class="na">type</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+      <span class="na">url</span><span class="p">:</span> <span class="s1">'/jwt'</span><span class="p">,</span>
+      <span class="na">dataType</span><span class="p">:</span> <span class="s1">'json'</span><span class="p">,</span>
+      <span class="na">beforeSend</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// **NOTE**: NEVER EXPOSE YOUR SECRET API KEY
+</span>        <span class="c1">// This is just an example to show you that
+</span>        <span class="c1">// you'd need to do a request to your own
+</span>        <span class="c1">// server (e.g. create your own /jwt route) which
+</span>        <span class="c1">// would then query our API server and return a JWT
+</span>        <span class="c1">// which you'd then return to your client (if any)
+</span>        <span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span>
+          <span class="s1">'Authorization'</span><span class="p">,</span>
+          <span class="s1">'Basic '</span> <span class="o">+</span> <span class="nx">btoa</span><span class="p">(</span><span class="s1">'sk_live_fXgDgry814qwakL41KDZin47:'</span><span class="p">)</span>
+        <span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">connectSocket</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">token</span><span class="p">)</span>
+    <span class="p">})</span>
+  <span class="p">})</span>
+
+<span class="p">}())</span>
+</pre>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Arguments</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>connect</td>
+<td>callback</td>
+<td>Connect to websockets</td>
+</tr>
+<tr>
+<td>disconnect</td>
+<td>callback</td>
+<td>Disconnect from websockets</td>
+</tr>
+<tr>
+<td>error</td>
+<td>callback</td>
+<td>Error from websocket connection</td>
+</tr>
+<tr>
+<td>err</td>
+<td>callback</td>
+<td>Error from endpoint currently subscribed to</td>
+</tr>
+<tr>
+<td>res</td>
+<td>callback</td>
+<td>Response from endpoint currently subscribed to</td>
+</tr>
+<tr>
+<td>subscribe</td>
+<td>name, options, callback</td>
+<td>Subscribe to an endpoint</td>
+</tr>
+<tr>
+<td>unsubscribe</td>
+<td>name, options, callback</td>
+<td>Unsubscribe from an endpoint</td>
+</tr>
+</tbody></table>
+<h3 id='event-arguments'>Event Arguments</h1>
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Name of the event</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>options</td>
+<td>Object</td>
+<td>Options to pass to the event</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>callback</td>
+<td>Function</td>
+<td>Returns an error object (if any)</td>
+<td>No</td>
+</tr>
+</tbody></table>
+<h4 id='options'>options</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>path</td>
+<td>Endpoint path (e.g. &ldquo;/real-time/crowd-sentiment&rdquo;)</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>method</td>
+<td>Case insensitive HTTP verb (e.g. &ldquo;GET&rdquo;)</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>params</td>
+<td>Object of parameters to pass to endpoint (e.g. <code class="prettyprint">{ ticker: &#39;AAPL&#39; }</code>)</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h4 id='callbackerr'>callback(err)</h1>
+<p>Returns an error object (if any)</p>
+<h2 id='json-web-token-quotjwtquot'>JSON Web Token (&ldquo;JWT&rdquo;)</h1><pre class="highlight shell">curl -X POST -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/jwt"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 239
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AdE7ky8GBWEHXax2litkU5IuBZ5pieIct.RvMT6aiTv0MJM3IHowoEd0Ouclp8ye5vGo2eaq8b1Mg; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:06 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as:</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAbWFya2V0cHJvcGhpdC5jb20iLCJhcGkiOiJza19saXZlX2ZYZ0Rncnk4MTRxd2FrTDQxS0RaaW40NyIsImlhdCI6MTQwNDc5OTMyNiwiZXhwIjoxNDA0ODAyOTI2fQ.H0GQUei706iOupeXR7OgScDtlfKyqj08W2vEHXU9Bw0"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<blockquote>
+<p>JSON Web Token (JWT) is a means of representing claims to be transferred between two parties.  The claims in a JWT are encoded as a JSON object that is digitally signed or MACed using JSON Web Signature (JWS) and/or encrypted using JSON Web Encryption (JWE). &ndash; <a href="http://tools.ietf.org/html/draft-jones-json-web-token-10">IETF</a></p>
+</blockquote>
+
+<p>In order to communicate over websockets with Market Prophit API endpoints, you must pass a valid JWT.</p>
+
+<p>The flow of communication with the Market Prophit websocket server is as follows:</p>
+
+<ol>
+<li>Retrieve a JWT using your secret API key (do not expose your secret API key)</li>
+<li>Pass the JWT as part of the request query object while connecting to the Market Prophit websocket server as the param <code class="prettyprint">token</code>.</li>
+<li>Every (5) hours from when the JWT was generated, re-generate a new JWT since the previous expires</li>
+</ol>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">POST https://open.marketprophit.com/jwt</code></p>
+
+          <h1 id='crowd-sentiment'>Crowd Sentiment</h1><h2 id='crowd-sentiment'>Crowd Sentiment</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/real-time/crowd-sentiment?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 3491
+ETag: W/<span class="s2">"da3-3018583834"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A7FEVVP9eOsH095ZvW-JHvoh5NG9_amZx.XmPGmQpABexT8284ER4zyn4mxFiMdVIwSs%2FRNgZSVdc; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 21 Jun 2014 21:31:36 GMT; HttpOnly
+Date: Fri, 20 Jun 2014 21:31:36 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-20T20:33:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.4648223986509972</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-20T20:34:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1045909036267269</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-20T20:36:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0412393088152574</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Realtime intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/real-time/crowd-sentiment</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='historical-crowd-sentiment'>Historical Crowd Sentiment</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/crowd-sentiment?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 57461
+ETag: W/<span class="s2">"e075-3925032003"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AHziRTmgtP7VUMgxK_kfigAZcHFAJZEKT.fsvKBTSQd%2BaAJ1n3oJY5qfbccNjs0aYib06THJpHlME; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 21 Jun 2014 21:31:37 GMT; HttpOnly
+Date: Fri, 20 Jun 2014 21:31:37 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-19T08:02:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1169283165310861</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-19T08:05:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.2735787703082803</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-19T08:11:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2626316532746197</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Historical intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/crowd-sentiment</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+<h2 id='daily-crowd-sentiment'>Daily Crowd Sentiment</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/daily-crowd-sentiment?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AweUGt6RGPMXl3RkLiPQ0UWsiCdyg3ndZ.kXqbpTFfey7vQcn8FoRYO3WbeGGnbKXva2g70E8NHto; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 21 Jun 2014 21:31:36 GMT; HttpOnly
+Date: Fri, 20 Jun 2014 21:31:36 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Daily crowd sentiment historical data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/daily-crowd-sentiment</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+
+          <h1 id='crowd-sentiment-moving-average'>Crowd Sentiment Moving Average</h1><h2 id='crowd-sentiment-moving-average'>Crowd Sentiment Moving Average</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/real-time/crowd-sentiment-moving-average?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 3491
+ETag: W/<span class="s2">"da3-3018583834"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3Ap3LKUMAG7KunQBz5AYBT-7KJMWMqOZYi.nWa19fxlYCz%2Bt29nTIswx9WCXnZk1%2F%2B7mbc9fxQA%2F48; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 21 Jun 2014 21:31:36 GMT; HttpOnly
+Date: Fri, 20 Jun 2014 21:31:36 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-20T20:33:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.4648223986509972</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-20T20:34:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1045909036267269</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-20T20:36:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0412393088152574</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Realtime moving average intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/real-time/crowd-sentiment-moving-average</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='historical-crowd-sentiment'>Historical Crowd Sentiment</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/crowd-sentiment-moving-average?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 57461
+ETag: W/<span class="s2">"e075-3925032003"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AH3wNzmUK9iZjr9wo1rq2-ptGI1mWXMiT.%2FsaDIaRvkjQhSU%2FNH7tYJACRKTeBnOVF8Scva3y24ww; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 21 Jun 2014 21:31:37 GMT; HttpOnly
+Date: Fri, 20 Jun 2014 21:31:37 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-19T08:02:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1169283165310861</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-19T08:05:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.2735787703082803</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-19T08:11:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2626316532746197</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Historical moving average intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/crowd-sentiment-moving-average</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+<h2 id='daily-crowd-sentiment'>Daily Crowd Sentiment</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/daily-crowd-sentiment-moving-average?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ARoBfpW0zC1Gga0KYg5Nt-0oqN3Nc1vCP.hwmZScOanm7lp1C6VxcIg2975Gt4BnU73rCuTXNeETo; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 21 Jun 2014 21:31:37 GMT; HttpOnly
+Date: Fri, 20 Jun 2014 21:31:37 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Daily crowd sentiment moving average historical data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/daily-crowd-sentiment-moving-average</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+
+          <h1 id='market-prophit-sentiment'>Market Prophit Sentiment</h1><h2 id='market-prophit-sentiment'>Market Prophit Sentiment</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/real-time/market-prophit-sentiment?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 3627
+ETag: W/<span class="s2">"e2b-2746514977"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A7xFJACrvSXxoDpNQ7-MMACiHd4FhIOhf.SONo603ZJ53XoFjCqfLFLxxwifzMWsi7raAhOEbFIYk; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:09 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-08T05:07:09.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.0838003756891833</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-08T05:07:28.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.2996763267093429</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-08T05:08:09.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.2905735799714648</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Realtime intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/real-time/market-prophit-sentiment</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='historical-market-prophit-sentiment'>Historical Market Prophit Sentiment</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/market-prophit-sentiment?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 202988
+ETag: W/<span class="s2">"318ec-773548502"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A6vyPdMYJ10ri_al6M1becbySUH24yNfU.GpJ%2FrzAJK%2FGsyUbIiqPfqgz%2F7OvqTmwsD%2BIFt1Glhjg; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:20 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-07T08:00:31.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.037356084318076</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-07T08:01:47.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.0362396260090931</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-07T08:02:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.0779200104587312</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Historical intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/market-prophit-sentiment</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+<h2 id='daily-market-prophit-sentiment'>Daily Market Prophit Sentiment</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/daily-market-prophit-sentiment?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AFClZwW4y2P-UZUBEDgKLST9YQd4bVa2I.tSNCcVYIHft%2FHL2AtL2%2Bmbv4TraaJFVFRmOv29xDeKY; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:08 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Daily market prophit sentiment historical data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/daily-market-prophit-sentiment</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+
+          <h1 id='market-prophit-sentiment-moving-average'>Market Prophit Sentiment Moving Average</h1><h2 id='market-prophit-sentiment-moving-average'>Market Prophit Sentiment Moving Average</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/real-time/market-prophit-sentiment-moving-average?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 3627
+ETag: W/<span class="s2">"e2b-2746514977"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AU9J7_7ff5y_oVVw7Bgl0xNWLe5qtNtlN.19reDiBwcAxQpxoacT3axgLZZYroYzXUdfVqEKoglBY; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:10 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-08T05:07:09.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.0838003756891833</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-08T05:07:28.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.2996763267093429</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-08T05:08:09.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.2905735799714648</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Realtime intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/real-time/market-prophit-sentiment-moving-average</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='historical-market-prophit-sentiment-moving-average'>Historical Market Prophit Sentiment Moving Average</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/market-prophit-sentiment-moving-average?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 202988
+ETag: W/<span class="s2">"318ec-773548502"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ASySuVakDfvkxbrHqO20_ZbaOKIjh87P4.myKxMDad0Cv87eHKM7YtlIwC10kCtTGFOIfjEgpVCXY; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:17 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-07T08:00:31.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.037356084318076</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-07T08:01:47.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.0362396260090931</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-07T08:02:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.0779200104587312</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Historical intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/market-prophit-sentiment-moving-average</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+<h2 id='daily-market-prophit-sentiment-moving-average'>Daily Market Prophit Sentiment Moving Average</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/daily-market-prophit-sentiment-moving-average?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AWYH0OIiNLdLUPaHFrRnd0JIxjQ6VqEgC.wa%2FJFANpRyLQVM2vpoe1ldpxHSyMmuyaUeCpWhfeNOg; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:07 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:09 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Daily market prophit sentiment moving average historical data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/daily-market-prophit-sentiment-moving-average</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+
+          <h1 id='crowd-sentiment-z-score'>Crowd Sentiment Z-Score</h1><h2 id='crowd-sentiment-z-score'>Crowd Sentiment Z-Score</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/real-time/crowd-sentiment-z-score?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 3491
+ETag: W/<span class="s2">"da3-3018583834"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AD_tlBfZC8FXtOkhyDx9tIWShV5gVu6Gp.u3z5eCaE4O4qqOlu6Gb1ZnbV7ORSDSZ%2F2A0iGDs%2BDWQ; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 21 Jun 2014 21:31:37 GMT; HttpOnly
+Date: Fri, 20 Jun 2014 21:31:37 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-20T20:33:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.4648223986509972</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-20T20:34:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1045909036267269</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-20T20:36:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0412393088152574</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Realtime intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/real-time/crowd-sentiment-z-score</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='historical-crowd-sentiment-z-score'>Historical Crowd Sentiment Z-Score</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/crowd-sentiment-z-score?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 57461
+ETag: W/<span class="s2">"e075-3925032003"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AagLbZYE7bsuyINtmIIwPRd7aNX4eDPfu.R1nq22hpPB8hMY%2F0VVeuTjpURedDzsg%2BeLFvBzy3cqU; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 21 Jun 2014 21:31:37 GMT; HttpOnly
+Date: Fri, 20 Jun 2014 21:31:37 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-19T08:02:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1169283165310861</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-19T08:05:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.2735787703082803</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-19T08:11:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2626316532746197</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Historical intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/crowd-sentiment-z-score</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+<h2 id='daily-crowd-sentiment-z-score'>Daily Crowd Sentiment Z-Score</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/daily-crowd-sentiment-z-score?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3APTBCK3ZnDmrAnm6MBPQyao7nIC8-6_--.TGOEA9kC4dNTYE92RrFx8qT5l0sGUxZ8o%2F3W1Cln940; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 21 Jun 2014 21:31:37 GMT; HttpOnly
+Date: Fri, 20 Jun 2014 21:31:37 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Daily crowd sentiment z-score historical data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/daily-crowd-sentiment-z-score</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+
+          <h1 id='crowd-sentiment-z-score-moving-average'>Crowd Sentiment Z-Score Moving Average</h1><h2 id='crowd-sentiment-z-score-moving-average'>Crowd Sentiment Z-Score Moving Average</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/real-time/crowd-sentiment-z-score-moving-average?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 3491
+ETag: W/<span class="s2">"da3-3018583834"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AWZzetqGOpbzsARKXZR0T_jEzET-5nE8D.DznFMgVuKDAdpvDF95NjZRN90LsHXclzvar0m0heBKA; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 21 Jun 2014 21:31:37 GMT; HttpOnly
+Date: Fri, 20 Jun 2014 21:31:37 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-20T20:33:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.4648223986509972</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-20T20:34:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1045909036267269</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-20T20:36:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0412393088152574</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Realtime intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/real-time/crowd-sentiment-z-score-moving-average</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='historical-crowd-sentiment-z-score-moving-average'>Historical Crowd Sentiment Z-Score Moving Average</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/crowd-sentiment-z-score-moving-average?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 57461
+ETag: W/<span class="s2">"e075-3925032003"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AVjzNie_Op3W8WZ-v5z0cp_Cu_zru1pDR.f4yLOcIn%2FNw7CPzyzbCbxOCjHWNYDsVJRhJRiQYoS0M; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 21 Jun 2014 21:31:37 GMT; HttpOnly
+Date: Fri, 20 Jun 2014 21:31:37 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-19T08:02:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1169283165310861</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-19T08:05:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.2735787703082803</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-19T08:11:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2626316532746197</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Historical intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/crowd-sentiment-z-score-moving-average</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+<h2 id='daily-crowd-sentiment-z-score-moving-average'>Daily Crowd Sentiment Z-Score Moving Average</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/daily-crowd-sentiment-z-score-moving-average?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AIZ81oqUkNlX7TkWnLkTVYucjrh-HDkm8.iymNi1QVTpJRNDgICpxTQ%2FyOiuFhPa%2Folsg5R4iD5yU; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 21 Jun 2014 21:31:37 GMT; HttpOnly
+Date: Fri, 20 Jun 2014 21:31:37 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Daily crowd sentiment z-score moving average historical data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/daily-crowd-sentiment-z-score-moving-average</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+
+          <h1 id='market-prophit-sentiment-z-score'>Market Prophit Sentiment Z-Score</h1><h2 id='market-prophit-sentiment-z-score'>Market Prophit Sentiment Z-Score</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/real-time/market-prophit-sentiment-z-score?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 3627
+ETag: W/<span class="s2">"e2b-2746514977"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ARQHMywCMrNBxpNuoU7h_8LTZb2T4J9sI.Fcpr1BHKQ9JKzHL887x6HCcLF0ib7oLQop4EWFHFsXc; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:07 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:10 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-08T05:07:09.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.0838003756891833</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-08T05:07:28.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.2996763267093429</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-08T05:08:09.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.2905735799714648</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Realtime intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/real-time/market-prophit-sentiment-z-score</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='historical-market-prophit-sentiment-z-score'>Historical Market Prophit Sentiment Z-Score</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/market-prophit-sentiment-z-score?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 202988
+ETag: W/<span class="s2">"318ec-773548502"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AUWH4Pozin7uM1zvlw89TVEq7AsTEENUE.bZfQ3qH9ymrNt7%2Bjksp3T6DyOYhmwto4a7qlx2V74Pw; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:07 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:19 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-07T08:00:31.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.037356084318076</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-07T08:01:47.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.0362396260090931</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-07T08:02:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.0779200104587312</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Historical intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/market-prophit-sentiment-z-score</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+<h2 id='daily-market-prophit-sentiment-z-score'>Daily Market Prophit Sentiment Z-Score</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/daily-market-prophit-sentiment-z-score?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3Ao-QaAbH1yHK4eKn93zAKtO-Dm04-8kBC.6tz%2FANBE6gumFweIX4RGvNfAAiRSERRAj3RhO5ZRIag; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:07 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:13 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Daily market prophit sentiment z-score historical data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/daily-market-prophit-sentiment-z-score</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+
+          <h1 id='market-prophit-sentiment-z-score-moving-average'>Market Prophit Sentiment Z-Score Moving Average</h1><h2 id='market-prophit-sentiment-z-score-moving-average'>Market Prophit Sentiment Z-Score Moving Average</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/real-time/market-prophit-sentiment-z-score-moving-average?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 3627
+ETag: W/<span class="s2">"e2b-2746514977"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AbTREj7cvulyiZaHnPrP0tscgErrJzYg_.qzN%2F4REGFAM23TTio4FEX%2BA%2B8ejgBjsAejE7tjUr3J4; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:08 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:10 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-08T05:07:09.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.0838003756891833</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-08T05:07:28.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.2996763267093429</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-08T05:08:09.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.2905735799714648</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Realtime intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/real-time/market-prophit-sentiment-z-score-moving-average</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='historical-market-prophit-sentiment-z-score-moving-average'>Historical Market Prophit Sentiment Z-Score Moving Average</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/market-prophit-sentiment-z-score-moving-average?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 202988
+ETag: W/<span class="s2">"318ec-773548502"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AMuZ3WWxbEy6U1Hi9wRJAVHzM98oxneC6.EcXYHeZuA0DYC3zpnX2knGUkVYYSA0SxJzyEqL%2Fx4yw; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:08 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:19 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-07T08:00:31.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.037356084318076</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-07T08:01:47.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.0362396260090931</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-07T08:02:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.0779200104587312</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Historical intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/market-prophit-sentiment-z-score-moving-average</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+<h2 id='daily-market-prophit-sentiment-z-score-moving-average'>Daily Market Prophit Sentiment Z-Score Moving Average</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/daily-market-prophit-sentiment-z-score-moving-average?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AKXXReu3takrhnHhmGnR_gPaVlrn014tE.d39D0mKi1IJeuXUV4BfK%2BintdOpl5jnzDFJNnGNPu9I; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:08 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:11 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Daily market prophit sentiment z-score moving average historical data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/daily-market-prophit-sentiment-z-score-moving-average</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+
+          <h1 id='tweet-volume'>Tweet Volume</h1><h2 id='tweet-volume'>Tweet Volume</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/real-time/tweet-volume?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2014
+ETag: W/<span class="s2">"7de-1351849824"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AorWj7BMoAtmAF2vOqK2jXrGpL91nPobr.RG5O3fE8FVZitToIpOWFWrZjHj3kV9CsSxAPxBjQk1s; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:09 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-08T05:04:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-08T05:06:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-08T05:07:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Realtime intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/real-time/tweet-volume</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='historical-tweet-volume'>Historical Tweet Volume</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/tweet-volume?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 68025
+ETag: W/<span class="s2">"109b9-1495726735"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3At43uBSQb5SN5jBQnIDd8SKdgFEFYOeq5.yWXSMDqDnv23s9x%2BploVXVYSX8P70rgvYI5U6m00tCY; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:14 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-07T08:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-07T08:01:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-07T08:02:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Historical intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/tweet-volume</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+<h2 id='daily-tweet-volume'>Daily Tweet Volume</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/daily-tweet-volume?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A8RTwb7qyU8e_pktldDgpbvjMlW6A9Vy7.7DPSCyZLvlAezL%2BoeHnWmsTBNm8assSqD7BfObp2D8Q; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:09 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Daily tweet volume historical data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/daily-tweet-volume</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+
+          <h1 id='tweet-buzz'>Tweet Buzz</h1><h2 id='tweet-buzz'>Tweet Buzz</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/real-time/tweet-buzz?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2509
+ETag: W/<span class="s2">"9cd-364826469"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AeNhGb1mOGrbwsd7VmtbQ_jHzzo4Wg574.3dOR9Ai36nLoxfcQytYEoC%2FYBuQH%2FiEaws%2FDNqm91Y0; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:05 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:06 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-08T05:04:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4684647302904527</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-08T05:06:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9369294605809053</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-08T05:07:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9369294605809053</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Realtime intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/real-time/tweet-buzz</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='historical-tweet-buzz'>Historical Tweet Buzz</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/tweet-buzz?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 84467
+ETag: W/<span class="s2">"149f3-2663769506"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ASedQL7A2Yuf7Jjcqw9gyiVc9vcL_oBq5.n0hKJKEwya3sJlnA%2Bx8Z77dX4KT%2BYAkCVk2WvzSkOFI; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:05 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:07 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-07T08:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4875405485107623</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-07T08:01:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4875405485107623</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-07T08:02:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4875405485107623</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
+<p>Historical intraday data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/tweet-buzz</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+<h2 id='daily-tweet-buzz'>Daily Tweet Buzz</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/daily-tweet-buzz?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AQkEXyVJwt76SiFy6zq5ZVW401lLbgKPY.8usYwQ4TWD1HmjtOkwWp3br0eyskjpOGakOioGlm8u4; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:07 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Daily tweet buzz historical data</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/daily-tweet-buzz</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>yesterday</td>
+</tr>
+<tr>
+<td>end_ts</td>
+<td>ISO-8601 timestamp</td>
+<td>no</td>
+<td>now</td>
+</tr>
+</tbody></table>
+
+          <h1 id='user-sentiment'>User Sentiment</h1><h2 id='user-sentiment'>User Sentiment</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/real-time/user-sentiment"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AdkQ-Jei8Od1o8eMl94FVCirx7ddSimHI.RUgQgwEh5cqLFsnkBikDZGh7xefeg7dOV61O91XHQcw; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:07 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Pushes the complete set of user sentiment records for all tickers and users for the most recent full second of data.</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/real-time/user-sentiment</code></p>
+<h2 id='user-sentiment-last-minute'>User Sentiment Last Minute</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/real-time/user-sentiment-last-minute?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AOFRyRooxnPvBOmcTlj1Cc6sOzo2-I9ef.xFdjgfYtHDUvWRFH5jFDZhnBAXnweW8R8wCdS0f2o%2BU; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:09 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Returns the complete set of user sentiment records for all tickers and users for the most recent full minute of data.</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/real-time/user-sentiment-last-minute</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='user-sentiment-by-user'>User Sentiment by User</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/user-sentiment-by-user?user_id=14216123"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AGsRxqBL_mthrQniE8rBEUbTVqqBDvrpW.qipXj%2BShURszR9pRoPg4g9%2Bh8wog%2BaY8oc1GZh5pShA; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:09 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Returns a complete range of historical intraday records for a given user based on a date range (start date, end date).</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/user-sentiment-by-user</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_id</td>
+<td>User ID of a Twitter username</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>Start date range (MM-DD-YY)</td>
+<td>no</td>
+<td>1 month ago</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>End date range (MM-DD-YY)</td>
+<td>no</td>
+<td>previous business day</td>
+</tr>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>no</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='user-sentiment-by-ticker'>User Sentiment by Ticker</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/user-sentiment-by-ticker?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 4452014
+ETag: W/<span class="s2">"43eeae-2928580455"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AGOpKQj0KxTUPIWa7gEYSASgi-CJWfYvn.xk9xBkQiTekbly2Jg%2BZyhKcYarBcBPU23%2FZ73MQD72c; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:37 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Returns a complete range of historical intraday records for a given ticker based on a date range (start date, end date)..</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/user-sentiment-by-ticker</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>Start date range (MM-DD-YY)</td>
+<td>no</td>
+<td>1 month ago</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>End date range (MM-DD-YY)</td>
+<td>no</td>
+<td>previous business day</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>User ID of a Twitter username</td>
+<td>no</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+          <h1 id='user-scores'>User Scores</h1><h2 id='user-scores'>User Scores</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/user-scores"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3Al_3eAMFM_hu5bdyMhU4WaBf668t3Evjb.5Dn6U2yNvT8Dz7SVldDXq%2BQSuj4S4UIjpWMYlOv4Je8; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:09 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:16 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Returns a complete set of historical daily records for a single date.</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/user-scores</code></p>
+<h2 id='user-scores-last'>User Scores Last</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/user-scores-last"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AXsLCIbeQ_KPh3vD3tfXhfhOtsG6OaQPn.31jDLeO4v0JE%2BHDmIEb66FcB5%2Bv79N9TzPNXEgEAMf8; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:09 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:13 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Returns all user scores for the most recent business date.</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/user-scores-last</code></p>
+<h2 id='daily-user-scores-by-user'>Daily User Scores by User</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/daily-user-scores-by-user?user_id=14216123"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A5zC2QFXUoNwvbLx8yDmrrC-KxxZfR7JG.6%2Fu23SqGLFaiE2a5G2aSO%2FpLeDwS2d21O%2FLkz0cRq5w; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:10 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:13 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Returns user scores for a given range of business dates and user id.</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/daily-user-scores-by-user</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_id</td>
+<td>User ID of a Twitter username</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>Start date range (MM-DD-YY)</td>
+<td>no</td>
+<td>1 year ago</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>End date range (MM-DD-YY)</td>
+<td>no</td>
+<td>previous business day</td>
+</tr>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>no</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='ticker-specific-user-scores'>Ticker Specific User Scores</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/ticker-specific-user-scores"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AV54W8aN2xMkswtRJpfw0VfpBIw0J51P3.hu%2BFi1W3fv77yNGWKdAR4hIm5w43e9KbrfNQePurxpc; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:10 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:14 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Returns ticker specific user scores for a given business date.</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/ticker-specific-user-scores</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>time_frame</td>
+<td>Time frame (must be one of ONE_WEEK, TWO_WEEKS, THREE_WEEKS, FOUR_WEEKS)</td>
+<td>no</td>
+<td>ONE_WEEK</td>
+</tr>
+<tr>
+<td>date</td>
+<td>Date (MM-DD-YY)</td>
+<td>no</td>
+<td>previous business day</td>
+</tr>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>no</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='ticker-specific-user-scores-by-user'>Ticker Specific User Scores by User</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/ticker-specific-user-scores-by-user?user_id=14216123"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AwjwdmcXqJn9vZriQnWD5IbDMutVor5p7.tMYEwLVCuXlzR7YQZnrsKEsNDI2IDoccFSxaEfsJvls; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:11 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:16 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Ticker specific user score data for range of given business dates for a given user id.</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/ticker-specific-user-scores-by-user</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>time_frame</td>
+<td>Time frame (must be one of ONE_WEEK, TWO_WEEKS, THREE_WEEKS, FOUR_WEEKS)</td>
+<td>no</td>
+<td>ONE_WEEK</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>User ID of a Twitter username</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>Start date range (MM-DD-YY)</td>
+<td>no</td>
+<td>1 week ago</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>End date range (MM-DD-YY)</td>
+<td>no</td>
+<td>previous business day</td>
+</tr>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>no</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='ticker-specific-user-scores-by-ticker'>Ticker Specific User Scores by Ticker</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/ticker-specific-user-scores-by-ticker?ticker=AAPL"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AaAoIDFUxaFdECX4pTTsN428hlhqrZkkI.XopaBGKmF4Kkz%2F%2Bd6UQlCMsBKNWSNQfEdNsyqPeT1sc; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:12 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:16 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Ticker specific user score data for range of given business dates for a given ticker.</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/ticker-specific-user-scores-by-ticker</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>time_frame</td>
+<td>Time frame (must be one of ONE_WEEK, TWO_WEEKS, THREE_WEEKS, FOUR_WEEKS)</td>
+<td>no</td>
+<td>ONE_WEEK</td>
+</tr>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>Start date range (MM-DD-YY)</td>
+<td>no</td>
+<td>1 week ago</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>End date range (MM-DD-YY)</td>
+<td>no</td>
+<td>previous business day</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>User ID of a Twitter username</td>
+<td>no</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='sector-specific-user-scores'>Sector Specific User Scores</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/sector-specific-user-scores"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A5U494wjHSV235Ev2boJObxbV3ojM3pMt.hgHy3iGJXHIwKMrahKRwBs3gqmFhbZvRLUBbrTNUJsU; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:05 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:07 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Returns sector specific user scores for a given business date.</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/sector-specific-user-scores</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>time_frame</td>
+<td>Time frame (must be one of ONE_WEEK, TWO_WEEKS, THREE_WEEKS, FOUR_WEEKS)</td>
+<td>no</td>
+<td>ONE_WEEK</td>
+</tr>
+<tr>
+<td>date</td>
+<td>Date (MM-DD-YY)</td>
+<td>no</td>
+<td>previous business day</td>
+</tr>
+<tr>
+<td>sector</td>
+<td>Sector (must be one of Agriculture, BasicMaterials, Conglomerates, ConsumerGoods, Currency, Energy, Financial, Healthcare, Index, IndustrialGoods, Livestock, Metals, Other Futures, Services, Technology, Utilities)</td>
+<td>no</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='sector-specific-user-scores-by-user'>Sector Specific User Scores by User</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/sector-specific-user-scores-by-user?user_id=14216123"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AuD5Obg-lGB-T1Mwbz6mZ5_w0U76JEDKJ.ZPEkvdLu4R6IEW8TmwZVn5TNrop1p4IWEYPJcTiw5Ss; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:07 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Returns sector specific user scores for a given range of business dates for a given user id.</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/sector-specific-user-scores-by-user</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>time_frame</td>
+<td>Time frame (must be one of ONE_WEEK, TWO_WEEKS, THREE_WEEKS, FOUR_WEEKS)</td>
+<td>no</td>
+<td>ONE_WEEK</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>User ID of a Twitter username</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>Start date range (MM-DD-YY)</td>
+<td>no</td>
+<td>1 week ago</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>End date range (MM-DD-YY)</td>
+<td>no</td>
+<td>previous business day</td>
+</tr>
+<tr>
+<td>sector</td>
+<td>Sector (must be one of Agriculture, BasicMaterials, Conglomerates, ConsumerGoods, Currency, Energy, Financial, Healthcare, Index, IndustrialGoods, Livestock, Metals, Other Futures, Services, Technology, Utilities)</td>
+<td>no</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='sector-specific-user-scores-by-sector'>Sector Specific User Scores by Sector</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/sector-specific-user-scores-by-sector?sector=Technology"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AzLmggqmuicksh_HNKOD6n-YpDNCojRXA.uL9FwC1Vd2iKUYLGezB6dYGstXl8e8FzsbaaiMHxsik; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:06 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Sector specific user score data for range of given business dates for a given sector.</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/sector-specific-user-scores-by-sector</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>time_frame</td>
+<td>Time frame (must be one of ONE_WEEK, TWO_WEEKS, THREE_WEEKS, FOUR_WEEKS)</td>
+<td>no</td>
+<td>ONE_WEEK</td>
+</tr>
+<tr>
+<td>sector</td>
+<td>Sector (must be one of Agriculture, BasicMaterials, Conglomerates, ConsumerGoods, Currency, Energy, Financial, Healthcare, Index, IndustrialGoods, Livestock, Metals, Other Futures, Services, Technology, Utilities)</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>Start date range (MM-DD-YY)</td>
+<td>no</td>
+<td>1 week ago</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>End date range (MM-DD-YY)</td>
+<td>no</td>
+<td>previous business day</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>User ID of a Twitter username</td>
+<td>no</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+          <h1 id='user-returns'>User Returns</h1><h2 id='ticker-specific-user-returns'>Ticker Specific User Returns</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/ticker-specific-user-returns"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AizZVJkseD4TQwD4d4H0NHNA8zWRbt8nX.VkYY4RxJj7%2BkHbwSx4zYTI8llti0ET%2FbAM5yvltd7Nc; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:07 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:15 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Returns ticker specific user returns for a given business date.</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/ticker-specific-user-returns</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>time_frame</td>
+<td>Time frame (must be one of ONE_WEEK, TWO_WEEKS, THREE_WEEKS, FOUR_WEEKS)</td>
+<td>no</td>
+<td>ONE_WEEK</td>
+</tr>
+<tr>
+<td>date</td>
+<td>Date (MM-DD-YY)</td>
+<td>no</td>
+<td>previous business day</td>
+</tr>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>no</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='ticker-specific-user-returns-by-ticker'>Ticker Specific User Returns by Ticker</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/ticker-specific-user-returns-by-ticker"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A0jWg1wClOvu3K2uePoh4A91__pTtIpSM.EBYQv%2BQM4PF2tSkqqattZBtwuzzHC3vV%2B27QQr6MUlg; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:07 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:15 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Ticker specific user returns data for range of given business dates for a given user id.</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/ticker-specific-user-returns-by-ticker</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>time_frame</td>
+<td>Time frame (must be one of ONE_WEEK, TWO_WEEKS, THREE_WEEKS, FOUR_WEEKS)</td>
+<td>no</td>
+<td>ONE_WEEK</td>
+</tr>
+<tr>
+<td>ticker</td>
+<td>3-4 character long alphanumeric stock ticker symbol</td>
+<td>no</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>Start date range (MM-DD-YY)</td>
+<td>no</td>
+<td>1 week ago</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>End date range (MM-DD-YY)</td>
+<td>no</td>
+<td>previous business day</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>User ID of a Twitter username</td>
+<td>no</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='sector-specific-user-returns'>Sector Specific User Returns</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/sector-specific-user-returns"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AtOGlbPz45gbhKmjg3F3r7Q4e6wEjtUWW.PnJiccewH6Rtnih5WHg5iWW4pAhtOniivixrA%2BGJnoQ; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:07 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:16 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Returns sector specific user returns for a given business date.</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/sector-specific-user-returns</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>time_frame</td>
+<td>Time frame (must be one of ONE_WEEK, TWO_WEEKS, THREE_WEEKS, FOUR_WEEKS)</td>
+<td>no</td>
+<td>ONE_WEEK</td>
+</tr>
+<tr>
+<td>date</td>
+<td>Date (MM-DD-YY)</td>
+<td>no</td>
+<td>previous business day</td>
+</tr>
+<tr>
+<td>sector</td>
+<td>Sector (must be one of Agriculture, BasicMaterials, Conglomerates, ConsumerGoods, Currency, Energy, Financial, Healthcare, Index, IndustrialGoods, Livestock, Metals, Other Futures, Services, Technology, Utilities)</td>
+<td>no</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='sector-specific-user-returns-by-user'>Sector Specific User Returns by User</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/sector-specific-user-returns-by-user"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AOLEXzm93KcmWnpGbxnMxK9yZZLVv_wM6.ywpz8WfL0CMG9JMzOXd7t%2B5hFyYIUJB%2FXQ5bLfTnw2w; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:07 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:14 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Returns sector specific user returns for a given range of business dates for a given user id.</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/sector-specific-user-returns-by-user</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>time_frame</td>
+<td>Time frame (must be one of ONE_WEEK, TWO_WEEKS, THREE_WEEKS, FOUR_WEEKS)</td>
+<td>no</td>
+<td>ONE_WEEK</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>User ID of a Twitter username</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>Start date range (MM-DD-YY)</td>
+<td>no</td>
+<td>1 week ago</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>End date range (MM-DD-YY)</td>
+<td>no</td>
+<td>previous business day</td>
+</tr>
+<tr>
+<td>sector</td>
+<td>Sector (must be one of Agriculture, BasicMaterials, Conglomerates, ConsumerGoods, Currency, Energy, Financial, Healthcare, Index, IndustrialGoods, Livestock, Metals, Other Futures, Services, Technology, Utilities)</td>
+<td>no</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id='sector-specific-user-returns-by-sector'>Sector Specific User Returns by Sector</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/sector-specific-user-returns-by-sector?sector=Technology"</span>
+</pre>
+
+<blockquote>
+<p>Returns response headers such as:</p>
+</blockquote>
+<pre class="highlight shell">HTTP/1.1 200 OK
+Vary: Accept, Accept-Encoding
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3Ap1NJ7z-eBlypDeBRszuY6wgrbBOP0Sdn.TTzh18cCs3z9O8UgwY6RcsYBXN1se0QBUZ9DQL%2FJ4O8; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 09 Jul 2014 06:02:08 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:14 GMT
+Connection: keep-alive
+
+
+</pre>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[]</span><span class="w">
+</span></pre>
+
+<p>Sector specific user returns data for range of given business dates for a given sector.</p>
+<h3 id='http-request'>HTTP Request</h1>
+<p><code class="prettyprint">GET https://open.marketprophit.com/historical/sector-specific-user-returns-by-sector</code></p>
+<h3 id='query-parameters'>Query Parameters</h1>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>time_frame</td>
+<td>Time frame (must be one of ONE_WEEK, TWO_WEEKS, THREE_WEEKS, FOUR_WEEKS)</td>
+<td>no</td>
+<td>ONE_WEEK</td>
+</tr>
+<tr>
+<td>sector</td>
+<td>Sector (must be one of Agriculture, BasicMaterials, Conglomerates, ConsumerGoods, Currency, Energy, Financial, Healthcare, Index, IndustrialGoods, Livestock, Metals, Other Futures, Services, Technology, Utilities)</td>
+<td>yes</td>
+<td>none</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>Start date range (MM-DD-YY)</td>
+<td>no</td>
+<td>1 week ago</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>End date range (MM-DD-YY)</td>
+<td>no</td>
+<td>previous business day</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>User ID of a Twitter username</td>
+<td>no</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">shell</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
