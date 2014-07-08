@@ -23,6 +23,9 @@ includes:
   - market_prophit_sentiment_z_score_moving_average
   - tweet_volume
   - tweet_buzz
+  - user_sentiment
+  - user_scores
+  - user_returns
 
 search: true
 ---

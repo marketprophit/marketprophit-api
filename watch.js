@@ -42,7 +42,33 @@ stream.on('data', function(entry) {
     ticker: 'AAPL',
     url: url,
     auth: auth,
-    apiKey: apiKey
+    apiKey: apiKey,
+    userId: '14216123',
+    sector: 'Technology',
+    timeFrames: [
+      'ONE_WEEK',
+      'TWO_WEEKS',
+      'THREE_WEEKS',
+      'FOUR_WEEKS'
+    ],
+    sectors: [
+      'Agriculture',
+      'BasicMaterials',
+      'Conglomerates',
+      'ConsumerGoods',
+      'Currency',
+      'Energy',
+      'Financial',
+      'Healthcare',
+      'Index',
+      'IndustrialGoods',
+      'Livestock',
+      'Metals',
+      'Other Futures',
+      'Services',
+      'Technology',
+      'Utilities'
+    ]
   }, function(err, result) {
     if (err) {
       console.error(err)

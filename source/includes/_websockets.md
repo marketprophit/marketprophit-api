@@ -148,11 +148,11 @@ curl -X POST -u "sk_live_fXgDgry814qwakL41KDZin47:" "https://open.marketprophit.
 
 ```bash
 HTTP/1.1 200 OK
-Vary: Accept
+Vary: Accept, Accept-Encoding
 Content-Type: application/json; charset=utf-8
 Content-Length: 239
-set-cookie: igloo=s%3A9sNKlO6-PqSX79xbEP8c5eVa-gZqNUwT.aadtHpeI4JQh33Caqwyl9KjwLNv0cr8l9ucsgA9Bkfw; Path=/; Expires=Sat, 21 Jun 2014 21:31:37 GMT; HttpOnly
-Date: Fri, 20 Jun 2014 21:31:37 GMT
+set-cookie: igloo=s%3AdE7ky8GBWEHXax2litkU5IuBZ5pieIct.RvMT6aiTv0MJM3IHowoEd0Ouclp8ye5vGo2eaq8b1Mg; Path=/; Expires=Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
+Date: Tue, 08 Jul 2014 06:02:06 GMT
 Connection: keep-alive
 
 
@@ -162,7 +162,7 @@ Connection: keep-alive
 
 ```json
 {
-  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAbWFya2V0cHJvcGhpdC5jb20iLCJhcGkiOiJza19saXZlX2ZYZ0Rncnk4MTRxd2FrTDQxS0RaaW40NyIsImlhdCI6MTQwMzI5OTg5OCwiZXhwIjoxNDAzMzAzNDk4fQ.AtHoDOchHbl8Jozogak76_8axxOWM6sf2m1Yp11H81U"
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAbWFya2V0cHJvcGhpdC5jb20iLCJhcGkiOiJza19saXZlX2ZYZ0Rncnk4MTRxd2FrTDQxS0RaaW40NyIsImlhdCI6MTQwNDc5OTMyNiwiZXhwIjoxNDA0ODAyOTI2fQ.H0GQUei706iOupeXR7OgScDtlfKyqj08W2vEHXU9Bw0"
 }
 ```
 
