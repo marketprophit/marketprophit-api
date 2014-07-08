@@ -20,6 +20,3 @@ build/
 _yardoc
 doc/
 .idea/
-
-# node modules
-node_modules/
