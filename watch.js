@@ -11,7 +11,7 @@ var index = path.join(__dirname, 'source', 'index.md')
 
 var url = process.env.NODE_ENV === 'production' ? 'https://open.marketprophit.com' : 'http://localhost:3000'
 
-var apiKey = 'sk_live_fXgDgry814qwakL41KDZin47'
+var apiKey = 'sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5'
 var auth = '-u "' + apiKey + ':"'
 
 var aejs = require('async-ejs').add('curl', function(str, callback) {

@@ -36,6 +36,42 @@ ticker | 3-4 character long alphanumeric stock ticker symbol | no | none
 
 
 
+## Ticker Specific User Returns by User
+
+```shell
+curl <%- auth %> "<%= url %>/historical/ticker-specific-user-returns-by-user?user_id=<%= userId %>"
+```
+
+> Returns response headers such as:
+
+```bash
+<%- curl('/historical/ticker-specific-user-returns-by-user?user_id=' + userId + ' -s -D- -o/dev/null') %>
+```
+
+> Returns response such as (limited `results` for brevity):
+
+```json
+<%- curl('/historical/ticker-specific-user-returns-by-user?user_id=' userId) %>
+```
+
+Ticker specific user returns data for range of given business dates for a given user id.
+
+### HTTP Request
+
+`GET <%= url %>/historical/ticker-specific-user-returns-by-user`
+
+### Query Parameters
+
+Parameter | Description | Required | Default
+--------- | ----------- | -------- | -------
+time_frame | Time frame (must be one of <%= timeFrames.join(', ') %>) | no | ONE_WEEK
+user_id | User ID of a Twitter username | yes | none
+ticker | 3-4 character long alphanumeric stock ticker symbol | no | none
+start_date | Start date range (MM-DD-YY) | no | 1 week ago
+end_date | End date range (MM-DD-YY) | no | previous business day
+
+
+
 ## Ticker Specific User Returns by Ticker
 
 ```shell
@@ -65,7 +101,7 @@ Ticker specific user returns data for range of given business dates for a given 
 Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 time_frame | Time frame (must be one of <%= timeFrames.join(', ') %>) | no | ONE_WEEK
-ticker | 3-4 character long alphanumeric stock ticker symbol | no | none
+ticker | 3-4 character long alphanumeric stock ticker symbol | yes | none
 start_date | Start date range (MM-DD-YY) | no | 1 week ago
 end_date | End date range (MM-DD-YY) | no | previous business day
 user_id | User ID of a Twitter username | no | none
