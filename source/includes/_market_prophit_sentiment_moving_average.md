@@ -5,19 +5,19 @@
 ## Market Prophit Sentiment Moving Average
 
 ```shell
-curl -u "sk_live_fXgDgry814qwakL41KDZin47:" "https://open.marketprophit.com/real-time/market-prophit-sentiment-moving-average?ticker=AAPL"
+curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/real-time/market-prophit-sentiment-moving-average?ticker=AAPL"
 ```
 
 > Returns response headers such as:
 
 ```bash
 HTTP/1.1 200 OK
-Vary: Accept, Accept-Encoding
+Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 3627
-ETag: W/"e2b-2746514977"
-set-cookie: igloo=s%3AU9J7_7ff5y_oVVw7Bgl0xNWLe5qtNtlN.19reDiBwcAxQpxoacT3axgLZZYroYzXUdfVqEKoglBY; Path=/; Expires=Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
-Date: Tue, 08 Jul 2014 06:02:10 GMT
+Content-Length: 1039
+ETag: W/"40f-3483225430"
+set-cookie: igloo=s%3A19Fh8DvdFbI4Lcm8z-VUMnoAY68zaprI.0%2Bl3d6K0eKXw0z%2BwNr0pAvtMjHJ3cW%2BMtv%2BMbBJAnVQ; Path=/; Expires=Thu, 24 Jul 2014 07:45:12 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 07:45:12 GMT
 Connection: keep-alive
 
 
@@ -28,19 +28,19 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-07-08T05:07:09.000Z",
+    "ts": "2014-07-23T07:06:52.000Z",
     "ticker": "AAPL",
-    "signal_value": -0.0838003756891833
+    "signal_value": "-0.0206048606067477"
   },
   {
-    "ts": "2014-07-08T05:07:28.000Z",
+    "ts": "2014-07-23T07:09:32.000Z",
     "ticker": "AAPL",
-    "signal_value": -0.2996763267093429
+    "signal_value": "-0.1231130270988458"
   },
   {
-    "ts": "2014-07-08T05:08:09.000Z",
+    "ts": "2014-07-23T07:09:50.000Z",
     "ticker": "AAPL",
-    "signal_value": -0.2905735799714648
+    "signal_value": "-0.0995641227974565"
   }
 ]
 ```
@@ -62,19 +62,19 @@ ticker | 3-4 character long alphanumeric stock ticker symbol | yes | none
 ## Historical Market Prophit Sentiment Moving Average
 
 ```shell
-curl -u "sk_live_fXgDgry814qwakL41KDZin47:" "https://open.marketprophit.com/historical/market-prophit-sentiment-moving-average?ticker=AAPL"
+curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/historical/market-prophit-sentiment-moving-average?ticker=AAPL"
 ```
 
 > Returns response headers such as:
 
 ```bash
 HTTP/1.1 200 OK
-Vary: Accept, Accept-Encoding
+Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 202988
-ETag: W/"318ec-773548502"
-set-cookie: igloo=s%3ASySuVakDfvkxbrHqO20_ZbaOKIjh87P4.myKxMDad0Cv87eHKM7YtlIwC10kCtTGFOIfjEgpVCXY; Path=/; Expires=Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
-Date: Tue, 08 Jul 2014 06:02:17 GMT
+Content-Length: 185375
+ETag: W/"2d41f-2057771493"
+set-cookie: igloo=s%3AgT7-gTEMNGQRhPpopOd0az1unTrZBf-P.p%2FBGMRMFL7b1%2Fi0A0cQhO29XJ6Kric37kl7fqn1B5Qc; Path=/; Expires=Thu, 24 Jul 2014 07:45:12 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 07:45:12 GMT
 Connection: keep-alive
 
 
@@ -85,19 +85,19 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-07-07T08:00:31.000Z",
+    "ts": "2014-07-22T08:06:06.000Z",
     "ticker": "AAPL",
-    "signal_value": -0.037356084318076
+    "signal_value": "0.1547941407480791"
   },
   {
-    "ts": "2014-07-07T08:01:47.000Z",
+    "ts": "2014-07-22T08:08:16.000Z",
     "ticker": "AAPL",
-    "signal_value": -0.0362396260090931
+    "signal_value": "0.1447193382248778"
   },
   {
-    "ts": "2014-07-07T08:02:00.000Z",
+    "ts": "2014-07-22T08:08:47.000Z",
     "ticker": "AAPL",
-    "signal_value": -0.0779200104587312
+    "signal_value": "0.1496200105908318"
   }
 ]
 ```
@@ -120,19 +120,19 @@ end_ts | ISO-8601 timestamp | no | now
 ## Daily Market Prophit Sentiment Moving Average
 
 ```shell
-curl -u "sk_live_fXgDgry814qwakL41KDZin47:" "https://open.marketprophit.com/historical/daily-market-prophit-sentiment-moving-average?ticker=AAPL"
+curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/historical/daily-market-prophit-sentiment-moving-average?ticker=AAPL"
 ```
 
 > Returns response headers such as:
 
 ```bash
 HTTP/1.1 200 OK
-Vary: Accept, Accept-Encoding
+Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AWYH0OIiNLdLUPaHFrRnd0JIxjQ6VqEgC.wa%2FJFANpRyLQVM2vpoe1ldpxHSyMmuyaUeCpWhfeNOg; Path=/; Expires=Wed, 09 Jul 2014 06:02:07 GMT; HttpOnly
-Date: Tue, 08 Jul 2014 06:02:09 GMT
+set-cookie: igloo=s%3Ad869TN5My3YAZNh9z4161y636yA3vakj.yVruCGVAUOvgmmdc%2FV%2ByyaMdiKAX0bsGV2H58TeU1cQ; Path=/; Expires=Thu, 24 Jul 2014 07:45:12 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 07:45:12 GMT
 Connection: keep-alive
 
 

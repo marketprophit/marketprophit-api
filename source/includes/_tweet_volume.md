@@ -5,19 +5,19 @@
 ## Tweet Volume
 
 ```shell
-curl -u "sk_live_fXgDgry814qwakL41KDZin47:" "https://open.marketprophit.com/real-time/tweet-volume?ticker=AAPL"
+curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/real-time/tweet-volume?ticker=AAPL"
 ```
 
 > Returns response headers such as:
 
 ```bash
 HTTP/1.1 200 OK
-Vary: Accept, Accept-Encoding
+Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2014
-ETag: W/"7de-1351849824"
-set-cookie: igloo=s%3AorWj7BMoAtmAF2vOqK2jXrGpL91nPobr.RG5O3fE8FVZitToIpOWFWrZjHj3kV9CsSxAPxBjQk1s; Path=/; Expires=Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
-Date: Tue, 08 Jul 2014 06:02:09 GMT
+Content-Length: 1072
+ETag: W/"430-1826996724"
+set-cookie: igloo=s%3AMlJYWQL3OhgGjn6_Kbiuu8nRZhmcW7im.5143bMZ%2FfB9PBj7VSZBzQ5czIzCuhAN9SdhLzupcQ%2Fk; Path=/; Expires=Thu, 24 Jul 2014 07:45:13 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 07:45:13 GMT
 Connection: keep-alive
 
 
@@ -28,19 +28,19 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-07-08T05:04:00.000Z",
+    "ts": "2014-07-23T07:05:00.000Z",
     "ticker": "AAPL",
-    "volume": 1
+    "volume": "1"
   },
   {
-    "ts": "2014-07-08T05:06:00.000Z",
+    "ts": "2014-07-23T07:06:00.000Z",
     "ticker": "AAPL",
-    "volume": 2
+    "volume": "2"
   },
   {
-    "ts": "2014-07-08T05:07:00.000Z",
+    "ts": "2014-07-23T07:07:00.000Z",
     "ticker": "AAPL",
-    "volume": 2
+    "volume": "1"
   }
 ]
 ```
@@ -62,19 +62,19 @@ ticker | 3-4 character long alphanumeric stock ticker symbol | yes | none
 ## Historical Tweet Volume
 
 ```shell
-curl -u "sk_live_fXgDgry814qwakL41KDZin47:" "https://open.marketprophit.com/historical/tweet-volume?ticker=AAPL"
+curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/historical/tweet-volume?ticker=AAPL"
 ```
 
 > Returns response headers such as:
 
 ```bash
 HTTP/1.1 200 OK
-Vary: Accept, Accept-Encoding
+Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 68025
-ETag: W/"109b9-1495726735"
-set-cookie: igloo=s%3At43uBSQb5SN5jBQnIDd8SKdgFEFYOeq5.yWXSMDqDnv23s9x%2BploVXVYSX8P70rgvYI5U6m00tCY; Path=/; Expires=Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
-Date: Tue, 08 Jul 2014 06:02:14 GMT
+Content-Length: 70006
+ETag: W/"11176-1940814807"
+set-cookie: igloo=s%3AmJBh8xZSzpx3bhNhlsNAUg_FvjO7o-0H.bghuRJiYH74Uapxol%2BnoXubDlkDSacwkmAamozWnyCI; Path=/; Expires=Thu, 24 Jul 2014 07:45:15 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 07:45:15 GMT
 Connection: keep-alive
 
 
@@ -85,19 +85,19 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-07-07T08:00:00.000Z",
+    "ts": "2014-07-22T08:01:00.000Z",
     "ticker": "AAPL",
-    "volume": 1
+    "volume": "2"
   },
   {
-    "ts": "2014-07-07T08:01:00.000Z",
+    "ts": "2014-07-22T08:02:00.000Z",
     "ticker": "AAPL",
-    "volume": 1
+    "volume": "2"
   },
   {
-    "ts": "2014-07-07T08:02:00.000Z",
+    "ts": "2014-07-22T08:05:00.000Z",
     "ticker": "AAPL",
-    "volume": 1
+    "volume": "1"
   }
 ]
 ```
@@ -120,19 +120,19 @@ end_ts | ISO-8601 timestamp | no | now
 ## Daily Tweet Volume
 
 ```shell
-curl -u "sk_live_fXgDgry814qwakL41KDZin47:" "https://open.marketprophit.com/historical/daily-tweet-volume?ticker=AAPL"
+curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/historical/daily-tweet-volume?ticker=AAPL"
 ```
 
 > Returns response headers such as:
 
 ```bash
 HTTP/1.1 200 OK
-Vary: Accept, Accept-Encoding
+Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3A8RTwb7qyU8e_pktldDgpbvjMlW6A9Vy7.7DPSCyZLvlAezL%2BoeHnWmsTBNm8assSqD7BfObp2D8Q; Path=/; Expires=Wed, 09 Jul 2014 06:02:06 GMT; HttpOnly
-Date: Tue, 08 Jul 2014 06:02:09 GMT
+set-cookie: igloo=s%3ANzU0m0WizHbM9nuANg2zi5GkMNCjbQJV.bkD95GGA4qEdzRsP3t5CcZlILM4BFNCvYUU%2Be18QpOk; Path=/; Expires=Thu, 24 Jul 2014 07:45:15 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 07:45:15 GMT
 Connection: keep-alive
 
 

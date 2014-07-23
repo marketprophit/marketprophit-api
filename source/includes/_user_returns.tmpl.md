@@ -51,7 +51,7 @@ curl <%- auth %> "<%= url %>/historical/ticker-specific-user-returns-by-user?use
 > Returns response such as (limited `results` for brevity):
 
 ```json
-<%- curl('/historical/ticker-specific-user-returns-by-user?user_id=' userId) %>
+<%- curl('/historical/ticker-specific-user-returns-by-user?user_id=' + userId) %>
 ```
 
 Ticker specific user returns data for range of given business dates for a given user id.
