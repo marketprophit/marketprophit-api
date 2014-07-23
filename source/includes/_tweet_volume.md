@@ -14,10 +14,10 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/real
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 1072
-ETag: W/"430-1826996724"
-set-cookie: igloo=s%3AMlJYWQL3OhgGjn6_Kbiuu8nRZhmcW7im.5143bMZ%2FfB9PBj7VSZBzQ5czIzCuhAN9SdhLzupcQ%2Fk; Path=/; Expires=Thu, 24 Jul 2014 07:45:13 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:13 GMT
+Content-Length: 3279
+ETag: W/"ccf-1919590084"
+set-cookie: igloo=s%3AqereGzEhfnTrfjnzX-K5uEIWUOOChENA.2Gk5HIDy3PBTlpmFYpsQaaeq8wUfC5Elvi2%2F%2BBOoybk; Path=/; Expires=Thu, 24 Jul 2014 21:29:20 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:20 GMT
 Connection: keep-alive
 
 
@@ -28,19 +28,19 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-07-23T07:05:00.000Z",
+    "ts": "2014-07-23T20:30:00.000Z",
     "ticker": "AAPL",
     "volume": "1"
   },
   {
-    "ts": "2014-07-23T07:06:00.000Z",
+    "ts": "2014-07-23T20:31:00.000Z",
     "ticker": "AAPL",
     "volume": "2"
   },
   {
-    "ts": "2014-07-23T07:07:00.000Z",
+    "ts": "2014-07-23T20:32:00.000Z",
     "ticker": "AAPL",
-    "volume": "1"
+    "volume": "5"
   }
 ]
 ```
@@ -71,10 +71,10 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 70006
-ETag: W/"11176-1940814807"
-set-cookie: igloo=s%3AmJBh8xZSzpx3bhNhlsNAUg_FvjO7o-0H.bghuRJiYH74Uapxol%2BnoXubDlkDSacwkmAamozWnyCI; Path=/; Expires=Thu, 24 Jul 2014 07:45:15 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:15 GMT
+Content-Length: 70321
+ETag: W/"112b1-3775655410"
+set-cookie: igloo=s%3AM79SXgRZ-QWbBXDSRt5ymh0YradT4rgr.Y%2FWj3rgsq3KItSWVUBSyOrKEGB5ftgtywcF2PrxsIwM; Path=/; Expires=Thu, 24 Jul 2014 21:29:21 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:21 GMT
 Connection: keep-alive
 
 
@@ -131,8 +131,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3ANzU0m0WizHbM9nuANg2zi5GkMNCjbQJV.bkD95GGA4qEdzRsP3t5CcZlILM4BFNCvYUU%2Be18QpOk; Path=/; Expires=Thu, 24 Jul 2014 07:45:15 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:15 GMT
+set-cookie: igloo=s%3AlS32JvIjUzGwnQKr18dAuLt4AVrhwnxP.WKqEUwR442hg5%2FwQey9Pm6JesxJdfs%2Fc4SAliY02SGo; Path=/; Expires=Thu, 24 Jul 2014 21:29:21 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:21 GMT
 Connection: keep-alive
 
 

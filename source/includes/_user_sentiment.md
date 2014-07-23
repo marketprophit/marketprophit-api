@@ -16,8 +16,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AUiEAC8ZAVm6g6bdMBLPW9tPcT8ELDtLG.HRcof%2FfWjFhzBd8sq1pLIROlqNOwWuZXmQmqmzed5Qs; Path=/; Expires=Thu, 24 Jul 2014 07:45:16 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:16 GMT
+set-cookie: igloo=s%3AzFHXQSzppkHN0KeDr3lVIqQqwCq3Evyo.WDrieU%2B60PtirIF7VfShTPGtc0sgqs4pKWHwr0YFWRE; Path=/; Expires=Thu, 24 Jul 2014 21:29:25 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:25 GMT
 Connection: keep-alive
 
 
@@ -49,10 +49,10 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/real
 HTTP/1.1 500 Internal Server Error
 Vary: Accept
 Content-Type: text/plain; charset=utf-8
-Content-Length: 228
-ETag: W/"e4-3852162581"
-set-cookie: igloo=s%3A9aaJMgiovpBIDgzudPK3o4UPaQeyiwJg.vcD8s2yIsjU1oke%2FOiWewZpM%2BwsRHXDvVXR1PdQQ9LA; Path=/; Expires=Thu, 24 Jul 2014 07:45:16 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:16 GMT
+Content-Length: 39
+ETag: W/"27-1680212420"
+set-cookie: igloo=s%3AospNbfHah_BRMzIl6om3neIhsfW898RV.foFnn1ScVRkl7Bblkh6xTFiucAXDcfhqeIPm9SgcD1w; Path=/; Expires=Thu, 24 Jul 2014 21:29:22 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:22 GMT
 Connection: keep-alive
 
 
@@ -61,13 +61,7 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'SELECT
-  TS,
-  USER_ID,
-  TICKER,
-  SENTIMENT,
-  USER_SCORE
-FROM UserSentimentDa' at line 2
+Unknown column 'AAPL' in 'where clause'
 ```
 
 Returns the complete set of user sentiment records for all tickers and users for the most recent full minute of data.
@@ -97,8 +91,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3A9egkQ2zqCz1KcoYArQjUAd4WUifrb99N.OtGyarwEIrMJ4p8MmSCqgFRZJDacc9OmF1KCjcLFl1Q; Path=/; Expires=Thu, 24 Jul 2014 07:45:16 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:16 GMT
+set-cookie: igloo=s%3AfttXg3KNXb1YiH8tDPDMFz1JIUu68JI2.XwIaa6DxFMqHKFWq5J%2F0eJDW%2F2Qrq1phD%2Fk%2FquRxwO0; Path=/; Expires=Thu, 24 Jul 2014 21:29:22 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:22 GMT
 Connection: keep-alive
 
 
@@ -139,10 +133,10 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2
-ETag: W/"2-223132457"
-set-cookie: igloo=s%3AddHmkNOt2A3GtB7BroPAQs9-wrGP6rgd.asATchxOarkb0Wk7S06HUEx9AKzIijG77OGSt6PCC6k; Path=/; Expires=Thu, 24 Jul 2014 07:45:16 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:16 GMT
+Content-Length: 5152961
+ETag: W/"4ea0c1-2676318965"
+set-cookie: igloo=s%3AIwOmJR74Ah_BzqSdmKMVo5flmTIqngki.mHSoRUEPYwabUDt29%2BHtfoevZYFgjxfqJFxnr6eMbiU; Path=/; Expires=Thu, 24 Jul 2014 21:29:25 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:22 GMT
 Connection: keep-alive
 
 
@@ -151,26 +145,7 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[
-  {
-    "ts": "2014-06-22T04:01:46.000Z",
-    "user_id": "15691758",
-    "ticker": "AAPL",
-    "sentiment": "0.4422646964938051"
-  },
-  {
-    "ts": "2014-06-22T04:02:05.000Z",
-    "user_id": "2499887964",
-    "ticker": "AAPL",
-    "sentiment": "-0.0107047781159852"
-  },
-  {
-    "ts": "2014-06-22T04:02:37.000Z",
-    "user_id": "2499887964",
-    "ticker": "AAPL",
-    "sentiment": "0.0482552051243046"
-  }
-]
+[]
 ```
 
 Returns a complete range of historical intraday records for a given ticker based on a date range (start date, end date)..

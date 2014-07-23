@@ -75,19 +75,19 @@ end_date | End date range (MM-DD-YY) | no | previous business day
 ## Ticker Specific User Returns by Ticker
 
 ```shell
-curl <%- auth %> "<%= url %>/historical/ticker-specific-user-returns-by-ticker"
+curl <%- auth %> "<%= url %>/historical/ticker-specific-user-returns-by-ticker?ticker=<%= ticker %>"
 ```
 
 > Returns response headers such as:
 
 ```bash
-<%- curl('/historical/ticker-specific-user-returns-by-ticker -s -D- -o/dev/null') %>
+<%- curl('/historical/ticker-specific-user-returns-by-ticker?ticker=' + ticker + ' -s -D- -o/dev/null') %>
 ```
 
 > Returns response such as (limited `results` for brevity):
 
 ```json
-<%- curl('/historical/ticker-specific-user-returns-by-ticker') %>
+<%- curl('/historical/ticker-specific-user-returns-by-ticker?ticker=' + ticker) %>
 ```
 
 Ticker specific user returns data for range of given business dates for a given user id.

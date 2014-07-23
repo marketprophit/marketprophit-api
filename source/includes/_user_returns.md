@@ -16,8 +16,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3A2ykU5EWVcur8FJG3MF0ZuiZQOHBzwEah.OUxXR%2FE2x25kVsQd4UYIkSU8kTaPQFwG9q2iD3E7VNI; Path=/; Expires=Thu, 24 Jul 2014 07:45:14 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:14 GMT
+set-cookie: igloo=s%3AJlTnyW0CuH_0ZrYrqepZt6I3WimBav-h.9xski8JUfgyFl2zht9r06%2BFaFs6gjfuHYhTUhaOKrHI; Path=/; Expires=Thu, 24 Jul 2014 21:29:21 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:21 GMT
 Connection: keep-alive
 
 
@@ -59,8 +59,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AY1dO5LXDul1bkqJpXwOf6SjoV9n0u_1u.zdbl2yA7YsLRzFSsKWdkeCU1xT0ZcOlNAfWpA0tarPc; Path=/; Expires=Thu, 24 Jul 2014 07:46:12 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:46:12 GMT
+set-cookie: igloo=s%3AAZHxOmbA4H4QPcHQ2Ygv-A9IkwUHjimz.JrU2xHEdfSRZkh33wlLMPHSgWuse3yKQCmeshncKTwM; Path=/; Expires=Thu, 24 Jul 2014 21:29:36 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:36 GMT
 Connection: keep-alive
 
 
@@ -93,19 +93,19 @@ end_date | End date range (MM-DD-YY) | no | previous business day
 ## Ticker Specific User Returns by Ticker
 
 ```shell
-curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/historical/ticker-specific-user-returns-by-ticker"
+curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/historical/ticker-specific-user-returns-by-ticker?ticker=AAPL"
 ```
 
 > Returns response headers such as:
 
 ```bash
-HTTP/1.1 400 Bad Request
+HTTP/1.1 200 OK
 Vary: Accept
-Content-Type: text/plain; charset=utf-8
-Content-Length: 72
-ETag: W/"48-3346433374"
-set-cookie: igloo=s%3ARX_MSMZhLBUSJAyhnLaAb8yicMYF9waB.X%2BxDIvlzuoiwNF6pqtOlkpK4pcSs6Nq6eHdf6biNCVA; Path=/; Expires=Thu, 24 Jul 2014 07:45:15 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:15 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 2
+ETag: W/"2-223132457"
+set-cookie: igloo=s%3A6pI4jAuj4KSDdIEdQ0nzzrFp0BQ8qu-z.fOX0zOsmvpyoknPNp1wFKI7vtk3safMC9P2NtVInCYI; Path=/; Expires=Thu, 24 Jul 2014 21:29:21 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:21 GMT
 Connection: keep-alive
 
 
@@ -114,7 +114,7 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-Ticker must not be empty and can have a max of 20 letters and/or numbers
+[]
 ```
 
 Ticker specific user returns data for range of given business dates for a given user id.
@@ -149,8 +149,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AOSARDf7K19ZhnYzk0MCWEhq0SpMhAhEe.NT3TkmLZmqTphuIJAnXzIZmvQT8sTAsbDqyqtmTxvoE; Path=/; Expires=Thu, 24 Jul 2014 07:45:15 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:15 GMT
+set-cookie: igloo=s%3AIpKkZyHaZhp9V0UI7yJSppiR-lzyxj-h.DBGwNmAisSjhDYX9QBSJuxpeUIMLkoqaxdP%2BXdOFkj0; Path=/; Expires=Thu, 24 Jul 2014 21:29:21 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:21 GMT
 Connection: keep-alive
 
 
@@ -192,8 +192,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AuANpUZx79R1GINQE6_otfI3DVQSEZlPl.WOeu51HxJge4MsnwPo5qh2jL4FmNCvgNm%2FwhbqlTUp8; Path=/; Expires=Thu, 24 Jul 2014 07:45:18 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:18 GMT
+set-cookie: igloo=s%3AmkMMprDaHWw3ZS6D3Shml2rNQGquVc_s.cnfU5fy3Lr86ZxUHeiCcwYAZdq9yRZo176D6%2BYrAeSk; Path=/; Expires=Thu, 24 Jul 2014 21:29:24 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:24 GMT
 Connection: keep-alive
 
 
@@ -237,8 +237,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AI0lSPidGegNYOjlkbcibRf3nUkRullO5.WG%2Bg1FnoBwoTbvpVwvSDHIU18e4qXCv%2BE0eEeUwAF7c; Path=/; Expires=Thu, 24 Jul 2014 07:45:16 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:16 GMT
+set-cookie: igloo=s%3AfVNlOBW2hCbkhsS1zjqTEkrZUZ6hjXTR.NZ5zw6u%2B3e62csL7C7guyr%2BUYx3d09Oh1myiupo0b1U; Path=/; Expires=Thu, 24 Jul 2014 21:29:25 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:25 GMT
 Connection: keep-alive
 
 

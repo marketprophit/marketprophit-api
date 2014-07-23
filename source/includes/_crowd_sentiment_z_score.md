@@ -5,7 +5,7 @@
 ## Crowd Sentiment Z-Score
 
 ```shell
-curl -u "sk_live_fXgDgry814qwakL41KDZin47:" "https://open.marketprophit.com/real-time/crowd-sentiment-z-score?ticker=AAPL"
+curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/real-time/crowd-sentiment-z-score?ticker=AAPL"
 ```
 
 > Returns response headers such as:
@@ -14,10 +14,10 @@ curl -u "sk_live_fXgDgry814qwakL41KDZin47:" "https://open.marketprophit.com/real
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 3491
-ETag: W/"da3-3018583834"
-set-cookie: igloo=s%3AD_tlBfZC8FXtOkhyDx9tIWShV5gVu6Gp.u3z5eCaE4O4qqOlu6Gb1ZnbV7ORSDSZ%2F2A0iGDs%2BDWQ; Path=/; Expires=Sat, 21 Jun 2014 21:31:37 GMT; HttpOnly
-Date: Fri, 20 Jun 2014 21:31:37 GMT
+Content-Length: 4242
+ETag: W/"1092-794600393"
+set-cookie: igloo=s%3AIH3G71xQBOry8zTZJYHWCGfIwsXUNgPx.OjEb%2By6yBDnFDdavCkwstXpnNZ4D4cjfdpwivWv9ARg; Path=/; Expires=Thu, 24 Jul 2014 21:29:20 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:20 GMT
 Connection: keep-alive
 
 
@@ -28,19 +28,19 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-06-20T20:33:00.000Z",
+    "ts": "2014-07-23T20:30:00.000Z",
     "ticker": "AAPL",
-    "average_sentiment": -0.4648223986509972
+    "z_score": "0.0050948467471814"
   },
   {
-    "ts": "2014-06-20T20:34:00.000Z",
+    "ts": "2014-07-23T20:31:00.000Z",
     "ticker": "AAPL",
-    "average_sentiment": 0.1045909036267269
+    "z_score": "-1.0830262708446063"
   },
   {
-    "ts": "2014-06-20T20:36:00.000Z",
+    "ts": "2014-07-23T20:32:00.000Z",
     "ticker": "AAPL",
-    "average_sentiment": 0.0412393088152574
+    "z_score": "0.3785038072296589"
   }
 ]
 ```
@@ -62,7 +62,7 @@ ticker | 3-4 character long alphanumeric stock ticker symbol | yes | none
 ## Historical Crowd Sentiment Z-Score
 
 ```shell
-curl -u "sk_live_fXgDgry814qwakL41KDZin47:" "https://open.marketprophit.com/historical/crowd-sentiment-z-score?ticker=AAPL"
+curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/historical/crowd-sentiment-z-score?ticker=AAPL"
 ```
 
 > Returns response headers such as:
@@ -71,10 +71,10 @@ curl -u "sk_live_fXgDgry814qwakL41KDZin47:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 57461
-ETag: W/"e075-3925032003"
-set-cookie: igloo=s%3AagLbZYE7bsuyINtmIIwPRd7aNX4eDPfu.R1nq22hpPB8hMY%2F0VVeuTjpURedDzsg%2BeLFvBzy3cqU; Path=/; Expires=Sat, 21 Jun 2014 21:31:37 GMT; HttpOnly
-Date: Fri, 20 Jun 2014 21:31:37 GMT
+Content-Length: 88202
+ETag: W/"1588a-2482970011"
+set-cookie: igloo=s%3AuC7L_ZhGxmnx077EWVi92WVaLp7_f4bM.b%2BoaYEyI9im04jByoR6ISbjIZ4znKfUBja41d%2FHSVzk; Path=/; Expires=Thu, 24 Jul 2014 21:29:19 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:19 GMT
 Connection: keep-alive
 
 
@@ -85,19 +85,19 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-06-19T08:02:00.000Z",
+    "ts": "2014-07-22T08:08:00.000Z",
     "ticker": "AAPL",
-    "average_sentiment": 0.1169283165310861
+    "z_score": "-0.9049303386383771"
   },
   {
-    "ts": "2014-06-19T08:05:00.000Z",
+    "ts": "2014-07-22T08:09:00.000Z",
     "ticker": "AAPL",
-    "average_sentiment": -0.2735787703082803
+    "z_score": "-1.4394693528096765"
   },
   {
-    "ts": "2014-06-19T08:11:00.000Z",
+    "ts": "2014-07-22T08:10:00.000Z",
     "ticker": "AAPL",
-    "average_sentiment": 0.2626316532746197
+    "z_score": "-0.0981927471663552"
   }
 ]
 ```
@@ -120,7 +120,7 @@ end_ts | ISO-8601 timestamp | no | now
 ## Daily Crowd Sentiment Z-Score
 
 ```shell
-curl -u "sk_live_fXgDgry814qwakL41KDZin47:" "https://open.marketprophit.com/historical/daily-crowd-sentiment-z-score?ticker=AAPL"
+curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/historical/daily-crowd-sentiment-z-score?ticker=AAPL"
 ```
 
 > Returns response headers such as:
@@ -131,8 +131,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3APTBCK3ZnDmrAnm6MBPQyao7nIC8-6_--.TGOEA9kC4dNTYE92RrFx8qT5l0sGUxZ8o%2F3W1Cln940; Path=/; Expires=Sat, 21 Jun 2014 21:31:37 GMT; HttpOnly
-Date: Fri, 20 Jun 2014 21:31:37 GMT
+set-cookie: igloo=s%3Ag2mv0B33qPU4XgUL6SY1YCIOUmlzW7lb.znlCrEZbLQgIHUG%2BvOZDdOg4aZ5SxyNK%2FXNNoWRi%2FsA; Path=/; Expires=Thu, 24 Jul 2014 21:29:20 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:20 GMT
 Connection: keep-alive
 
 

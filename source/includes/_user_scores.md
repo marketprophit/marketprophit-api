@@ -16,8 +16,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AuHOaJ7TFhc3aX5vOP-_WqpzbobXzk-eu.rmJA0ULkEAJp%2FhbIfakOH7Z2JxlJMwzredXoyI%2B9DXs; Path=/; Expires=Thu, 24 Jul 2014 07:45:20 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:20 GMT
+set-cookie: igloo=s%3Artt7klaUZmeaYz2YiiaxKlhzegBIoT7t.GXtkpN4GNCOOvZ4S5nkL2wREGGWRSJU21i94vStS06o; Path=/; Expires=Thu, 24 Jul 2014 21:29:21 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:21 GMT
 Connection: keep-alive
 
 
@@ -49,10 +49,10 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 320673
-ETag: W/"4e4a1-4022629531"
-set-cookie: igloo=s%3AYtCGdX2276lqGlLq2r7FaN1NMs9lzavf.ZYtoH0%2FBODYJtRWG4Druay6RmyX9U5bm9MYheGu%2FhAo; Path=/; Expires=Thu, 24 Jul 2014 07:45:20 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:20 GMT
+Content-Length: 492891
+ETag: W/"7855b-2207717398"
+set-cookie: igloo=s%3AI_DmUkeZLYJP0u50Nx9SjXVnUDtik7Ne.dZHyJaIlU%2FlLqQ6YBFwGc0PvShmws2%2Fx2AjYXRR8z6I; Path=/; Expires=Thu, 24 Jul 2014 21:29:25 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:25 GMT
 Connection: keep-alive
 
 
@@ -63,22 +63,22 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-07-21T04:00:00.000Z",
-    "user_id": "399673647",
-    "score": "0.2999216977558785",
-    "mp_rank": "367"
+    "ts": "2014-07-22T04:00:00.000Z",
+    "user_id": "2663617496",
+    "score": "0.0875637557941699",
+    "mp_rank": "1567"
   },
   {
-    "ts": "2014-07-21T04:00:00.000Z",
-    "user_id": "245420776",
-    "score": "0.4929985732430003",
-    "mp_rank": "143"
+    "ts": "2014-07-22T04:00:00.000Z",
+    "user_id": "2663616672",
+    "score": "0.1366606588906953",
+    "mp_rank": "1183"
   },
   {
-    "ts": "2014-07-21T04:00:00.000Z",
-    "user_id": "82142636",
-    "score": "0.0962966716975763",
-    "mp_rank": "989"
+    "ts": "2014-07-22T04:00:00.000Z",
+    "user_id": "2659768237",
+    "score": "-0.1225859851397952",
+    "mp_rank": "3573"
   }
 ]
 ```
@@ -105,8 +105,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AocgJ0Wr1cz_bfsL3Mox6CkL1bmO3R7dd.%2BgMFn1E%2BYb9PiX8QedHTbVulAOlCls8pAlV3cDgoiKw; Path=/; Expires=Thu, 24 Jul 2014 07:45:20 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:20 GMT
+set-cookie: igloo=s%3AK_CuUsQveFTTBfrE_zbpvO7v96Gzgpol.RdG9yzB0v0gjq353uCKGAJaBL6p0g8WaOiKnMWU7P70; Path=/; Expires=Thu, 24 Jul 2014 21:29:22 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:22 GMT
 Connection: keep-alive
 
 
@@ -149,8 +149,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AlkmaohoCVh8ZoPHneZZjMmU1m9lek0Md.PKfO%2FokF47isksHnW%2BEpIyikcWUzfP4aGHk%2BMzZQBYU; Path=/; Expires=Thu, 24 Jul 2014 07:45:20 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:20 GMT
+set-cookie: igloo=s%3AC9v-OCGuDU3RdAy7L6ydZEpcsr1_skZv.7s5GhIhAElAyi9JkG4FmBvC2T8szahAtFvuhEBAi7KA; Path=/; Expires=Thu, 24 Jul 2014 21:29:21 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:21 GMT
 Connection: keep-alive
 
 
@@ -192,8 +192,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3ALEdKT203XRYHNPYeehEXjLVnX3hAB9yP.ApAZjZQxvoXrioICmeqPAY3Qk%2FbMT28L7lJ2zZVi6dA; Path=/; Expires=Thu, 24 Jul 2014 07:45:21 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:21 GMT
+set-cookie: igloo=s%3Ah4brnxeM7U7O3ex_gGeiwqdmdypUwhaf.7cWVp%2Fcgb03%2BNVnPeiJJl4y3DLKl6wk7YX446fYCLLU; Path=/; Expires=Thu, 24 Jul 2014 21:29:22 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:22 GMT
 Connection: keep-alive
 
 
@@ -237,8 +237,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3ADsHhwyMy7bQwaJ-2f_Yg42-GJOAN0Tff.dt%2Fo9C0mMAwDerbe7vuWDZsfEEfyXqeimP3Mlq2LzHs; Path=/; Expires=Thu, 24 Jul 2014 07:45:20 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:20 GMT
+set-cookie: igloo=s%3A9mtCzaefhJujj1dOr9eDvnmDrKGiAeb9.NtZwK%2FA7pikIDDGB8u6AkvuHZZAU%2FnJfCHVfmIU9jWE; Path=/; Expires=Thu, 24 Jul 2014 21:29:22 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:22 GMT
 Connection: keep-alive
 
 
@@ -282,8 +282,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AqI5XLfwIL4FofaP11IAa3o8xU0_1Lzvm.xkt%2BGsMMmNlJ%2B%2FaDKUuNHy2KWNqY%2F0MXCxmzNuS1fW8; Path=/; Expires=Thu, 24 Jul 2014 07:45:16 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:16 GMT
+set-cookie: igloo=s%3A-XcMTPINbBtS60EzQEwbTwD06LeLD2q8.7Glr5V3oqI%2F%2B3NnYqP4Lld%2Fm%2BGFrEmd8X4HnlzCnoBU; Path=/; Expires=Thu, 24 Jul 2014 21:29:25 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:25 GMT
 Connection: keep-alive
 
 
@@ -325,8 +325,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AEX7TlAqCH_5TueOu2gJ-Hv0eWNeP1cpw.FwoOlKZq1nxM2dCu4tNvoR4LR78N0pTxLkFrKQtquxA; Path=/; Expires=Thu, 24 Jul 2014 07:45:15 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:15 GMT
+set-cookie: igloo=s%3A0f1wCM5AXT4sU6jmFTNspgi51YDPFXLn.M4C7pBhFDoKkwlsjNn6QwrJ%2B%2BhNzoLq6gdzeXtaBxNc; Path=/; Expires=Thu, 24 Jul 2014 21:29:23 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:23 GMT
 Connection: keep-alive
 
 
@@ -370,8 +370,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AX5EkunjwC9pu-pD_0oRyXtgoQBFSy1Kj.QqUDOtHelZgtoutCiZCHnBvLSFsjfg31pUbEb7PRU0w; Path=/; Expires=Thu, 24 Jul 2014 07:45:16 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:16 GMT
+set-cookie: igloo=s%3AIlvtbqIGC6akB4aNGoPDNdRl1vYYQcCv.%2FMEjgr39KRC0c5cId3%2BUMnHJO255ekVco5zYM1BWBNY; Path=/; Expires=Thu, 24 Jul 2014 21:29:23 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:23 GMT
 Connection: keep-alive
 
 

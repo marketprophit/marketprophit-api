@@ -151,8 +151,8 @@ HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 5204
-set-cookie: igloo=s%3Aqx2iACkTyMiwkB58GuGc05hi_8BFay04.xVShK%2BEQCGlJMWdTceQYPmZfH5dHFHkK5KtEsdZQ5AY; Path=/; Expires=Thu, 24 Jul 2014 07:45:16 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 07:45:16 GMT
+set-cookie: igloo=s%3ALPn1dMsKT0k0ancoqgWurASnKgziW78d.4KSTadjeyvTO3sfldpfSqpnnaJm8xEpm6bTpNokZ20Y; Path=/; Expires=Thu, 24 Jul 2014 21:29:22 GMT; HttpOnly
+Date: Wed, 23 Jul 2014 21:29:22 GMT
 Connection: keep-alive
 
 
