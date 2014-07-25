@@ -20,6 +20,7 @@
   "homepage": "https://github.com/marketprophit/marketprophit-api",
   "dependencies": {
     "async-ejs": "^0.1.6",
-    "readdirp": "^1.1.0"
+    "readdirp": "^1.1.0",
+    "replace": "^0.2.9"
   }
 }

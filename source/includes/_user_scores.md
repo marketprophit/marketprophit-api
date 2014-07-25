@@ -16,8 +16,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3Artt7klaUZmeaYz2YiiaxKlhzegBIoT7t.GXtkpN4GNCOOvZ4S5nkL2wREGGWRSJU21i94vStS06o; Path=/; Expires=Thu, 24 Jul 2014 21:29:21 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 21:29:21 GMT
+set-cookie: igloo=s%3AVj-KP7rXgJpLuB0HeRciI3EiEYuQpDWh.PKoQ0ShbetnA3lbaSa4uwj%2FckIkchjHt%2BlK0zabcwBA; Path=/; Expires=Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
+Date: Fri, 25 Jul 2014 16:58:04 GMT
 Connection: keep-alive
 
 
@@ -49,10 +49,10 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 492891
-ETag: W/"7855b-2207717398"
-set-cookie: igloo=s%3AI_DmUkeZLYJP0u50Nx9SjXVnUDtik7Ne.dZHyJaIlU%2FlLqQ6YBFwGc0PvShmws2%2Fx2AjYXRR8z6I; Path=/; Expires=Thu, 24 Jul 2014 21:29:25 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 21:29:25 GMT
+Content-Length: 505064
+ETag: W/"7b4e8-1580733910"
+set-cookie: igloo=s%3AbffoecLgl_9RwSg-sbWfrs2Hwahz2v6o.2H7B0xFVokEmahtD4AhjBJsmhFJa%2F7LoPP6flbqs%2FYg; Path=/; Expires=Sat, 26 Jul 2014 16:58:05 GMT; HttpOnly
+Date: Fri, 25 Jul 2014 16:58:04 GMT
 Connection: keep-alive
 
 
@@ -63,22 +63,22 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-07-22T04:00:00.000Z",
+    "ts": "2014-07-24T04:00:00.000Z",
     "user_id": "2663617496",
-    "score": "0.0875637557941699",
-    "mp_rank": "1567"
+    "score": "-0.0351003602575661",
+    "mp_rank": "2951"
   },
   {
-    "ts": "2014-07-22T04:00:00.000Z",
+    "ts": "2014-07-24T04:00:00.000Z",
     "user_id": "2663616672",
-    "score": "0.1366606588906953",
-    "mp_rank": "1183"
+    "score": "0.0723533513177047",
+    "mp_rank": "1679"
   },
   {
-    "ts": "2014-07-22T04:00:00.000Z",
+    "ts": "2014-07-24T04:00:00.000Z",
     "user_id": "2659768237",
-    "score": "-0.1225859851397952",
-    "mp_rank": "3573"
+    "score": "-0.0115342911853007",
+    "mp_rank": "2678"
   }
 ]
 ```
@@ -100,13 +100,13 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 > Returns response headers such as:
 
 ```bash
-HTTP/1.1 200 OK
+HTTP/1.1 500 Internal Server Error
 Vary: Accept
-Content-Type: application/json; charset=utf-8
-Content-Length: 2
-ETag: W/"2-223132457"
-set-cookie: igloo=s%3AK_CuUsQveFTTBfrE_zbpvO7v96Gzgpol.RdG9yzB0v0gjq353uCKGAJaBL6p0g8WaOiKnMWU7P70; Path=/; Expires=Thu, 24 Jul 2014 21:29:22 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 21:29:22 GMT
+Content-Type: text/plain; charset=utf-8
+Content-Length: 87
+ETag: W/"57-1119346246"
+set-cookie: igloo=s%3AurG3jcmQsUzIRdl0W-tUWj4mWsVuG5ye.9TBBvnZmetrnYQFkhUj6vbjxlzyhXUwRk7mbxUaFwpw; Path=/; Expires=Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
+Date: Fri, 25 Jul 2014 16:58:04 GMT
 Connection: keep-alive
 
 
@@ -115,7 +115,7 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[]
+execute command denied to user 'nick'@'%' for routine 'mp_prod.GetTwitterUsernameForId'
 ```
 
 Returns user scores for a given range of business dates and user id.
@@ -129,8 +129,8 @@ Returns user scores for a given range of business dates and user id.
 Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 user_id | User ID of a Twitter username | yes | none
-start_date | Start date range (MM-DD-YY) | no | 1 year ago
-end_date | End date range (MM-DD-YY) | no | previous business day
+start_date | Start date range (MM-DD-YYYY) | no | 1 year ago
+end_date | End date range (MM-DD-YYYY) | no | previous business day
 ticker | 3-4 character long alphanumeric stock ticker symbol | no | none
 
 
@@ -149,8 +149,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AC9v-OCGuDU3RdAy7L6ydZEpcsr1_skZv.7s5GhIhAElAyi9JkG4FmBvC2T8szahAtFvuhEBAi7KA; Path=/; Expires=Thu, 24 Jul 2014 21:29:21 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 21:29:21 GMT
+set-cookie: igloo=s%3AxFfpGEg-G_dqnGkCNxizvkscdCwCVfn5.yGIkbhw69C6YVjFsnkhhlCHsv0RtrN0b2ZOIGnrNSJU; Path=/; Expires=Sat, 26 Jul 2014 16:58:05 GMT; HttpOnly
+Date: Fri, 25 Jul 2014 16:58:05 GMT
 Connection: keep-alive
 
 
@@ -173,7 +173,7 @@ Returns ticker specific user scores for a given business date.
 Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 time_frame | Time frame (must be one of ONE_WEEK, TWO_WEEKS, THREE_WEEKS, FOUR_WEEKS) | no | ONE_WEEK
-date | Date (MM-DD-YY) | no | previous business day
+date | Date (MM-DD-YYYY) | no | previous business day
 ticker | 3-4 character long alphanumeric stock ticker symbol | no | none
 
 
@@ -187,13 +187,13 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 > Returns response headers such as:
 
 ```bash
-HTTP/1.1 200 OK
+HTTP/1.1 500 Internal Server Error
 Vary: Accept
-Content-Type: application/json; charset=utf-8
-Content-Length: 2
-ETag: W/"2-223132457"
-set-cookie: igloo=s%3Ah4brnxeM7U7O3ex_gGeiwqdmdypUwhaf.7cWVp%2Fcgb03%2BNVnPeiJJl4y3DLKl6wk7YX446fYCLLU; Path=/; Expires=Thu, 24 Jul 2014 21:29:22 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 21:29:22 GMT
+Content-Type: text/plain; charset=utf-8
+Content-Length: 87
+ETag: W/"57-1119346246"
+set-cookie: igloo=s%3AAtoY3jgzvBHzpHJOYKEO1kgZLtSSURed.0C2nXJTqFp6zM9RxoxoBYv9F%2BDVGYQV5fHBrAKP2ai0; Path=/; Expires=Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
+Date: Fri, 25 Jul 2014 16:58:04 GMT
 Connection: keep-alive
 
 
@@ -202,7 +202,7 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[]
+execute command denied to user 'nick'@'%' for routine 'mp_prod.GetTwitterUsernameForId'
 ```
 
 Ticker specific user score data for range of given business dates for a given user id.
@@ -217,8 +217,8 @@ Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 time_frame | Time frame (must be one of ONE_WEEK, TWO_WEEKS, THREE_WEEKS, FOUR_WEEKS) | no | ONE_WEEK
 user_id | User ID of a Twitter username | yes | none
-start_date | Start date range (MM-DD-YY) | no | 1 week ago
-end_date | End date range (MM-DD-YY) | no | previous business day
+start_date | Start date range (MM-DD-YYYY) | no | 1 week ago
+end_date | End date range (MM-DD-YYYY) | no | previous business day
 ticker | 3-4 character long alphanumeric stock ticker symbol | no | none
 
 
@@ -237,8 +237,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3A9mtCzaefhJujj1dOr9eDvnmDrKGiAeb9.NtZwK%2FA7pikIDDGB8u6AkvuHZZAU%2FnJfCHVfmIU9jWE; Path=/; Expires=Thu, 24 Jul 2014 21:29:22 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 21:29:22 GMT
+set-cookie: igloo=s%3AuVFD6IAswjUqoZVxJMJojYR72x_xDy7M.8TQ1Vq9aZWR%2FHITBHmESxpxFguTHWif8GNhBXNfTvMI; Path=/; Expires=Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
+Date: Fri, 25 Jul 2014 16:58:04 GMT
 Connection: keep-alive
 
 
@@ -262,8 +262,8 @@ Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 time_frame | Time frame (must be one of ONE_WEEK, TWO_WEEKS, THREE_WEEKS, FOUR_WEEKS) | no | ONE_WEEK
 ticker | 3-4 character long alphanumeric stock ticker symbol | yes | none
-start_date | Start date range (MM-DD-YY) | no | 1 week ago
-end_date | End date range (MM-DD-YY) | no | previous business day
+start_date | Start date range (MM-DD-YYYY) | no | 1 week ago
+end_date | End date range (MM-DD-YYYY) | no | previous business day
 user_id | User ID of a Twitter username | no | none
 
 
@@ -282,8 +282,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3A-XcMTPINbBtS60EzQEwbTwD06LeLD2q8.7Glr5V3oqI%2F%2B3NnYqP4Lld%2Fm%2BGFrEmd8X4HnlzCnoBU; Path=/; Expires=Thu, 24 Jul 2014 21:29:25 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 21:29:25 GMT
+set-cookie: igloo=s%3ADT8-pqcAdS5tIRpsGDbCnXdMUU39aNdT.bUBOpq3sTHujF4Y2M5oiP0ToWr8gGJEQ9MR5BkNAMhs; Path=/; Expires=Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
+Date: Fri, 25 Jul 2014 16:58:04 GMT
 Connection: keep-alive
 
 
@@ -306,7 +306,7 @@ Returns sector specific user scores for a given business date.
 Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 time_frame | Time frame (must be one of ONE_WEEK, TWO_WEEKS, THREE_WEEKS, FOUR_WEEKS) | no | ONE_WEEK
-date | Date (MM-DD-YY) | no | previous business day
+date | Date (MM-DD-YYYY) | no | previous business day
 sector | Sector (must be one of Agriculture, BasicMaterials, Conglomerates, ConsumerGoods, Currency, Energy, Financial, Healthcare, Index, IndustrialGoods, Livestock, Metals, Other Futures, Services, Technology, Utilities) | no | none
 
 
@@ -320,13 +320,13 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 > Returns response headers such as:
 
 ```bash
-HTTP/1.1 200 OK
+HTTP/1.1 500 Internal Server Error
 Vary: Accept
-Content-Type: application/json; charset=utf-8
-Content-Length: 2
-ETag: W/"2-223132457"
-set-cookie: igloo=s%3A0f1wCM5AXT4sU6jmFTNspgi51YDPFXLn.M4C7pBhFDoKkwlsjNn6QwrJ%2B%2BhNzoLq6gdzeXtaBxNc; Path=/; Expires=Thu, 24 Jul 2014 21:29:23 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 21:29:23 GMT
+Content-Type: text/plain; charset=utf-8
+Content-Length: 87
+ETag: W/"57-1119346246"
+set-cookie: igloo=s%3A-2bnwv6CV3HEQgTB2OKqpPFBQ1mLQtb8.9y%2BB48Zc4ea10U8V2IZ7Vw2ebH7y5P9TMpeAaSASFGU; Path=/; Expires=Sat, 26 Jul 2014 16:58:05 GMT; HttpOnly
+Date: Fri, 25 Jul 2014 16:58:05 GMT
 Connection: keep-alive
 
 
@@ -335,7 +335,7 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[]
+execute command denied to user 'nick'@'%' for routine 'mp_prod.GetTwitterUsernameForId'
 ```
 
 Returns sector specific user scores for a given range of business dates for a given user id.
@@ -350,8 +350,8 @@ Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 time_frame | Time frame (must be one of ONE_WEEK, TWO_WEEKS, THREE_WEEKS, FOUR_WEEKS) | no | ONE_WEEK
 user_id | User ID of a Twitter username | yes | none
-start_date | Start date range (MM-DD-YY) | no | 1 week ago
-end_date | End date range (MM-DD-YY) | no | previous business day
+start_date | Start date range (MM-DD-YYYY) | no | 1 week ago
+end_date | End date range (MM-DD-YYYY) | no | previous business day
 sector | Sector (must be one of Agriculture, BasicMaterials, Conglomerates, ConsumerGoods, Currency, Energy, Financial, Healthcare, Index, IndustrialGoods, Livestock, Metals, Other Futures, Services, Technology, Utilities) | no | none
 
 
@@ -370,8 +370,8 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AIlvtbqIGC6akB4aNGoPDNdRl1vYYQcCv.%2FMEjgr39KRC0c5cId3%2BUMnHJO255ekVco5zYM1BWBNY; Path=/; Expires=Thu, 24 Jul 2014 21:29:23 GMT; HttpOnly
-Date: Wed, 23 Jul 2014 21:29:23 GMT
+set-cookie: igloo=s%3AfWnyVRy6LZT9nLJaFJtO6hTHoZdrJ4Jg.3oFb1AfXl8GCMtWVA0HAndvrhsRluGqDCdqrSR0KCaQ; Path=/; Expires=Sat, 26 Jul 2014 16:58:05 GMT; HttpOnly
+Date: Fri, 25 Jul 2014 16:58:05 GMT
 Connection: keep-alive
 
 
@@ -395,6 +395,6 @@ Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 time_frame | Time frame (must be one of ONE_WEEK, TWO_WEEKS, THREE_WEEKS, FOUR_WEEKS) | no | ONE_WEEK
 sector | Sector (must be one of Agriculture, BasicMaterials, Conglomerates, ConsumerGoods, Currency, Energy, Financial, Healthcare, Index, IndustrialGoods, Livestock, Metals, Other Futures, Services, Technology, Utilities) | yes | none
-start_date | Start date range (MM-DD-YY) | no | 1 week ago
-end_date | End date range (MM-DD-YY) | no | previous business day
+start_date | Start date range (MM-DD-YYYY) | no | 1 week ago
+end_date | End date range (MM-DD-YYYY) | no | previous business day
 user_id | User ID of a Twitter username | no | none

@@ -31,7 +31,7 @@ Returns ticker specific user returns for a given business date.
 Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 time_frame | Time frame (must be one of <%= timeFrames.join(', ') %>) | no | ONE_WEEK
-date | Date (MM-DD-YY) | no | previous business day
+date | Date (MM-DD-YYYY) | no | previous business day
 ticker | 3-4 character long alphanumeric stock ticker symbol | no | none
 
 
@@ -67,8 +67,8 @@ Parameter | Description | Required | Default
 time_frame | Time frame (must be one of <%= timeFrames.join(', ') %>) | no | ONE_WEEK
 user_id | User ID of a Twitter username | yes | none
 ticker | 3-4 character long alphanumeric stock ticker symbol | no | none
-start_date | Start date range (MM-DD-YY) | no | 1 week ago
-end_date | End date range (MM-DD-YY) | no | previous business day
+start_date | Start date range (MM-DD-YYYY) | no | 1 week ago
+end_date | End date range (MM-DD-YYYY) | no | previous business day
 
 
 
@@ -102,8 +102,8 @@ Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 time_frame | Time frame (must be one of <%= timeFrames.join(', ') %>) | no | ONE_WEEK
 ticker | 3-4 character long alphanumeric stock ticker symbol | yes | none
-start_date | Start date range (MM-DD-YY) | no | 1 week ago
-end_date | End date range (MM-DD-YY) | no | previous business day
+start_date | Start date range (MM-DD-YYYY) | no | 1 week ago
+end_date | End date range (MM-DD-YYYY) | no | previous business day
 user_id | User ID of a Twitter username | no | none
 
 
@@ -137,7 +137,7 @@ Returns sector specific user returns for a given business date.
 Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 time_frame | Time frame (must be one of <%= timeFrames.join(', ') %>) | no | ONE_WEEK
-date | Date (MM-DD-YY) | no | previous business day
+date | Date (MM-DD-YYYY) | no | previous business day
 sector | Sector (must be one of <%= sectors.join(', ') %>) | no | none
 
 
@@ -172,8 +172,8 @@ Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 time_frame | Time frame (must be one of <%= timeFrames.join(', ') %>) | no | ONE_WEEK
 user_id | User ID of a Twitter username | yes | none
-start_date | Start date range (MM-DD-YY) | no | 1 week ago
-end_date | End date range (MM-DD-YY) | no | previous business day
+start_date | Start date range (MM-DD-YYYY) | no | 1 week ago
+end_date | End date range (MM-DD-YYYY) | no | previous business day
 sector | Sector (must be one of <%= sectors.join(', ') %>) | no | none
 
 
@@ -208,6 +208,6 @@ Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 time_frame | Time frame (must be one of <%= timeFrames.join(', ') %>) | no | ONE_WEEK
 sector | Sector (must be one of <%= sectors.join(', ') %>) | yes | none
-start_date | Start date range (MM-DD-YY) | no | 1 week ago
-end_date | End date range (MM-DD-YY) | no | previous business day
+start_date | Start date range (MM-DD-YYYY) | no | 1 week ago
+end_date | End date range (MM-DD-YYYY) | no | previous business day
 user_id | User ID of a Twitter username | no | none
