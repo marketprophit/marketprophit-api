@@ -5,7 +5,7 @@ language_tabs:
   - shell
 
 toc_footers:
-  - <i>Developer Keys Coming Soon</i>
+  - Contact us to receive your secret API key and start using our API at the [Developer Portal](https://open.marketprophit.com/)
 
 includes:
   - introduction
@@ -14,6 +14,8 @@ includes:
   - errors
   - websockets
   - streaming
+  - intraday_bundled_chart_data
+  - daily_bundled_chart_data
   - crowd_sentiment
   - crowd_sentiment_moving_average
   - market_prophit_sentiment
