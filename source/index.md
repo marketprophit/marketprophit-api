@@ -5,7 +5,7 @@ language_tabs:
   - shell
 
 toc_footers:
-  - Contact us to receive your secret API key and start using our API at the [Developer Portal](https://open.marketprophit.com/)
+  - Contact us for API keys
 
 includes:
   - introduction
