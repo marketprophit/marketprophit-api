@@ -13,6 +13,7 @@ includes:
   - response_formats
   - errors
   - websockets
+  - streaming
   - crowd_sentiment
   - crowd_sentiment_moving_average
   - market_prophit_sentiment

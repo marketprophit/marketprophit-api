@@ -3,8 +3,6 @@
 
 In order to communicate with websockets, you must follow these requirements:
 
-By default, all `/real-time/` prefixed `GET` endpoints have support for websockets.
-
 * Use a [socket.io](http://socket.io) API wrapper (or an alternative if available):
 
   - [Node.js](https://github.com/Automattic/socket.io-client)
@@ -20,102 +18,22 @@ By default, all `/real-time/` prefixed `GET` endpoints have support for websocke
 
 ## Websocket Events
 
-> Example using client-side JavaScript (through use of jQuery and socket.io):
+> Examples using client-side JavaScript (through use of jQuery and socket.io):
 
-```js
+* [Client-side JavaScript JSFiddle Example Template](http://jsfiddle.net/Lokqp2os/)
 
-(function() {
-
-  /*globals io*/
-
-  function connectSocket(token) {
-    var socket = io.connect('https://open.marketprophit.com', {
-      query: 'token=' + token,
-      secure: true
-    })
-    socket
-    .on('connect', function() {
-      console.log('connected and authenticated')
-    })
-    .emit('subscribe', {
-      path: '/real-time/crowd-sentiment',
-      method: 'get',
-      params: {
-        ticker: 'AAPL'
-      }
-    }, function(err) {
-      if (err) return console.error(err)
-      console.log(
-        'subscribed to: %s %s',
-        'GET',
-        '/real-time/crowd-sentiment'
-      )
-    })
-    .on('disconnect', function() {
-      console.log('disconnected')
-    })
-    .on('error', function(err) {
-      console.error('error', err)
-    })
-    .on('err', function(err) {
-      console.error('err', err)
-    })
-    .on('res', function(res) {
-      console.log('res', res)
-    })
-    // after 3 minutes unsubscribe us
-    setTimeout(function() {
-      socket.emit('unsubscribe', {
-        path: '/real-time/crowd-sentiment',
-        method: 'GET',
-        params: {
-          ticker: 'APPL'
-        }
-      }, function(err) {
-        if (err) return console.error(err)
-        console.log(
-          'unsubscribed from: %s %s',
-          'GET',
-          '/real-time/crowd-sentiment'
-        )
-      })
-    }, 3 * 60 * 1000)
-  }
-
-  $(function() {
-    $.ajax({
-      type: 'POST',
-      url: '/jwt',
-      dataType: 'json',
-      beforeSend: function(xhr) {
-        // **NOTE**: NEVER EXPOSE YOUR SECRET API KEY
-        // This is just an example to show you that
-        // you'd need to do a request to your own
-        // server (e.g. create your own /jwt route) which
-        // would then query our API server and return a JWT
-        // which you'd then return to your client (if any)
-        xhr.setRequestHeader(
-          'Authorization',
-          'Basic ' + btoa('sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:')
-        )
-      }
-    }).done(function(res) {
-      connectSocket(res.token)
-    })
-  })
-
-}())
-```
+#### Bindable Events
 
 Name | Arguments | Description
 ---- | --------- | -----------
-connect | callback | Connect to websockets
-disconnect | callback | Disconnect from websockets
+connect | callback\* | Connect to websockets
+disconnect | callback\* | Disconnect from websockets
 error | callback | Error from websocket connection
-err | callback | Error from endpoint currently subscribed to
-res | callback | Response from endpoint currently subscribed to
-subscribe | name, options, callback | Subscribe to an endpoint
-unsubscribe | name, options, callback | Unsubscribe from an endpoint
+data | callback | Response from endpoint currently subscribed to (contains the following fields: `params`, `path`, `results`, and `timestamp`)
+subscribe | name, options, callback\* | Subscribe to an endpoint
+unsubscribe | name, options, callback\* | Unsubscribe from an endpoint
+
+\* indicates callback function returns a param of `err` (e.g. `callback(err)`), and `err` will be null if successful or will contain an error message if unsuccessful
 
 ### Event Arguments
 
@@ -130,7 +48,6 @@ callback | Function | Returns an error object (if any) | No
 Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 path | Endpoint path (e.g. "/real-time/crowd-sentiment") | yes | none
-method | Case insensitive HTTP verb (e.g. "GET") | yes | none
 params | Object of parameters to pass to endpoint (e.g. `{ ticker: 'AAPL' }`) | yes | none
 
 
@@ -148,11 +65,15 @@ curl -X POST -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.
 
 ```bash
 HTTP/1.1 200 OK
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: X-Requested-With
+Access-Control-Allow-Methods: POST, GET, OPTIONS
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 5204
-set-cookie: igloo=s%3A26nr2GfDB6bucwsfkn6JU4XtZoXPHFU0.2mz7TQh2eaxbcZfyMZU2VFbeF8BuNSSBQKvWfx1smDY; Path=/; Expires=Sat, 26 Jul 2014 16:58:05 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:05 GMT
+Content-Length: 8540
+set-cookie: igloo=s%3AlpeQBc22Jx3kF9fX1CCqNd824qm1GyEV.d%2B4BSvfzJuMI31Lewq7PmO2mIebJAyMN3D5qvOZNvVk; Path=/; Expires=Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 55.15008ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -162,7 +83,7 @@ Connection: keep-alive
 
 ```json
 {
-  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcGkiOiJza19saXZlX3czUTRiQ0pWQjh4Z3llSUtKbVRDNERTNSIsImNvbXBhbnkiOiJNYXJrZXQgUHJvcGhpdCIsImNyZWF0ZWRfYXQiOiIyMDE0LTA3LTIyVDE5OjA1OjE3LjAwMFoiLCJlbWFpbCI6Imhvb2RicmFuZG9uQHlhaG9vLmNvbSIsImZ1bGxfZW1haWwiOiJCcmFuZG9uIEhvb2QgPGhvb2RicmFuZG9uQHlhaG9vLmNvbT4iLCJtZXNzYWdlIjoiKioqIFRoaXMgaXMgTmljayBCYXVnaCBqdXN0IHRlc3Rpbmcgb3V0IHRoaXMgYW5kIHNldHRpbmcgdXAgQnJhbmRvbiB3aXRoIGFuIGFjY291bnQgZm9yIHRlc3RpbmcgdG9kYXkuICoqKiIsIm5hbWUiOiJCcmFuZG9uIEhvb2QiLCJ0cmlhbF9lbmRfYXQiOiIyMDE1LTEyLTAxVDA1OjAwOjAwLjAwMFoiLCJ1cGRhdGVkX2F0IjoiMjAxNC0wNy0yMlQxOTowNToxNy4wMDBaIiwiX192ZXJzaW9ucyI6W3siY3JlYXRlZF9hdCI6IjIwMTQtMDctMjJUMTk6MDU6MTcuMDAwWiIsInVwZGF0ZWRfYXQiOiIyMDE0LTA3LTIyVDE5OjA1OjE4LjE4MloiLCJmdWxsX2VtYWlsIjoiQnJhbmRvbiBIb29kIDxob29kYnJhbmRvbkB5YWhvby5jb20-IiwiYXBpIjoic2tfbGl2ZV93M1E0YkNKVkI4eGd5ZUlLSm1UQzREUzUiLCJzYWx0IjoiODdkNTlkYjk5MDgxNzg2M2EwMzNhNzA5MzIxODliNGU3OTMxNTVmZDg0YTMwN2ZjZmY2YTk4ZTMyYzViYWMxMiIsImhhc2giOiI4NWJiMzBkMzE5ZTg4NmZkYTA2NzBhM2U5YzA4ZThlYTFiYWMxMzY0MDhkOTIxY2MyNTM1YWJlYTNjNGQ2NzJkNmMwMzIzMGE5ZTVmNDBmZmNkZTU5MzM2ZDQ2MDM2ZDA5ODc3MzRhYWE1OGRkNWYwMTI5M2ZhYTIwMWM3ZGNhZDFlYjBmNmMxNzMyZGU0ZDZjMzY5ZmI1YTRjNmJmYjIzMTBlMTMwNjlhNGY4NjkxZjYyNGNlZWFmMmI2MjIxOTBiNjQwM2MyYTFmMDllODI0MDI2ZWM5MTgzNzk1NzI1MmFjYmZkZGUzZGM0NmQ0NzE4ZWYxMTkzODViMzg1ZjkzZjQwODgyNTUyNTE1MGUzYzQwNTNhYTk2MWJkZTBmNDIyMWVmNmY5NmQ1ZTEzNjM3ODlmZTM4MzVjN2I4ZjI4YjRlM2RiYjM0NjllYzRmYmNhYWQwZDA1ODYyYzFkMWQ0MjcxYmJhY2Y5OTY4ODBlZTQ4MzE4ZDE0YjZmZjc4MGQ0MGY5MjIzNGI2MGMxMDZjNDk2MGIzNTZiNTBlNzA0ZDZkN2NkNDQzOTI5ODY0NWM1MjVkYWZmMDZmY2FhMTI5MWI3MjI0YzNiY2U3NzVkNzk2ZDQwM2NiMzQxMGFlMDY1YjZiMzIwNjQwODYyOTdhN2FhZmI0YzZkMzJmMTcwMGEwYTNiZGRmOTkxNzQ2NDlkMDA2OTQ0YWJiNTliNDQwNTgwN2YyYzQwYTNlMDQ5NzI4NDFkNGE3ZWZjYzJmNDY0MDY5NjA0NjM4YjRlYjFmMTZlZWYyMmY0NjRhZGQ5NjgwYWU2ZGUwOThlMDNhZmJjZjdiNzUwNjUzOTQyNjVmYTU2YTgyODEyZTQ5MjFjZTdiMTI3M2NhNTk4N2RjNzYyM2RkOGFkYTE2NzdkMWUwODYyNTFkNDg1YmM5NzY4Y2MyYTMwMWFlMTQzZmQwODY3OGI3YmY5MDU1ZDg2ZDViMmU4ZTQwMDhhMGIyZWE2MmQ1NzU3YjYyNjdiZmNmYjUzZWM3ZWJjNzI2YmFjOWRmOWQ3N2UxY2UwMzI1MzE2YTQyOWFhNDExMTg1ZGQxMTg3Zjk5NzNiZTQ3MDUwZGIzMTBmMjNkM2EzODdlNzgxYzAwMzA1YmUyN2IyOWFjNDNiNmE1ODIzNzBmMjRlY2E1Yzc1ZWYyNjBiM2Y0YmI4MzM3ZTEzZTE5NGE0ZDdkZGFkYTgxYmMyZjhhZDE0MWJlN2JkNGRiODc2YzZmNzk1ZGM3YTM1MDFjYzQ1NzRiODZjYTBhZTQ2ODAzNjM3ZDMwMWUzMTFkMWEzM2ZiMWVjYzJjZWZmMWM1OGEwMzdlY2U2MjgyNDc5MGI1NzA1N2E3IiwiZW1haWwiOiJob29kYnJhbmRvbkB5YWhvby5jb20iLCJuYW1lIjoiQnJhbmRvbiBIb29kIiwiY29tcGFueSI6Ik1hcmtldCBQcm9waGl0IiwibWVzc2FnZSI6IioqKiBUaGlzIGlzIE5pY2sgQmF1Z2gganVzdCB0ZXN0aW5nIG91dCB0aGlzIGFuZCBzZXR0aW5nIHVwIEJyYW5kb24gd2l0aCBhbiBhY2NvdW50IGZvciB0ZXN0aW5nIHRvZGF5LiAqKioiLCJfaWQiOiI1M2NlYjVlZDg2ODE4YTE5N2JhOGVjMjAiLCJ0aWNrZXJzIjpbXSwidHJpYWwiOnRydWUsImFjdGl2ZSI6ZmFsc2UsImdyb3VwIjoidXNlciIsIm9iamVjdCI6InVzZXIiLCJpZCI6IjUzY2ViNWVkODY4MThhMTk3YmE4ZWMyMCIsIl9fdiI6MH0seyJpZCI6IjUzY2ViNWVkODY4MThhMTk3YmE4ZWMyMCIsIm9iamVjdCI6InVzZXIiLCJncm91cCI6ImFkbWluIiwiYWN0aXZlIjp0cnVlLCJ0cmlhbCI6dHJ1ZSwidGlja2VycyI6W10sIl9fdiI6MSwiX2lkIjoiNTNjZWI1ZWQ4NjgxOGExOTdiYThlYzIwIiwibWVzc2FnZSI6IioqKiBUaGlzIGlzIE5pY2sgQmF1Z2gganVzdCB0ZXN0aW5nIG91dCB0aGlzIGFuZCBzZXR0aW5nIHVwIEJyYW5kb24gd2l0aCBhbiBhY2NvdW50IGZvciB0ZXN0aW5nIHRvZGF5LiAqKioiLCJjb21wYW55IjoiTWFya2V0IFByb3BoaXQiLCJuYW1lIjoiQnJhbmRvbiBIb29kIiwiZW1haWwiOiJob29kYnJhbmRvbkB5YWhvby5jb20iLCJoYXNoIjoiODViYjMwZDMxOWU4ODZmZGEwNjcwYTNlOWMwOGU4ZWExYmFjMTM2NDA4ZDkyMWNjMjUzNWFiZWEzYzRkNjcyZDZjMDMyMzBhOWU1ZjQwZmZjZGU1OTMzNmQ0NjAzNmQwOTg3NzM0YWFhNThkZDVmMDEyOTNmYWEyMDFjN2RjYWQxZWIwZjZjMTczMmRlNGQ2YzM2OWZiNWE0YzZiZmIyMzEwZTEzMDY5YTRmODY5MWY2MjRjZWVhZjJiNjIyMTkwYjY0MDNjMmExZjA5ZTgyNDAyNmVjOTE4Mzc5NTcyNTJhY2JmZGRlM2RjNDZkNDcxOGVmMTE5Mzg1YjM4NWY5M2Y0MDg4MjU1MjUxNTBlM2M0MDUzYWE5NjFiZGUwZjQyMjFlZjZmOTZkNWUxMzYzNzg5ZmUzODM1YzdiOGYyOGI0ZTNkYmIzNDY5ZWM0ZmJjYWFkMGQwNTg2MmMxZDFkNDI3MWJiYWNmOTk2ODgwZWU0ODMxOGQxNGI2ZmY3ODBkNDBmOTIyMzRiNjBjMTA2YzQ5NjBiMzU2YjUwZTcwNGQ2ZDdjZDQ0MzkyOTg2NDVjNTI1ZGFmZjA2ZmNhYTEyOTFiNzIyNGMzYmNlNzc1ZDc5NmQ0MDNjYjM0MTBhZTA2NWI2YjMyMDY0MDg2Mjk3YTdhYWZiNGM2ZDMyZjE3MDBhMGEzYmRkZjk5MTc0NjQ5ZDAwNjk0NGFiYjU5YjQ0MDU4MDdmMmM0MGEzZTA0OTcyODQxZDRhN2VmY2MyZjQ2NDA2OTYwNDYzOGI0ZWIxZjE2ZWVmMjJmNDY0YWRkOTY4MGFlNmRlMDk4ZTAzYWZiY2Y3Yjc1MDY1Mzk0MjY1ZmE1NmE4MjgxMmU0OTIxY2U3YjEyNzNjYTU5ODdkYzc2MjNkZDhhZGExNjc3ZDFlMDg2MjUxZDQ4NWJjOTc2OGNjMmEzMDFhZTE0M2ZkMDg2NzhiN2JmOTA1NWQ4NmQ1YjJlOGU0MDA4YTBiMmVhNjJkNTc1N2I2MjY3YmZjZmI1M2VjN2ViYzcyNmJhYzlkZjlkNzdlMWNlMDMyNTMxNmE0MjlhYTQxMTE4NWRkMTE4N2Y5OTczYmU0NzA1MGRiMzEwZjIzZDNhMzg3ZTc4MWMwMDMwNWJlMjdiMjlhYzQzYjZhNTgyMzcwZjI0ZWNhNWM3NWVmMjYwYjNmNGJiODMzN2UxM2UxOTRhNGQ3ZGRhZGE4MWJjMmY4YWQxNDFiZTdiZDRkYjg3NmM2Zjc5NWRjN2EzNTAxY2M0NTc0Yjg2Y2EwYWU0NjgwMzYzN2QzMDFlMzExZDFhMzNmYjFlY2MyY2VmZjFjNThhMDM3ZWNlNjI4MjQ3OTBiNTcwNTdhNyIsInNhbHQiOiI4N2Q1OWRiOTkwODE3ODYzYTAzM2E3MDkzMjE4OWI0ZTc5MzE1NWZkODRhMzA3ZmNmZjZhOThlMzJjNWJhYzEyIiwiYXBpIjoic2tfbGl2ZV93M1E0YkNKVkI4eGd5ZUlLSm1UQzREUzUiLCJmdWxsX2VtYWlsIjoiQnJhbmRvbiBIb29kIDxob29kYnJhbmRvbkB5YWhvby5jb20-IiwidXBkYXRlZF9hdCI6IjIwMTQtMDctMjJUMTk6MDU6MTcuMDAwWiIsImNyZWF0ZWRfYXQiOiIyMDE0LTA3LTIyVDE5OjA1OjE3LjAwMFoiLCJ0cmlhbF9lbmRfYXQiOiIyMDE1LTEyLTAxVDA1OjAwOjAwLjAwMFoifV0sInRpY2tlcnMiOltdLCJ0cmlhbCI6dHJ1ZSwiYWN0aXZlIjp0cnVlLCJncm91cCI6ImFkbWluIiwib2JqZWN0IjoidXNlciIsImlkIjoiNTNjZWI1ZWQ4NjgxOGExOTdiYThlYzIwIn0.htZ_xCqbdIE7OMlG6JSLbpqHu3AZWCDs8PytE8pKSns"
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfX3ZlcnNpb25zIjpbeyJjcmVhdGVkX2F0IjoiMjAxNC0wNy0yMlQxOTowNToxNy4wMDBaIiwidXBkYXRlZF9hdCI6IjIwMTQtMDctMjJUMTk6MDU6MTguMTgyWiIsImZ1bGxfZW1haWwiOiJCcmFuZG9uIEhvb2QgPGhvb2RicmFuZG9uQHlhaG9vLmNvbT4iLCJhcGkiOiJza19saXZlX3czUTRiQ0pWQjh4Z3llSUtKbVRDNERTNSIsInNhbHQiOiI4N2Q1OWRiOTkwODE3ODYzYTAzM2E3MDkzMjE4OWI0ZTc5MzE1NWZkODRhMzA3ZmNmZjZhOThlMzJjNWJhYzEyIiwiaGFzaCI6Ijg1YmIzMGQzMTllODg2ZmRhMDY3MGEzZTljMDhlOGVhMWJhYzEzNjQwOGQ5MjFjYzI1MzVhYmVhM2M0ZDY3MmQ2YzAzMjMwYTllNWY0MGZmY2RlNTkzMzZkNDYwMzZkMDk4NzczNGFhYTU4ZGQ1ZjAxMjkzZmFhMjAxYzdkY2FkMWViMGY2YzE3MzJkZTRkNmMzNjlmYjVhNGM2YmZiMjMxMGUxMzA2OWE0Zjg2OTFmNjI0Y2VlYWYyYjYyMjE5MGI2NDAzYzJhMWYwOWU4MjQwMjZlYzkxODM3OTU3MjUyYWNiZmRkZTNkYzQ2ZDQ3MThlZjExOTM4NWIzODVmOTNmNDA4ODI1NTI1MTUwZTNjNDA1M2FhOTYxYmRlMGY0MjIxZWY2Zjk2ZDVlMTM2Mzc4OWZlMzgzNWM3YjhmMjhiNGUzZGJiMzQ2OWVjNGZiY2FhZDBkMDU4NjJjMWQxZDQyNzFiYmFjZjk5Njg4MGVlNDgzMThkMTRiNmZmNzgwZDQwZjkyMjM0YjYwYzEwNmM0OTYwYjM1NmI1MGU3MDRkNmQ3Y2Q0NDM5Mjk4NjQ1YzUyNWRhZmYwNmZjYWExMjkxYjcyMjRjM2JjZTc3NWQ3OTZkNDAzY2IzNDEwYWUwNjViNmIzMjA2NDA4NjI5N2E3YWFmYjRjNmQzMmYxNzAwYTBhM2JkZGY5OTE3NDY0OWQwMDY5NDRhYmI1OWI0NDA1ODA3ZjJjNDBhM2UwNDk3Mjg0MWQ0YTdlZmNjMmY0NjQwNjk2MDQ2MzhiNGViMWYxNmVlZjIyZjQ2NGFkZDk2ODBhZTZkZTA5OGUwM2FmYmNmN2I3NTA2NTM5NDI2NWZhNTZhODI4MTJlNDkyMWNlN2IxMjczY2E1OTg3ZGM3NjIzZGQ4YWRhMTY3N2QxZTA4NjI1MWQ0ODViYzk3NjhjYzJhMzAxYWUxNDNmZDA4Njc4YjdiZjkwNTVkODZkNWIyZThlNDAwOGEwYjJlYTYyZDU3NTdiNjI2N2JmY2ZiNTNlYzdlYmM3MjZiYWM5ZGY5ZDc3ZTFjZTAzMjUzMTZhNDI5YWE0MTExODVkZDExODdmOTk3M2JlNDcwNTBkYjMxMGYyM2QzYTM4N2U3ODFjMDAzMDViZTI3YjI5YWM0M2I2YTU4MjM3MGYyNGVjYTVjNzVlZjI2MGIzZjRiYjgzMzdlMTNlMTk0YTRkN2RkYWRhODFiYzJmOGFkMTQxYmU3YmQ0ZGI4NzZjNmY3OTVkYzdhMzUwMWNjNDU3NGI4NmNhMGFlNDY4MDM2MzdkMzAxZTMxMWQxYTMzZmIxZWNjMmNlZmYxYzU4YTAzN2VjZTYyODI0NzkwYjU3MDU3YTciLCJlbWFpbCI6Imhvb2RicmFuZG9uQHlhaG9vLmNvbSIsIm5hbWUiOiJCcmFuZG9uIEhvb2QiLCJjb21wYW55IjoiTWFya2V0IFByb3BoaXQiLCJtZXNzYWdlIjoiKioqIFRoaXMgaXMgTmljayBCYXVnaCBqdXN0IHRlc3Rpbmcgb3V0IHRoaXMgYW5kIHNldHRpbmcgdXAgQnJhbmRvbiB3aXRoIGFuIGFjY291bnQgZm9yIHRlc3RpbmcgdG9kYXkuICoqKiIsIl9pZCI6IjUzY2ViNWVkODY4MThhMTk3YmE4ZWMyMCIsInRpY2tlcnMiOltdLCJ0cmlhbCI6dHJ1ZSwiYWN0aXZlIjpmYWxzZSwiZ3JvdXAiOiJ1c2VyIiwib2JqZWN0IjoidXNlciIsImlkIjoiNTNjZWI1ZWQ4NjgxOGExOTdiYThlYzIwIiwiX192IjowfSx7ImlkIjoiNTNjZWI1ZWQ4NjgxOGExOTdiYThlYzIwIiwib2JqZWN0IjoidXNlciIsImdyb3VwIjoiYWRtaW4iLCJhY3RpdmUiOnRydWUsInRyaWFsIjp0cnVlLCJ0aWNrZXJzIjpbXSwiX192IjoxLCJfaWQiOiI1M2NlYjVlZDg2ODE4YTE5N2JhOGVjMjAiLCJtZXNzYWdlIjoiKioqIFRoaXMgaXMgTmljayBCYXVnaCBqdXN0IHRlc3Rpbmcgb3V0IHRoaXMgYW5kIHNldHRpbmcgdXAgQnJhbmRvbiB3aXRoIGFuIGFjY291bnQgZm9yIHRlc3RpbmcgdG9kYXkuICoqKiIsImNvbXBhbnkiOiJNYXJrZXQgUHJvcGhpdCIsIm5hbWUiOiJCcmFuZG9uIEhvb2QiLCJlbWFpbCI6Imhvb2RicmFuZG9uQHlhaG9vLmNvbSIsImhhc2giOiI4NWJiMzBkMzE5ZTg4NmZkYTA2NzBhM2U5YzA4ZThlYTFiYWMxMzY0MDhkOTIxY2MyNTM1YWJlYTNjNGQ2NzJkNmMwMzIzMGE5ZTVmNDBmZmNkZTU5MzM2ZDQ2MDM2ZDA5ODc3MzRhYWE1OGRkNWYwMTI5M2ZhYTIwMWM3ZGNhZDFlYjBmNmMxNzMyZGU0ZDZjMzY5ZmI1YTRjNmJmYjIzMTBlMTMwNjlhNGY4NjkxZjYyNGNlZWFmMmI2MjIxOTBiNjQwM2MyYTFmMDllODI0MDI2ZWM5MTgzNzk1NzI1MmFjYmZkZGUzZGM0NmQ0NzE4ZWYxMTkzODViMzg1ZjkzZjQwODgyNTUyNTE1MGUzYzQwNTNhYTk2MWJkZTBmNDIyMWVmNmY5NmQ1ZTEzNjM3ODlmZTM4MzVjN2I4ZjI4YjRlM2RiYjM0NjllYzRmYmNhYWQwZDA1ODYyYzFkMWQ0MjcxYmJhY2Y5OTY4ODBlZTQ4MzE4ZDE0YjZmZjc4MGQ0MGY5MjIzNGI2MGMxMDZjNDk2MGIzNTZiNTBlNzA0ZDZkN2NkNDQzOTI5ODY0NWM1MjVkYWZmMDZmY2FhMTI5MWI3MjI0YzNiY2U3NzVkNzk2ZDQwM2NiMzQxMGFlMDY1YjZiMzIwNjQwODYyOTdhN2FhZmI0YzZkMzJmMTcwMGEwYTNiZGRmOTkxNzQ2NDlkMDA2OTQ0YWJiNTliNDQwNTgwN2YyYzQwYTNlMDQ5NzI4NDFkNGE3ZWZjYzJmNDY0MDY5NjA0NjM4YjRlYjFmMTZlZWYyMmY0NjRhZGQ5NjgwYWU2ZGUwOThlMDNhZmJjZjdiNzUwNjUzOTQyNjVmYTU2YTgyODEyZTQ5MjFjZTdiMTI3M2NhNTk4N2RjNzYyM2RkOGFkYTE2NzdkMWUwODYyNTFkNDg1YmM5NzY4Y2MyYTMwMWFlMTQzZmQwODY3OGI3YmY5MDU1ZDg2ZDViMmU4ZTQwMDhhMGIyZWE2MmQ1NzU3YjYyNjdiZmNmYjUzZWM3ZWJjNzI2YmFjOWRmOWQ3N2UxY2UwMzI1MzE2YTQyOWFhNDExMTg1ZGQxMTg3Zjk5NzNiZTQ3MDUwZGIzMTBmMjNkM2EzODdlNzgxYzAwMzA1YmUyN2IyOWFjNDNiNmE1ODIzNzBmMjRlY2E1Yzc1ZWYyNjBiM2Y0YmI4MzM3ZTEzZTE5NGE0ZDdkZGFkYTgxYmMyZjhhZDE0MWJlN2JkNGRiODc2YzZmNzk1ZGM3YTM1MDFjYzQ1NzRiODZjYTBhZTQ2ODAzNjM3ZDMwMWUzMTFkMWEzM2ZiMWVjYzJjZWZmMWM1OGEwMzdlY2U2MjgyNDc5MGI1NzA1N2E3Iiwic2FsdCI6Ijg3ZDU5ZGI5OTA4MTc4NjNhMDMzYTcwOTMyMTg5YjRlNzkzMTU1ZmQ4NGEzMDdmY2ZmNmE5OGUzMmM1YmFjMTIiLCJhcGkiOiJza19saXZlX3czUTRiQ0pWQjh4Z3llSUtKbVRDNERTNSIsImZ1bGxfZW1haWwiOiJCcmFuZG9uIEhvb2QgPGhvb2RicmFuZG9uQHlhaG9vLmNvbT4iLCJ1cGRhdGVkX2F0IjoiMjAxNC0wNy0yMlQxOTowNToxNy4wMDBaIiwiY3JlYXRlZF9hdCI6IjIwMTQtMDctMjJUMTk6MDU6MTcuMDAwWiIsInRyaWFsX2VuZF9hdCI6IjIwMTUtMTItMDFUMDU6MDA6MDAuMDAwWiJ9XSwiYXBpIjoic2tfbGl2ZV93M1E0YkNKVkI4eGd5ZUlLSm1UQzREUzUiLCJjb21wYW55IjoiTWFya2V0IFByb3BoaXQiLCJjcmVhdGVkX2F0IjoiMjAxNC0wNy0yMlQxOTowNToxNy4wMDBaIiwiY3VzdG9tZXJfbnVtYmVyIjoiMTQ3MDI2MzcwMyIsImVtYWlsIjoiaG9vZGJyYW5kb25AeWFob28uY29tIiwiZnVsbF9lbWFpbCI6IkJyYW5kb24gSG9vZCA8aG9vZGJyYW5kb25AeWFob28uY29tPiIsImZ1bGxfbmFtZSI6IkJyYW5kb24gSG9vZCIsIm1lc3NhZ2UiOiIqKiogVGhpcyBpcyBOaWNrIEJhdWdoIGp1c3QgdGVzdGluZyBvdXQgdGhpcyBhbmQgc2V0dGluZyB1cCBCcmFuZG9uIHdpdGggYW4gYWNjb3VudCBmb3IgdGVzdGluZyB0b2RheS4gKioqIiwibmFtZSI6IkJyYW5kb24iLCJwaG9uZSI6IjEyMy00NTYtNzg5MCIsInJlc2V0X2F0IjoiMjAxNC0wNy0zMFQwMDoxOTo1Ni4wMDBaIiwicmVzZXRfdG9rZW4iOiIiLCJzdXJuYW1lIjoiSG9vZCIsInRyaWFsX2VuZF9hdCI6IjIwMTUtMTItMDFUMDU6MDA6MDAuMDAwWiIsInVwZGF0ZWRfYXQiOiIyMDE0LTA3LTIyVDE5OjA1OjE3LjAwMFoiLCJyYXRlX2xpbWl0X292ZXJhZ2VfYW1vdW50IjowLCJyYXRlX2xpbWl0X292ZXJhZ2VfaW50ZXJ2YWwiOjAsImJpbGxpbmdfYW1vdW50X3Blcl9mcmVxdWVuY3kiOjAsImJpbGxpbmdfZnJlcXVlbmN5IjoiIiwiYmlsbGluZ19pbnRlcnZhbCI6IiIsImVuZHBvaW50X3BhdGhzIjpbIi9oaXN0b3JpY2FsL2Nyb3dkLXNlbnRpbWVudC1tb3ZpbmctYXZlcmFnZSIsIi9oaXN0b3JpY2FsL2Nyb3dkLXNlbnRpbWVudC16LXNjb3JlLW1vdmluZy1hdmVyYWdlIiwiL2hpc3RvcmljYWwvY3Jvd2Qtc2VudGltZW50LXotc2NvcmUiLCIvaGlzdG9yaWNhbC9jcm93ZC1zZW50aW1lbnQiLCIvaGlzdG9yaWNhbC9kYWlseS1jcm93ZC1zZW50aW1lbnQtbW92aW5nLWF2ZXJhZ2UiLCIvaGlzdG9yaWNhbC9kYWlseS1jcm93ZC1zZW50aW1lbnQtei1zY29yZS1tb3ZpbmctYXZlcmFnZSIsIi9oaXN0b3JpY2FsL2RhaWx5LWNyb3dkLXNlbnRpbWVudC16LXNjb3JlIiwiL2hpc3RvcmljYWwvZGFpbHktY3Jvd2Qtc2VudGltZW50IiwiL2hpc3RvcmljYWwvZGFpbHktbWFya2V0LXByb3BoaXQtc2VudGltZW50LW1vdmluZy1hdmVyYWdlIiwiL2hpc3RvcmljYWwvZGFpbHktbWFya2V0LXByb3BoaXQtc2VudGltZW50LXotc2NvcmUtbW92aW5nLWF2ZXJhZ2UiLCIvaGlzdG9yaWNhbC9kYWlseS1tYXJrZXQtcHJvcGhpdC1zZW50aW1lbnQtei1zY29yZSIsIi9oaXN0b3JpY2FsL2RhaWx5LW1hcmtldC1wcm9waGl0LXNlbnRpbWVudCIsIi9oaXN0b3JpY2FsL2RhaWx5LXR3ZWV0LWJ1enoiLCIvaGlzdG9yaWNhbC9kYWlseS10d2VldC12b2x1bWUiLCIvaGlzdG9yaWNhbC9kYWlseS11c2VyLXNjb3Jlcy1ieS11c2VyIiwiL2hpc3RvcmljYWwvbWFya2V0LXByb3BoaXQtc2VudGltZW50LW1vdmluZy1hdmVyYWdlIiwiL2hpc3RvcmljYWwvbWFya2V0LXByb3BoaXQtc2VudGltZW50LXotc2NvcmUtbW92aW5nLWF2ZXJhZ2UiLCIvaGlzdG9yaWNhbC9tYXJrZXQtcHJvcGhpdC1zZW50aW1lbnQtei1zY29yZSIsIi9oaXN0b3JpY2FsL21hcmtldC1wcm9waGl0LXNlbnRpbWVudCIsIi9oaXN0b3JpY2FsL3NlY3Rvci1zcGVjaWZpYy11c2VyLXJldHVybnMtYnktc2VjdG9yIiwiL2hpc3RvcmljYWwvc2VjdG9yLXNwZWNpZmljLXVzZXItcmV0dXJucy1ieS11c2VyIiwiL2hpc3RvcmljYWwvc2VjdG9yLXNwZWNpZmljLXVzZXItcmV0dXJucyIsIi9oaXN0b3JpY2FsL3NlY3Rvci1zcGVjaWZpYy11c2VyLXNjb3Jlcy1ieS1zZWN0b3IiLCIvaGlzdG9yaWNhbC9zZWN0b3Itc3BlY2lmaWMtdXNlci1zY29yZXMtYnktdXNlciIsIi9oaXN0b3JpY2FsL3NlY3Rvci1zcGVjaWZpYy11c2VyLXNjb3JlcyIsIi9oaXN0b3JpY2FsL3RpY2tlci1zcGVjaWZpYy11c2VyLXJldHVybnMtYnktdGlja2VyIiwiL2hpc3RvcmljYWwvdGlja2VyLXNwZWNpZmljLXVzZXItcmV0dXJucy1ieS11c2VyIiwiL2hpc3RvcmljYWwvdGlja2VyLXNwZWNpZmljLXVzZXItcmV0dXJucyIsIi9oaXN0b3JpY2FsL3RpY2tlci1zcGVjaWZpYy11c2VyLXNjb3Jlcy1ieS10aWNrZXIiLCIvaGlzdG9yaWNhbC90aWNrZXItc3BlY2lmaWMtdXNlci1zY29yZXMtYnktdXNlciIsIi9oaXN0b3JpY2FsL3RpY2tlci1zcGVjaWZpYy11c2VyLXNjb3JlcyIsIi9oaXN0b3JpY2FsL3R3ZWV0LWJ1enoiLCIvaGlzdG9yaWNhbC90d2VldC12b2x1bWUiLCIvaGlzdG9yaWNhbC91c2VyLXNjb3Jlcy1sYXN0IiwiL2hpc3RvcmljYWwvdXNlci1zY29yZXMiLCIvaGlzdG9yaWNhbC91c2VyLXNlbnRpbWVudC1ieS10aWNrZXIiLCIvaGlzdG9yaWNhbC91c2VyLXNlbnRpbWVudC1ieS11c2VyIiwiL3JlYWwtdGltZS9jcm93ZC1zZW50aW1lbnQtbW92aW5nLWF2ZXJhZ2UiLCIvcmVhbC10aW1lL2Nyb3dkLXNlbnRpbWVudC16LXNjb3JlLW1vdmluZy1hdmVyYWdlIiwiL3JlYWwtdGltZS9jcm93ZC1zZW50aW1lbnQtei1zY29yZSIsIi9yZWFsLXRpbWUvY3Jvd2Qtc2VudGltZW50IiwiL3JlYWwtdGltZS9tYXJrZXQtcHJvcGhpdC1zZW50aW1lbnQtbW92aW5nLWF2ZXJhZ2UiLCIvcmVhbC10aW1lL21hcmtldC1wcm9waGl0LXNlbnRpbWVudC16LXNjb3JlLW1vdmluZy1hdmVyYWdlIiwiL3JlYWwtdGltZS9tYXJrZXQtcHJvcGhpdC1zZW50aW1lbnQtei1zY29yZSIsIi9yZWFsLXRpbWUvbWFya2V0LXByb3BoaXQtc2VudGltZW50IiwiL3JlYWwtdGltZS90d2VldC1idXp6IiwiL3JlYWwtdGltZS90d2VldC12b2x1bWUiLCIvcmVhbC10aW1lL3VzZXItc2VudGltZW50LWxhc3QtbWludXRlIiwiL3JlYWwtdGltZS91c2VyLXNlbnRpbWVudCJdLCJ0aWNrZXJzIjpbXSwic3RyZWFtaW5nX2FjY2VzcyI6ZmFsc2UsInJhdGVfbGltaXRfY291bnQiOjUzLCJyYXRlX2xpbWl0IjowLCJ0cmlhbCI6dHJ1ZSwiYWN0aXZlIjp0cnVlLCJncm91cCI6ImFkbWluIiwib2JqZWN0IjoidXNlciIsImlkIjoiNTNjZWI1ZWQ4NjgxOGExOTdiYThlYzIwIn0.BpcwlgZtjjt-eO9_9AD9nBrb_o-OyM7vw4PBZGowVLk"
 }
 ```
 
@@ -172,7 +93,7 @@ In order to communicate over websockets with Market Prophit API endpoints, you m
 
 The flow of communication with the Market Prophit websocket server is as follows:
 
-1. Retrieve a JWT using your secret API key (do not expose your secret API key)
+1. Retrieve a JWT using your secret API key (do not expose your secret API key, set up your own `/jwt` route on your server and send a server-side request to our `/jwt` route with your secret key &ndash; basically create a proxy route)
 2. Pass the JWT as part of the request query object while connecting to the Market Prophit websocket server as the param `token`.
 3. Every (5) hours from when the JWT was generated, re-generate a new JWT since the previous expires
 

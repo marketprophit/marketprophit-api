@@ -16,8 +16,9 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AVj-KP7rXgJpLuB0HeRciI3EiEYuQpDWh.PKoQ0ShbetnA3lbaSa4uwj%2FckIkchjHt%2BlK0zabcwBA; Path=/; Expires=Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+set-cookie: igloo=s%3AsnXbgidLdbrvicm0U-ErT9iC-qJqFyep.d4q7enUeFx94XTU%2Fcx4JK31T8ys9oymBHUT0j6z2UF0; Path=/; Expires=Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 113.47492ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -49,10 +50,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 505064
-ETag: W/"7b4e8-1580733910"
-set-cookie: igloo=s%3AbffoecLgl_9RwSg-sbWfrs2Hwahz2v6o.2H7B0xFVokEmahtD4AhjBJsmhFJa%2F7LoPP6flbqs%2FYg; Path=/; Expires=Sat, 26 Jul 2014 16:58:05 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+Content-Length: 551583
+ETag: W/"86a9f-4104617079"
+set-cookie: igloo=s%3A4wZEzI5QuDiSiyj5CUhxIMmNTtEu7mIq.ax66nOttREv9BHKTD89fidbFwHsR4oXQr49AM1WM0lM; Path=/; Expires=Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 2380.21346ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 
@@ -63,22 +65,22 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-07-24T04:00:00.000Z",
-    "user_id": "2663617496",
-    "score": "-0.0351003602575661",
-    "mp_rank": "2951"
+    "ts": "2014-08-08T04:00:00.000Z",
+    "user_id": "118840585",
+    "score": "-0.2377401927536272",
+    "mp_rank": "4585"
   },
   {
-    "ts": "2014-07-24T04:00:00.000Z",
-    "user_id": "2663616672",
-    "score": "0.0723533513177047",
-    "mp_rank": "1679"
+    "ts": "2014-08-08T04:00:00.000Z",
+    "user_id": "2728758695",
+    "score": "-0.0680631214237277",
+    "mp_rank": "3344"
   },
   {
-    "ts": "2014-07-24T04:00:00.000Z",
-    "user_id": "2659768237",
-    "score": "-0.0115342911853007",
-    "mp_rank": "2678"
+    "ts": "2014-08-08T04:00:00.000Z",
+    "user_id": "2728774330",
+    "score": "-0.3391943186620021",
+    "mp_rank": "4962"
   }
 ]
 ```
@@ -100,13 +102,14 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 > Returns response headers such as:
 
 ```bash
-HTTP/1.1 500 Internal Server Error
+HTTP/1.1 200 OK
 Vary: Accept
-Content-Type: text/plain; charset=utf-8
-Content-Length: 87
-ETag: W/"57-1119346246"
-set-cookie: igloo=s%3AurG3jcmQsUzIRdl0W-tUWj4mWsVuG5ye.9TBBvnZmetrnYQFkhUj6vbjxlzyhXUwRk7mbxUaFwpw; Path=/; Expires=Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 2
+ETag: W/"2-223132457"
+set-cookie: igloo=s%3A6zX2Jus5gEiWKdmitsAoAcqnl3ooy-aZ.cthRnJgNBT%2BTI6ymmvfziGLeTjRgEqM4C%2BA%2Fzf68Zug; Path=/; Expires=Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 2089.24547ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 
@@ -115,7 +118,7 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-execute command denied to user 'nick'@'%' for routine 'mp_prod.GetTwitterUsernameForId'
+[]
 ```
 
 Returns user scores for a given range of business dates and user id.
@@ -149,8 +152,9 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AxFfpGEg-G_dqnGkCNxizvkscdCwCVfn5.yGIkbhw69C6YVjFsnkhhlCHsv0RtrN0b2ZOIGnrNSJU; Path=/; Expires=Sat, 26 Jul 2014 16:58:05 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:05 GMT
+set-cookie: igloo=s%3AVHcA7HdWxHRXSBrMDDc_h_qMoMIIJaR2.uWq0X2MVz%2BoIxDTaQZL%2F03Rku29eQku5c0b3pL2QCwU; Path=/; Expires=Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 186.79376ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -187,13 +191,14 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 > Returns response headers such as:
 
 ```bash
-HTTP/1.1 500 Internal Server Error
+HTTP/1.1 200 OK
 Vary: Accept
-Content-Type: text/plain; charset=utf-8
-Content-Length: 87
-ETag: W/"57-1119346246"
-set-cookie: igloo=s%3AAtoY3jgzvBHzpHJOYKEO1kgZLtSSURed.0C2nXJTqFp6zM9RxoxoBYv9F%2BDVGYQV5fHBrAKP2ai0; Path=/; Expires=Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 2
+ETag: W/"2-223132457"
+set-cookie: igloo=s%3A0rVGBPGl4m8zwQLDA571IOrOuYaFXbCb.Xrtv0fLjUW3eLrqbFDdYGjN103hGLFCKE9a9a08Hv5c; Path=/; Expires=Wed, 13 Aug 2014 10:07:59 GMT; HttpOnly
+X-Response-Time: 4016.55462ms
+Date: Tue, 12 Aug 2014 10:07:59 GMT
 Connection: keep-alive
 
 
@@ -202,7 +207,7 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-execute command denied to user 'nick'@'%' for routine 'mp_prod.GetTwitterUsernameForId'
+[]
 ```
 
 Ticker specific user score data for range of given business dates for a given user id.
@@ -237,8 +242,9 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AuVFD6IAswjUqoZVxJMJojYR72x_xDy7M.8TQ1Vq9aZWR%2FHITBHmESxpxFguTHWif8GNhBXNfTvMI; Path=/; Expires=Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+set-cookie: igloo=s%3Av0pEpRbDDoZ6jEdOUfMt-YaQ5YzpyOf9.NygeyJURSYCJbDb6OseQ%2BN9GQOhlN3GNIC%2By5VTsI2A; Path=/; Expires=Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 170.74480ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -282,8 +288,9 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3ADT8-pqcAdS5tIRpsGDbCnXdMUU39aNdT.bUBOpq3sTHujF4Y2M5oiP0ToWr8gGJEQ9MR5BkNAMhs; Path=/; Expires=Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+set-cookie: igloo=s%3AbUxsX8YQ-303-Jo50501MHatFzDGaCVw.OtAxzpSVOnWnKIHyBJ7df3h5TViqUQ%2BxxIafGQxaQtg; Path=/; Expires=Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 216.29281ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -320,13 +327,14 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 > Returns response headers such as:
 
 ```bash
-HTTP/1.1 500 Internal Server Error
+HTTP/1.1 200 OK
 Vary: Accept
-Content-Type: text/plain; charset=utf-8
-Content-Length: 87
-ETag: W/"57-1119346246"
-set-cookie: igloo=s%3A-2bnwv6CV3HEQgTB2OKqpPFBQ1mLQtb8.9y%2BB48Zc4ea10U8V2IZ7Vw2ebH7y5P9TMpeAaSASFGU; Path=/; Expires=Sat, 26 Jul 2014 16:58:05 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:05 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 2
+ETag: W/"2-223132457"
+set-cookie: igloo=s%3AeHOvlfIgX2ILhH5p4lrcCf_XLPDia3nh.1Y%2BG7BJeE7X2s1fyzhuUs4nY8pIg2XCMjC4qZfByYVQ; Path=/; Expires=Wed, 13 Aug 2014 10:08:02 GMT; HttpOnly
+X-Response-Time: 6987.06872ms
+Date: Tue, 12 Aug 2014 10:08:02 GMT
 Connection: keep-alive
 
 
@@ -335,7 +343,7 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-execute command denied to user 'nick'@'%' for routine 'mp_prod.GetTwitterUsernameForId'
+[]
 ```
 
 Returns sector specific user scores for a given range of business dates for a given user id.
@@ -370,8 +378,9 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AfWnyVRy6LZT9nLJaFJtO6hTHoZdrJ4Jg.3oFb1AfXl8GCMtWVA0HAndvrhsRluGqDCdqrSR0KCaQ; Path=/; Expires=Sat, 26 Jul 2014 16:58:05 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:05 GMT
+set-cookie: igloo=s%3A09w-vc5nBXuhvNPSt8gtmNOkJx_Ec14I.X6gA1fiJEdF4EHLI6zB8Uw14ABf1Eov7Ta5ijBOdy9E; Path=/; Expires=Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 1661.85562ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 

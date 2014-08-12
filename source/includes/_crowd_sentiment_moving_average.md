@@ -14,10 +14,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/real
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 4692
-ETag: W/"1254-173775143"
-set-cookie: igloo=s%3AUiUJXYFaYM-PLBL6hpqhcVwT6bZwhirs.93p6%2Byec%2Fvr4v7w5zd49H5vvPC32WTFtqWvYJ%2F1V4Wk; Path=/; Expires=Sat, 26 Jul 2014 16:58:01 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:01 GMT
+Content-Length: 709
+ETag: W/"2c5-3544042483"
+set-cookie: igloo=s%3AC-Lkhru08MY9dnf1tq1-Ldf0bQ0XOdAn.3VRAQl69WxEGpRQ%2BwSBsqazvH5S7upquAWLZ%2BybDEJg; Path=/; Expires=Wed, 13 Aug 2014 10:07:54 GMT; HttpOnly
+X-Response-Time: 85.02410ms
+Date: Tue, 12 Aug 2014 10:07:54 GMT
 Connection: keep-alive
 
 
@@ -28,19 +29,19 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-07-25T15:58:00.000Z",
+    "ts": "2014-08-12T09:34:00.000Z",
     "ticker": "AAPL",
-    "moving_average": "0.0227069672439365"
+    "moving_average": "-0.0563975450790895"
   },
   {
-    "ts": "2014-07-25T15:59:00.000Z",
+    "ts": "2014-08-12T09:36:00.000Z",
     "ticker": "AAPL",
-    "moving_average": "0.0322101906932733"
+    "moving_average": "0.1049516864353846"
   },
   {
-    "ts": "2014-07-25T16:00:00.000Z",
+    "ts": "2014-08-12T09:40:00.000Z",
     "ticker": "AAPL",
-    "moving_average": "0.0200766331601287"
+    "moving_average": "0.0435146496627843"
   }
 ]
 ```
@@ -71,10 +72,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 105756
-ETag: W/"19d1c-2555125685"
-set-cookie: igloo=s%3Ay3Q9SvJEQ4QfKp-a3JFDz8QcaLTAh76m.sagTLEEfkipoBEY%2Bczk7Ero4opRvx80mLpLASS5PGwI; Path=/; Expires=Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+Content-Length: 43548
+ETag: W/"aa1c-504963124"
+set-cookie: igloo=s%3ASVA7grEVBWxfaxZ_2i8xPwRqXuCsz3OF.vCfpM2u63Gsm2aXcipIvqijoKpNbF1xdd1Bi3gtVoAw; Path=/; Expires=Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 1590.94514ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 
@@ -85,19 +87,19 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-07-24T08:00:00.000Z",
+    "ts": "2014-08-11T08:03:00.000Z",
     "ticker": "AAPL",
-    "moving_average": "0.0399686846889795"
+    "moving_average": "0.1081331944208557"
   },
   {
-    "ts": "2014-07-24T08:01:00.000Z",
+    "ts": "2014-08-11T08:30:00.000Z",
     "ticker": "AAPL",
-    "moving_average": "0.0310668258857226"
+    "moving_average": "-0.6236535129954819"
   },
   {
-    "ts": "2014-07-24T08:03:00.000Z",
+    "ts": "2014-08-11T08:36:00.000Z",
     "ticker": "AAPL",
-    "moving_average": "0.0275633260416567"
+    "moving_average": "-0.0058248097104295"
   }
 ]
 ```
@@ -131,8 +133,9 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3ArpELUOWOZmnhQqDGjEIc8_FEMxaECk53.55d%2F5NBcsdpS6za8r10yEN88rdZzm2dVdyVH57Iyn1k; Path=/; Expires=Sat, 26 Jul 2014 16:57:57 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:57:57 GMT
+set-cookie: igloo=s%3Aioz7cwfIx_eT6D8eqcGJsLBXyvdjCc9A.DpxUf5WnQHNBNeZcqhd%2FyKS%2FLJCC2ihAPwI%2FD3LHow4; Path=/; Expires=Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 1538.80559ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 
