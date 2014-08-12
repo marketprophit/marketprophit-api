@@ -14,11 +14,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/real
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2
-ETag: W/"2-223132457"
-set-cookie: igloo=s%3A67TBqm0wkHNiCDbte4XYoeVdBKXG2WbL.tVqHEE0X7ixJIvi3FpTdlzXCe2fmpPik4hbfPYcA3eA; Path=/; Expires=Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
-X-Response-Time: 99.74597ms
-Date: Tue, 12 Aug 2014 10:07:55 GMT
+Content-Length: 885
+ETag: W/"375-2412754791"
+set-cookie: igloo=s%3AnlnfEnSHfvb_CO0vq8z0DlZPL6WI0q4h.2MByLBmfkrx6MTZ1BEd8wjihSflWmgkitBYJgfZrqGs; Path=/; Expires=Wed, 13 Aug 2014 21:37:38 GMT; HttpOnly
+X-Response-Time: 7551.68931ms
+Date: Tue, 12 Aug 2014 21:37:38 GMT
 Connection: keep-alive
 
 
@@ -27,7 +27,23 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[]
+[
+  {
+    "ts": "2014-08-12T20:38:00.000Z",
+    "ticker": "AAPL",
+    "moving_average": "-0.0248249992633161"
+  },
+  {
+    "ts": "2014-08-12T20:40:00.000Z",
+    "ticker": "AAPL",
+    "moving_average": "0.0265871292470387"
+  },
+  {
+    "ts": "2014-08-12T20:42:00.000Z",
+    "ticker": "AAPL",
+    "moving_average": "-0.0222608311400150"
+  }
+]
 ```
 
 Realtime intraday data
@@ -56,11 +72,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 30507
-ETag: W/"772b-789534985"
-set-cookie: igloo=s%3AkthkmF6IdZyuOyQRRYl5M-ELprmsAJI5.h4EgP5D0cmAP24wdKZJMn6bPJ4q2iNtSXHgP3EBQc6Y; Path=/; Expires=Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
-X-Response-Time: 606.78549ms
-Date: Tue, 12 Aug 2014 10:07:55 GMT
+Content-Length: 889
+ETag: W/"379-2525490719"
+set-cookie: igloo=s%3AcEQ_sXoCrzltCQPgf_nV6gB7gvI6xgln.pRxCEA6JoR2df5V11FO%2B%2BoEeBIiUx7LqGZfng%2FIIf6c; Path=/; Expires=Wed, 13 Aug 2014 21:37:36 GMT; HttpOnly
+X-Response-Time: 6405.81668ms
+Date: Tue, 12 Aug 2014 21:37:30 GMT
 Connection: keep-alive
 
 
@@ -71,19 +87,19 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-08-11T11:46:00.000Z",
+    "ts": "2013-08-11T00:08:00.000Z",
     "ticker": "AAPL",
-    "moving_average": "1.1558816701940617"
+    "moving_average": "0.7338374164852608"
   },
   {
-    "ts": "2014-08-11T11:48:00.000Z",
+    "ts": "2013-08-11T00:09:00.000Z",
     "ticker": "AAPL",
-    "moving_average": "0.2255139748588991"
+    "moving_average": "0.0520174878536114"
   },
   {
-    "ts": "2014-08-11T11:59:00.000Z",
+    "ts": "2013-08-11T00:10:00.000Z",
     "ticker": "AAPL",
-    "moving_average": "0.3024422026143718"
+    "moving_average": "-0.2346234185563825"
   }
 ]
 ```
@@ -115,11 +131,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2
-ETag: W/"2-223132457"
-set-cookie: igloo=s%3ArlQYAA7V79RBxcPS8WeOgxgz8CK7oSAi.VioO8Bcm36qWO4Vs4lWdFmILbKnWrhJhM9%2FN28HudgM; Path=/; Expires=Wed, 13 Aug 2014 10:07:54 GMT; HttpOnly
-X-Response-Time: 102.81947ms
-Date: Tue, 12 Aug 2014 10:07:54 GMT
+Content-Length: 881
+ETag: W/"371-3237205047"
+set-cookie: igloo=s%3AnH9GzRFooLmthJRi9wEVsXbbKPrzOQD1.Yj9vvH0IZU5QraAYJY4jFwZMgza8aUG%2FDTooYt9OB34; Path=/; Expires=Wed, 13 Aug 2014 21:37:37 GMT; HttpOnly
+X-Response-Time: 7240.37982ms
+Date: Tue, 12 Aug 2014 21:37:37 GMT
 Connection: keep-alive
 
 
@@ -128,7 +144,23 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[]
+[
+  {
+    "ts": "2013-08-12T04:00:00.000Z",
+    "ticker": "AAPL",
+    "moving_average": "0.0648624193767667"
+  },
+  {
+    "ts": "2013-08-13T04:00:00.000Z",
+    "ticker": "AAPL",
+    "moving_average": "0.2077552673683673"
+  },
+  {
+    "ts": "2013-08-14T04:00:00.000Z",
+    "ticker": "AAPL",
+    "moving_average": "0.2298030781046750"
+  }
+]
 ```
 
 Daily crowd sentiment z-score moving average historical data

@@ -14,11 +14,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/real
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 697
-ETag: W/"2b9-2599664480"
-set-cookie: igloo=s%3A_7OitIyoqHRi2pNytBrlYpcPtcToBa4f.z76SHC4r2wb0zi6xlBnezPgyTUov4oX%2F8jwYMDD0RZQ; Path=/; Expires=Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
-X-Response-Time: 1535.40598ms
-Date: Tue, 12 Aug 2014 10:07:57 GMT
+Content-Length: 864
+ETag: W/"360-200455438"
+set-cookie: igloo=s%3ArLtZetJFOSQO_IxItUcXaTvbp8h81eRx.XL4F7HcJubjNz1te9JqRJVDvqwPd8UemRQFA1Eio2ww; Path=/; Expires=Wed, 13 Aug 2014 21:38:16 GMT; HttpOnly
+X-Response-Time: 38239.61660ms
+Date: Tue, 12 Aug 2014 21:38:16 GMT
 Connection: keep-alive
 
 
@@ -29,19 +29,19 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-08-12T09:51:42.000Z",
+    "ts": "2014-08-12T20:40:17.000Z",
     "ticker": "AAPL",
-    "signal_value": "-0.3259066607095499"
+    "signal_value": "-0.3269987433066757"
   },
   {
-    "ts": "2014-08-12T09:51:43.000Z",
+    "ts": "2014-08-12T20:40:59.000Z",
     "ticker": "AAPL",
-    "signal_value": "-0.3923478478567627"
+    "signal_value": "-0.2835789439773210"
   },
   {
-    "ts": "2014-08-12T10:06:16.000Z",
+    "ts": "2014-08-12T20:43:09.000Z",
     "ticker": "AAPL",
-    "signal_value": "-0.1891888776233052"
+    "signal_value": "-0.1614869778859951"
   }
 ]
 ```
@@ -72,11 +72,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 41804
-ETag: W/"a34c-1693176939"
-set-cookie: igloo=s%3AxdtEuhcJvdzrJ5hrYy27hFvvp1-wsI_P.rfyRhDcU98u4hcteThl85mKlevgS4OQllnhDxzO2lSI; Path=/; Expires=Wed, 13 Aug 2014 10:07:56 GMT; HttpOnly
-X-Response-Time: 875.09916ms
-Date: Tue, 12 Aug 2014 10:07:56 GMT
+Content-Length: 864
+ETag: W/"360-2817420536"
+set-cookie: igloo=s%3AkZsiDndFGDFEEmpRCY5zOd6Ny4HxoV_s.MftJvBZ%2Bt1Pnt7Uvc0PQqBYFr1DsYa%2F9rvjEHuHgifM; Path=/; Expires=Wed, 13 Aug 2014 21:37:55 GMT; HttpOnly
+X-Response-Time: 18009.20488ms
+Date: Tue, 12 Aug 2014 21:37:49 GMT
 Connection: keep-alive
 
 
@@ -87,19 +87,19 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-08-11T09:37:03.000Z",
+    "ts": "2013-11-22T14:32:29.000Z",
     "ticker": "AAPL",
-    "signal_value": "-0.0517360936839325"
+    "signal_value": "-0.0108788752572931"
   },
   {
-    "ts": "2014-08-11T09:37:04.000Z",
+    "ts": "2013-11-22T14:32:40.000Z",
     "ticker": "AAPL",
-    "signal_value": "-0.0517360936839325"
+    "signal_value": "-0.0107582667275593"
   },
   {
-    "ts": "2014-08-11T09:40:02.000Z",
+    "ts": "2013-11-22T14:33:11.000Z",
     "ticker": "AAPL",
-    "signal_value": "-0.0453071618228927"
+    "signal_value": "0.0018852081898496"
   }
 ]
 ```
@@ -131,11 +131,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2
-ETag: W/"2-223132457"
-set-cookie: igloo=s%3AadoJrz2Jtc7pyFXFW1i7zh2GF4sM8P7w.KK7dcVICla5LJInhdCISMRnfdIAO5Iev9pEoq1x%2F%2F90; Path=/; Expires=Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
-X-Response-Time: 124.17597ms
-Date: Tue, 12 Aug 2014 10:07:55 GMT
+Content-Length: 883
+ETag: W/"373-791338734"
+set-cookie: igloo=s%3AMR6zJdd_NMnLUZLcXqFBSNX9TbQeKeVP.477cf%2ByJ%2Fu19MhqOxGX%2B9nGVTS1%2F3Aixm%2BaAn%2BPVcPo; Path=/; Expires=Wed, 13 Aug 2014 21:38:16 GMT; HttpOnly
+X-Response-Time: 38101.44011ms
+Date: Tue, 12 Aug 2014 21:38:16 GMT
 Connection: keep-alive
 
 
@@ -144,7 +144,23 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[]
+[
+  {
+    "ts": "2013-11-25T05:00:00.000Z",
+    "ticker": "AAPL",
+    "average_signal": "0.0352639338098013"
+  },
+  {
+    "ts": "2013-11-26T05:00:00.000Z",
+    "ticker": "AAPL",
+    "average_signal": "0.0433387814683065"
+  },
+  {
+    "ts": "2013-11-27T05:00:00.000Z",
+    "ticker": "AAPL",
+    "average_signal": "0.0623340566957021"
+  }
+]
 ```
 
 Daily market prophit sentiment historical data

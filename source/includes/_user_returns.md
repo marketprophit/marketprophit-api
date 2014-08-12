@@ -14,11 +14,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2
-ETag: W/"2-223132457"
-set-cookie: igloo=s%3AK6I4mzIwywejtaoE4-bsFwEk_CjHeR55.pofeatSmSlc5QpX7VWYp1oaHAoz56G%2FmQYLKSPmJ9SE; Path=/; Expires=Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
-X-Response-Time: 230.23019ms
-Date: Tue, 12 Aug 2014 10:07:55 GMT
+Content-Length: 1784
+ETag: W/"6f8-4028804962"
+set-cookie: igloo=s%3AZX2eW8nwyIwlefLvzzZToQRimzXg0tpj.WiNqdNBXdHOAhhxwFLaEiM0UMfvgM0ev13fEtcvKK5M; Path=/; Expires=Wed, 13 Aug 2014 21:38:23 GMT; HttpOnly
+X-Response-Time: 41922.46063ms
+Date: Tue, 12 Aug 2014 21:38:23 GMT
 Connection: keep-alive
 
 
@@ -27,7 +27,35 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[]
+[
+  {
+    "ts": "2014-08-11T04:00:00.000Z",
+    "user_id": "76867219",
+    "user_score": "0.4290218226161255",
+    "mp_rank": "264",
+    "ticker": "6E",
+    "ticker_return": "-0.0001888902305558",
+    "ticker_rank": "1"
+  },
+  {
+    "ts": "2014-08-11T04:00:00.000Z",
+    "user_id": "44824361",
+    "user_score": "0.1716032017058580",
+    "mp_rank": "1076",
+    "ticker": "6E_F",
+    "ticker_return": "0.0024301013505508",
+    "ticker_rank": "1"
+  },
+  {
+    "ts": "2014-08-11T04:00:00.000Z",
+    "user_id": "56910769",
+    "user_score": "-0.1205962886514924",
+    "mp_rank": "3783",
+    "ticker": "6J_F",
+    "ticker_return": "0.0050026081627963",
+    "ticker_rank": "1"
+  }
+]
 ```
 
 Returns ticker specific user returns for a given business date.
@@ -58,11 +86,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2
-ETag: W/"2-223132457"
-set-cookie: igloo=s%3AY4KLgFGlFjDuxj9zg4azvAHFgDUsQpxy.ATgcs1MNBOMvRSwzAApBDHTk2WSmNfrGli847tl%2F55w; Path=/; Expires=Wed, 13 Aug 2014 10:09:25 GMT; HttpOnly
-X-Response-Time: 89601.34970ms
-Date: Tue, 12 Aug 2014 10:09:25 GMT
+Content-Length: 1790
+ETag: W/"6fe-772723283"
+set-cookie: igloo=s%3AvXJMEFfTP6mTruxVsXsXoi_CSWuVoBbT.MxxjGIAsqRmU%2Fe5ha%2B2ng1%2F9VRwP10A2BnRs32TsbI8; Path=/; Expires=Wed, 13 Aug 2014 21:38:58 GMT; HttpOnly
+X-Response-Time: 74143.21016ms
+Date: Tue, 12 Aug 2014 21:38:58 GMT
 Connection: keep-alive
 
 
@@ -71,7 +99,35 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[]
+[
+  {
+    "ts": "2014-08-04T04:00:00.000Z",
+    "user_id": "14216123",
+    "user_score": "-0.3510774804019593",
+    "mp_rank": "4447",
+    "ticker": "BA",
+    "ticker_return": "0.0004170837504172",
+    "ticker_rank": "42"
+  },
+  {
+    "ts": "2014-08-04T04:00:00.000Z",
+    "user_id": "14216123",
+    "user_score": "-0.3510774804019593",
+    "mp_rank": "4447",
+    "ticker": "ETN",
+    "ticker_return": "-0.0126724077574739",
+    "ticker_rank": "69"
+  },
+  {
+    "ts": "2014-08-04T04:00:00.000Z",
+    "user_id": "14216123",
+    "user_score": "-0.3510774804019593",
+    "mp_rank": "4447",
+    "ticker": "FB",
+    "ticker_return": "-0.0028441714514621",
+    "ticker_rank": "599"
+  }
+]
 ```
 
 Ticker specific user returns data for range of given business dates for a given user id.
@@ -104,11 +160,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2
-ETag: W/"2-223132457"
-set-cookie: igloo=s%3ABdHbfAURvO91nVHMpf_mvMDgumRg1J7b.8GGGi4ZGlh4heWA5PQq%2FJdfeLsj2q4Fc2dj607Y%2BO%2Bw; Path=/; Expires=Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
-X-Response-Time: 1887.05766ms
-Date: Tue, 12 Aug 2014 10:07:57 GMT
+Content-Length: 1712
+ETag: W/"6b0-2812379887"
+set-cookie: igloo=s%3A04V43-PUnHofqIS0iHJG5DLgRrHzscdJ.XjiTGHMt0sg1hka%2BbfOUGICHnyJaaFFMJNwVStLS1rI; Path=/; Expires=Wed, 13 Aug 2014 21:38:17 GMT; HttpOnly
+X-Response-Time: 35620.37097ms
+Date: Tue, 12 Aug 2014 21:38:17 GMT
 Connection: keep-alive
 
 
@@ -117,7 +173,35 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[]
+[
+  {
+    "ts": "2014-08-04T04:00:00.000Z",
+    "user_id": "2196092280",
+    "user_score": "0.1100262250232083",
+    "mp_rank": "1304",
+    "ticker": "AAPL",
+    "ticker_return": "0.0206325066945550",
+    "ticker_rank": "1"
+  },
+  {
+    "ts": "2014-08-04T04:00:00.000Z",
+    "user_id": "263246119",
+    "user_score": null,
+    "mp_rank": null,
+    "ticker": "AAPL",
+    "ticker_return": "0.0179763739085772",
+    "ticker_rank": "2"
+  },
+  {
+    "ts": "2014-08-04T04:00:00.000Z",
+    "user_id": "224613869",
+    "user_score": "0.0922994543961169",
+    "mp_rank": "1411",
+    "ticker": "AAPL",
+    "ticker_return": "0.0168187722322255",
+    "ticker_rank": "3"
+  }
+]
 ```
 
 Ticker specific user returns data for range of given business dates for a given user id.
@@ -150,11 +234,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2
-ETag: W/"2-223132457"
-set-cookie: igloo=s%3ANcKt2SLcomoXiYaAAEApcfbzmGlKCeGT.z0TvYMw%2BJxdbLtZdmRTPkvGAXQ%2FfHy75OELxvjLEbo4; Path=/; Expires=Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
-X-Response-Time: 1554.13324ms
-Date: Tue, 12 Aug 2014 10:07:57 GMT
+Content-Length: 2012
+ETag: W/"7dc-1115675420"
+set-cookie: igloo=s%3AQUBOJzJSxqgAjr2kaPCHOy2OUAs7gmpX.XwVCzlIZAUj17pQWQBKOVPvJpv9GiI5cDnAQfv9%2F37M; Path=/; Expires=Wed, 13 Aug 2014 21:38:50 GMT; HttpOnly
+X-Response-Time: 65264.19082ms
+Date: Tue, 12 Aug 2014 21:38:46 GMT
 Connection: keep-alive
 
 
@@ -163,7 +247,38 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[]
+[
+  {
+    "ts": "2014-08-11T04:00:00.000Z",
+    "user_id": "2631042979",
+    "user_score": "0.2949495363587444",
+    "mp_rank": "540",
+    "sector": "Agriculture",
+    "sector_return": "0.0313268694491999",
+    "sector_rank": "1",
+    "tickers": "ZW_F, CC_F"
+  },
+  {
+    "ts": "2014-08-11T04:00:00.000Z",
+    "user_id": "137768351",
+    "user_score": "0.4101057469019749",
+    "mp_rank": "296",
+    "sector": "BasicMaterials",
+    "sector_return": "2.1337087087087090",
+    "sector_rank": "1",
+    "tickers": "BBRD"
+  },
+  {
+    "ts": "2014-08-11T04:00:00.000Z",
+    "user_id": "2204135624",
+    "user_score": "0.0021204268748031",
+    "mp_rank": "2521",
+    "sector": "Conglomerates",
+    "sector_return": "0.4999999999999998",
+    "sector_rank": "1",
+    "tickers": "JRRD"
+  }
+]
 ```
 
 Returns sector specific user returns for a given business date.
@@ -196,9 +311,9 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AY4H85zIwpKJKVDkkbTsJ78eyBeLpIfVM.muvJFctgvdGdk1TMqWn2s2P%2Ft5gWJ4FZobo361z3e5Q; Path=/; Expires=Wed, 13 Aug 2014 10:08:18 GMT; HttpOnly
-X-Response-Time: 22959.31858ms
-Date: Tue, 12 Aug 2014 10:08:18 GMT
+set-cookie: igloo=s%3A0_MuVy3UH8bWaIR8knSy9FJaWKV7M8yD.bpkaayE6s%2FjmdnpyOwwmiJi%2BPk1Rxwr4Sqp1gG9C3cQ; Path=/; Expires=Wed, 13 Aug 2014 21:38:49 GMT; HttpOnly
+X-Response-Time: 64906.52986ms
+Date: Tue, 12 Aug 2014 21:38:46 GMT
 Connection: keep-alive
 
 
@@ -207,7 +322,38 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[]
+[
+  {
+    "ts": "2014-08-04T04:00:00.000Z",
+    "user_id": "14216123",
+    "user_score": "-0.3510774804019593",
+    "mp_rank": "4447",
+    "sector": "IndustrialGoods",
+    "sector_return": "-0.0122606094624110",
+    "sector_rank": "2558",
+    "tickers": "ETN, BA"
+  },
+  {
+    "ts": "2014-08-04T04:00:00.000Z",
+    "user_id": "14216123",
+    "user_score": "-0.3510774804019593",
+    "mp_rank": "4447",
+    "sector": "Services",
+    "sector_return": "0.0033719008264461",
+    "sector_rank": "2043",
+    "tickers": "PNRA"
+  },
+  {
+    "ts": "2014-08-04T04:00:00.000Z",
+    "user_id": "14216123",
+    "user_score": "-0.3510774804019593",
+    "mp_rank": "4447",
+    "sector": "Technology",
+    "sector_return": "0.0001114544281942",
+    "sector_rank": "2793",
+    "tickers": "TST, FB, XLNX, TWTR"
+  }
+]
 ```
 
 Returns sector specific user returns for a given range of business dates for a given user id.
@@ -240,11 +386,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2
-ETag: W/"2-223132457"
-set-cookie: igloo=s%3AMzjzEtEAs5kv5jz-R6NWVKrn0-HcSoEG.SeT7Oui9hnQsrNkHyS7VJBjUJ1n3d2tW92WscVTx78s; Path=/; Expires=Wed, 13 Aug 2014 10:08:00 GMT; HttpOnly
-X-Response-Time: 4756.02309ms
-Date: Tue, 12 Aug 2014 10:08:00 GMT
+Content-Length: 2052
+ETag: W/"804-1016644265"
+set-cookie: igloo=s%3AkatUZ0Ykoq9KeXr4mKC4Vtc14X0daITU.QNPJ36PLfqz%2FUkbZIS4pVfRdTAzY73WhLmYmj7XIzig; Path=/; Expires=Wed, 13 Aug 2014 21:39:04 GMT; HttpOnly
+X-Response-Time: 79298.98423ms
+Date: Tue, 12 Aug 2014 21:39:04 GMT
 Connection: keep-alive
 
 

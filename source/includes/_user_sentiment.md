@@ -16,9 +16,9 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AFrZFaPQEkMDpMWEmbqLh-ALmzRLv0NE5.bec%2F2d2xe3df60BqBTBqLucIDX7mHQxyR62dePIB2ZA; Path=/; Expires=Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
-X-Response-Time: 1517.17479ms
-Date: Tue, 12 Aug 2014 10:07:57 GMT
+set-cookie: igloo=s%3AfKLdqodPjlDYdjaY9KigLDpNQxQ4qoKB.GRVc4zb%2FC8dWurKegLufS72GWrwZ%2Brj4nG2Oy%2BTlmTY; Path=/; Expires=Wed, 13 Aug 2014 21:38:46 GMT; HttpOnly
+X-Response-Time: 61607.66209ms
+Date: Tue, 12 Aug 2014 21:38:46 GMT
 Connection: keep-alive
 
 
@@ -52,9 +52,9 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AgAvDgBv34-Oanqjl4-dqsmyPl_85k2uh.wFGya%2BD%2Futo3cRPbjvOZH%2Bm9GcjA4Is8k14KdvJo1LA; Path=/; Expires=Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
-X-Response-Time: 1553.17598ms
-Date: Tue, 12 Aug 2014 10:07:57 GMT
+set-cookie: igloo=s%3AYeY555_HpXHnKc48dl8bZDdn447DrcnY.pzu2rrS3HHU%2FHi8L3eGpQ3oWe3E1FwdeaXVFeqSCg0U; Path=/; Expires=Wed, 13 Aug 2014 21:37:57 GMT; HttpOnly
+X-Response-Time: 15939.51409ms
+Date: Tue, 12 Aug 2014 21:37:57 GMT
 Connection: keep-alive
 
 
@@ -91,11 +91,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2
-ETag: W/"2-223132457"
-set-cookie: igloo=s%3AsfLaWb7Dky4Vacr-JarG4KsTmQB2C6Gj.t28EvyEc2OFp7o%2BMo0D4h36V2Qp1UlsacLBpSh1Y6VY; Path=/; Expires=Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
-X-Response-Time: 1706.89541ms
-Date: Tue, 12 Aug 2014 10:07:57 GMT
+Content-Length: 523
+ETag: W/"20b-1534407351"
+set-cookie: igloo=s%3AJltmjgDjlIwvATHsDRZSaVkHAK8hHTEu.OPZvmq1C%2BDgZSniQ3ZSjRFOQscOYh5zTRPa8sm7kxnM; Path=/; Expires=Wed, 13 Aug 2014 21:38:58 GMT; HttpOnly
+X-Response-Time: 74126.22450ms
+Date: Tue, 12 Aug 2014 21:38:58 GMT
 Connection: keep-alive
 
 
@@ -104,7 +104,26 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[]
+[
+  {
+    "ts": "2014-07-12T15:04:38.000Z",
+    "user_id": "14216123",
+    "ticker": "AAPL",
+    "sentiment": "0.1316784390279158"
+  },
+  {
+    "ts": "2014-07-18T21:55:03.000Z",
+    "user_id": "14216123",
+    "ticker": "AAPL",
+    "sentiment": "0.0542175301491523"
+  },
+  {
+    "ts": "2014-07-21T16:26:47.000Z",
+    "user_id": "14216123",
+    "ticker": "AAPL",
+    "sentiment": "0.1106782438503441"
+  }
+]
 ```
 
 Returns a complete range of historical intraday records for a given user based on a date range (start date, end date).
@@ -136,11 +155,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 5024206
-ETag: W/"4ca9ce-2098979112"
-set-cookie: igloo=s%3A3DNzydHYb6TCQeSdLniS2YNKDtBtlhAh.clNR6yhHxXrCl%2FoUd%2FMOIqd8Lug1l%2BpQEbjBBKnH0nE; Path=/; Expires=Wed, 13 Aug 2014 10:08:11 GMT; HttpOnly
-X-Response-Time: 16237.79669ms
-Date: Tue, 12 Aug 2014 10:08:11 GMT
+Content-Length: 2
+ETag: W/"2-223132457"
+set-cookie: igloo=s%3ArZ6AP--i8WCcohJGeJ4mUiysyoXBRTiZ.wWmehGVq1sINRYooopRK%2FXbhWPeO3MciUKtGfHXlN3I; Path=/; Expires=Wed, 13 Aug 2014 21:37:54 GMT; HttpOnly
+X-Response-Time: 13135.91561ms
+Date: Tue, 12 Aug 2014 21:37:54 GMT
 Connection: keep-alive
 
 
