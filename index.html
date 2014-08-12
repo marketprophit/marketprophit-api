@@ -156,8 +156,6 @@
           <h1 id='websockets'>Websockets</h1>
 <p>In order to communicate with websockets, you must follow these requirements:</p>
 
-<p>By default, all <code class="prettyprint">/real-time/</code> prefixed <code class="prettyprint">GET</code> endpoints have support for websockets.</p>
-
 <ul>
 <li><p>Use a <a href="http://socket.io">socket.io</a> API wrapper (or an alternative if available):</p>
 
@@ -173,92 +171,13 @@
 </ul>
 <h2 id='websocket-events'>Websocket Events</h1>
 <blockquote>
-<p>Example using client-side JavaScript (through use of jQuery and socket.io):</p>
+<p>Examples using client-side JavaScript (through use of jQuery and socket.io):</p>
 </blockquote>
-<pre class="highlight javascript">
-<span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 
-  <span class="cm">/*globals io*/</span>
-
-  <span class="kd">function</span> <span class="nx">connectSocket</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">socket</span> <span class="o">=</span> <span class="nx">io</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s1">'https://open.marketprophit.com'</span><span class="p">,</span> <span class="p">{</span>
-      <span class="na">query</span><span class="p">:</span> <span class="s1">'token='</span> <span class="o">+</span> <span class="nx">token</span><span class="p">,</span>
-      <span class="na">secure</span><span class="p">:</span> <span class="kc">true</span>
-    <span class="p">})</span>
-    <span class="nx">socket</span>
-    <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'connect'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'connected and authenticated'</span><span class="p">)</span>
-    <span class="p">})</span>
-    <span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">'subscribe'</span><span class="p">,</span> <span class="p">{</span>
-      <span class="na">path</span><span class="p">:</span> <span class="s1">'/real-time/crowd-sentiment'</span><span class="p">,</span>
-      <span class="na">method</span><span class="p">:</span> <span class="s1">'get'</span><span class="p">,</span>
-      <span class="na">params</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">ticker</span><span class="p">:</span> <span class="s1">'AAPL'</span>
-      <span class="p">}</span>
-    <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
-        <span class="s1">'subscribed to: %s %s'</span><span class="p">,</span>
-        <span class="s1">'GET'</span><span class="p">,</span>
-        <span class="s1">'/real-time/crowd-sentiment'</span>
-      <span class="p">)</span>
-    <span class="p">})</span>
-    <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'disconnect'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'disconnected'</span><span class="p">)</span>
-    <span class="p">})</span>
-    <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
-    <span class="p">})</span>
-    <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'err'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'err'</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
-    <span class="p">})</span>
-    <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'res'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'res'</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span>
-    <span class="p">})</span>
-    <span class="c1">// after 3 minutes unsubscribe us
-</span>    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">'unsubscribe'</span><span class="p">,</span> <span class="p">{</span>
-        <span class="na">path</span><span class="p">:</span> <span class="s1">'/real-time/crowd-sentiment'</span><span class="p">,</span>
-        <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
-        <span class="na">params</span><span class="p">:</span> <span class="p">{</span>
-          <span class="na">ticker</span><span class="p">:</span> <span class="s1">'APPL'</span>
-        <span class="p">}</span>
-      <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
-          <span class="s1">'unsubscribed from: %s %s'</span><span class="p">,</span>
-          <span class="s1">'GET'</span><span class="p">,</span>
-          <span class="s1">'/real-time/crowd-sentiment'</span>
-        <span class="p">)</span>
-      <span class="p">})</span>
-    <span class="p">},</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
-  <span class="p">}</span>
-
-  <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-      <span class="na">type</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-      <span class="na">url</span><span class="p">:</span> <span class="s1">'/jwt'</span><span class="p">,</span>
-      <span class="na">dataType</span><span class="p">:</span> <span class="s1">'json'</span><span class="p">,</span>
-      <span class="na">beforeSend</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// **NOTE**: NEVER EXPOSE YOUR SECRET API KEY
-</span>        <span class="c1">// This is just an example to show you that
-</span>        <span class="c1">// you'd need to do a request to your own
-</span>        <span class="c1">// server (e.g. create your own /jwt route) which
-</span>        <span class="c1">// would then query our API server and return a JWT
-</span>        <span class="c1">// which you'd then return to your client (if any)
-</span>        <span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span>
-          <span class="s1">'Authorization'</span><span class="p">,</span>
-          <span class="s1">'Basic '</span> <span class="o">+</span> <span class="nx">btoa</span><span class="p">(</span><span class="s1">'sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:'</span><span class="p">)</span>
-        <span class="p">)</span>
-      <span class="p">}</span>
-    <span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">connectSocket</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">token</span><span class="p">)</span>
-    <span class="p">})</span>
-  <span class="p">})</span>
-
-<span class="p">}())</span>
-</pre>
-
+<ul>
+<li><a href="http://jsfiddle.net/Lokqp2os/">Client-side JavaScript JSFiddle Example Template</a></li>
+</ul>
+<h4 id='bindable-events'>Bindable Events</h1>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -268,12 +187,12 @@
 </thead><tbody>
 <tr>
 <td>connect</td>
-<td>callback</td>
+<td>callback*</td>
 <td>Connect to websockets</td>
 </tr>
 <tr>
 <td>disconnect</td>
-<td>callback</td>
+<td>callback*</td>
 <td>Disconnect from websockets</td>
 </tr>
 <tr>
@@ -282,26 +201,23 @@
 <td>Error from websocket connection</td>
 </tr>
 <tr>
-<td>err</td>
+<td>data</td>
 <td>callback</td>
-<td>Error from endpoint currently subscribed to</td>
-</tr>
-<tr>
-<td>res</td>
-<td>callback</td>
-<td>Response from endpoint currently subscribed to</td>
+<td>Response from endpoint currently subscribed to (contains the following fields: <code class="prettyprint">params</code>, <code class="prettyprint">path</code>, <code class="prettyprint">results</code>, and <code class="prettyprint">timestamp</code>)</td>
 </tr>
 <tr>
 <td>subscribe</td>
-<td>name, options, callback</td>
+<td>name, options, callback*</td>
 <td>Subscribe to an endpoint</td>
 </tr>
 <tr>
 <td>unsubscribe</td>
-<td>name, options, callback</td>
+<td>name, options, callback*</td>
 <td>Unsubscribe from an endpoint</td>
 </tr>
 </tbody></table>
+
+<p>* indicates callback function returns a param of <code class="prettyprint">err</code> (e.g. <code class="prettyprint">callback(err)</code>), and <code class="prettyprint">err</code> will be null if successful or will contain an error message if unsuccessful</p>
 <h3 id='event-arguments'>Event Arguments</h1>
 <table><thead>
 <tr>
@@ -346,12 +262,6 @@
 <td>none</td>
 </tr>
 <tr>
-<td>method</td>
-<td>Case insensitive HTTP verb (e.g. &ldquo;GET&rdquo;)</td>
-<td>yes</td>
-<td>none</td>
-</tr>
-<tr>
 <td>params</td>
 <td>Object of parameters to pass to endpoint (e.g. <code class="prettyprint">{ ticker: &#39;AAPL&#39; }</code>)</td>
 <td>yes</td>
@@ -367,11 +277,15 @@
 <p>Returns response headers such as:</p>
 </blockquote>
 <pre class="highlight shell">HTTP/1.1 200 OK
+Access-Control-Allow-Origin: <span class="k">*</span>
+Access-Control-Allow-Headers: X-Requested-With
+Access-Control-Allow-Methods: POST, GET, OPTIONS
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 5204
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A26nr2GfDB6bucwsfkn6JU4XtZoXPHFU0.2mz7TQh2eaxbcZfyMZU2VFbeF8BuNSSBQKvWfx1smDY; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:05 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:05 GMT
+Content-Length: 8540
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AlpeQBc22Jx3kF9fX1CCqNd824qm1GyEV.d%2B4BSvfzJuMI31Lewq7PmO2mIebJAyMN3D5qvOZNvVk; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 55.15008ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -381,7 +295,7 @@ Connection: keep-alive
 <p>Returns response such as:</p>
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcGkiOiJza19saXZlX3czUTRiQ0pWQjh4Z3llSUtKbVRDNERTNSIsImNvbXBhbnkiOiJNYXJrZXQgUHJvcGhpdCIsImNyZWF0ZWRfYXQiOiIyMDE0LTA3LTIyVDE5OjA1OjE3LjAwMFoiLCJlbWFpbCI6Imhvb2RicmFuZG9uQHlhaG9vLmNvbSIsImZ1bGxfZW1haWwiOiJCcmFuZG9uIEhvb2QgPGhvb2RicmFuZG9uQHlhaG9vLmNvbT4iLCJtZXNzYWdlIjoiKioqIFRoaXMgaXMgTmljayBCYXVnaCBqdXN0IHRlc3Rpbmcgb3V0IHRoaXMgYW5kIHNldHRpbmcgdXAgQnJhbmRvbiB3aXRoIGFuIGFjY291bnQgZm9yIHRlc3RpbmcgdG9kYXkuICoqKiIsIm5hbWUiOiJCcmFuZG9uIEhvb2QiLCJ0cmlhbF9lbmRfYXQiOiIyMDE1LTEyLTAxVDA1OjAwOjAwLjAwMFoiLCJ1cGRhdGVkX2F0IjoiMjAxNC0wNy0yMlQxOTowNToxNy4wMDBaIiwiX192ZXJzaW9ucyI6W3siY3JlYXRlZF9hdCI6IjIwMTQtMDctMjJUMTk6MDU6MTcuMDAwWiIsInVwZGF0ZWRfYXQiOiIyMDE0LTA3LTIyVDE5OjA1OjE4LjE4MloiLCJmdWxsX2VtYWlsIjoiQnJhbmRvbiBIb29kIDxob29kYnJhbmRvbkB5YWhvby5jb20-IiwiYXBpIjoic2tfbGl2ZV93M1E0YkNKVkI4eGd5ZUlLSm1UQzREUzUiLCJzYWx0IjoiODdkNTlkYjk5MDgxNzg2M2EwMzNhNzA5MzIxODliNGU3OTMxNTVmZDg0YTMwN2ZjZmY2YTk4ZTMyYzViYWMxMiIsImhhc2giOiI4NWJiMzBkMzE5ZTg4NmZkYTA2NzBhM2U5YzA4ZThlYTFiYWMxMzY0MDhkOTIxY2MyNTM1YWJlYTNjNGQ2NzJkNmMwMzIzMGE5ZTVmNDBmZmNkZTU5MzM2ZDQ2MDM2ZDA5ODc3MzRhYWE1OGRkNWYwMTI5M2ZhYTIwMWM3ZGNhZDFlYjBmNmMxNzMyZGU0ZDZjMzY5ZmI1YTRjNmJmYjIzMTBlMTMwNjlhNGY4NjkxZjYyNGNlZWFmMmI2MjIxOTBiNjQwM2MyYTFmMDllODI0MDI2ZWM5MTgzNzk1NzI1MmFjYmZkZGUzZGM0NmQ0NzE4ZWYxMTkzODViMzg1ZjkzZjQwODgyNTUyNTE1MGUzYzQwNTNhYTk2MWJkZTBmNDIyMWVmNmY5NmQ1ZTEzNjM3ODlmZTM4MzVjN2I4ZjI4YjRlM2RiYjM0NjllYzRmYmNhYWQwZDA1ODYyYzFkMWQ0MjcxYmJhY2Y5OTY4ODBlZTQ4MzE4ZDE0YjZmZjc4MGQ0MGY5MjIzNGI2MGMxMDZjNDk2MGIzNTZiNTBlNzA0ZDZkN2NkNDQzOTI5ODY0NWM1MjVkYWZmMDZmY2FhMTI5MWI3MjI0YzNiY2U3NzVkNzk2ZDQwM2NiMzQxMGFlMDY1YjZiMzIwNjQwODYyOTdhN2FhZmI0YzZkMzJmMTcwMGEwYTNiZGRmOTkxNzQ2NDlkMDA2OTQ0YWJiNTliNDQwNTgwN2YyYzQwYTNlMDQ5NzI4NDFkNGE3ZWZjYzJmNDY0MDY5NjA0NjM4YjRlYjFmMTZlZWYyMmY0NjRhZGQ5NjgwYWU2ZGUwOThlMDNhZmJjZjdiNzUwNjUzOTQyNjVmYTU2YTgyODEyZTQ5MjFjZTdiMTI3M2NhNTk4N2RjNzYyM2RkOGFkYTE2NzdkMWUwODYyNTFkNDg1YmM5NzY4Y2MyYTMwMWFlMTQzZmQwODY3OGI3YmY5MDU1ZDg2ZDViMmU4ZTQwMDhhMGIyZWE2MmQ1NzU3YjYyNjdiZmNmYjUzZWM3ZWJjNzI2YmFjOWRmOWQ3N2UxY2UwMzI1MzE2YTQyOWFhNDExMTg1ZGQxMTg3Zjk5NzNiZTQ3MDUwZGIzMTBmMjNkM2EzODdlNzgxYzAwMzA1YmUyN2IyOWFjNDNiNmE1ODIzNzBmMjRlY2E1Yzc1ZWYyNjBiM2Y0YmI4MzM3ZTEzZTE5NGE0ZDdkZGFkYTgxYmMyZjhhZDE0MWJlN2JkNGRiODc2YzZmNzk1ZGM3YTM1MDFjYzQ1NzRiODZjYTBhZTQ2ODAzNjM3ZDMwMWUzMTFkMWEzM2ZiMWVjYzJjZWZmMWM1OGEwMzdlY2U2MjgyNDc5MGI1NzA1N2E3IiwiZW1haWwiOiJob29kYnJhbmRvbkB5YWhvby5jb20iLCJuYW1lIjoiQnJhbmRvbiBIb29kIiwiY29tcGFueSI6Ik1hcmtldCBQcm9waGl0IiwibWVzc2FnZSI6IioqKiBUaGlzIGlzIE5pY2sgQmF1Z2gganVzdCB0ZXN0aW5nIG91dCB0aGlzIGFuZCBzZXR0aW5nIHVwIEJyYW5kb24gd2l0aCBhbiBhY2NvdW50IGZvciB0ZXN0aW5nIHRvZGF5LiAqKioiLCJfaWQiOiI1M2NlYjVlZDg2ODE4YTE5N2JhOGVjMjAiLCJ0aWNrZXJzIjpbXSwidHJpYWwiOnRydWUsImFjdGl2ZSI6ZmFsc2UsImdyb3VwIjoidXNlciIsIm9iamVjdCI6InVzZXIiLCJpZCI6IjUzY2ViNWVkODY4MThhMTk3YmE4ZWMyMCIsIl9fdiI6MH0seyJpZCI6IjUzY2ViNWVkODY4MThhMTk3YmE4ZWMyMCIsIm9iamVjdCI6InVzZXIiLCJncm91cCI6ImFkbWluIiwiYWN0aXZlIjp0cnVlLCJ0cmlhbCI6dHJ1ZSwidGlja2VycyI6W10sIl9fdiI6MSwiX2lkIjoiNTNjZWI1ZWQ4NjgxOGExOTdiYThlYzIwIiwibWVzc2FnZSI6IioqKiBUaGlzIGlzIE5pY2sgQmF1Z2gganVzdCB0ZXN0aW5nIG91dCB0aGlzIGFuZCBzZXR0aW5nIHVwIEJyYW5kb24gd2l0aCBhbiBhY2NvdW50IGZvciB0ZXN0aW5nIHRvZGF5LiAqKioiLCJjb21wYW55IjoiTWFya2V0IFByb3BoaXQiLCJuYW1lIjoiQnJhbmRvbiBIb29kIiwiZW1haWwiOiJob29kYnJhbmRvbkB5YWhvby5jb20iLCJoYXNoIjoiODViYjMwZDMxOWU4ODZmZGEwNjcwYTNlOWMwOGU4ZWExYmFjMTM2NDA4ZDkyMWNjMjUzNWFiZWEzYzRkNjcyZDZjMDMyMzBhOWU1ZjQwZmZjZGU1OTMzNmQ0NjAzNmQwOTg3NzM0YWFhNThkZDVmMDEyOTNmYWEyMDFjN2RjYWQxZWIwZjZjMTczMmRlNGQ2YzM2OWZiNWE0YzZiZmIyMzEwZTEzMDY5YTRmODY5MWY2MjRjZWVhZjJiNjIyMTkwYjY0MDNjMmExZjA5ZTgyNDAyNmVjOTE4Mzc5NTcyNTJhY2JmZGRlM2RjNDZkNDcxOGVmMTE5Mzg1YjM4NWY5M2Y0MDg4MjU1MjUxNTBlM2M0MDUzYWE5NjFiZGUwZjQyMjFlZjZmOTZkNWUxMzYzNzg5ZmUzODM1YzdiOGYyOGI0ZTNkYmIzNDY5ZWM0ZmJjYWFkMGQwNTg2MmMxZDFkNDI3MWJiYWNmOTk2ODgwZWU0ODMxOGQxNGI2ZmY3ODBkNDBmOTIyMzRiNjBjMTA2YzQ5NjBiMzU2YjUwZTcwNGQ2ZDdjZDQ0MzkyOTg2NDVjNTI1ZGFmZjA2ZmNhYTEyOTFiNzIyNGMzYmNlNzc1ZDc5NmQ0MDNjYjM0MTBhZTA2NWI2YjMyMDY0MDg2Mjk3YTdhYWZiNGM2ZDMyZjE3MDBhMGEzYmRkZjk5MTc0NjQ5ZDAwNjk0NGFiYjU5YjQ0MDU4MDdmMmM0MGEzZTA0OTcyODQxZDRhN2VmY2MyZjQ2NDA2OTYwNDYzOGI0ZWIxZjE2ZWVmMjJmNDY0YWRkOTY4MGFlNmRlMDk4ZTAzYWZiY2Y3Yjc1MDY1Mzk0MjY1ZmE1NmE4MjgxMmU0OTIxY2U3YjEyNzNjYTU5ODdkYzc2MjNkZDhhZGExNjc3ZDFlMDg2MjUxZDQ4NWJjOTc2OGNjMmEzMDFhZTE0M2ZkMDg2NzhiN2JmOTA1NWQ4NmQ1YjJlOGU0MDA4YTBiMmVhNjJkNTc1N2I2MjY3YmZjZmI1M2VjN2ViYzcyNmJhYzlkZjlkNzdlMWNlMDMyNTMxNmE0MjlhYTQxMTE4NWRkMTE4N2Y5OTczYmU0NzA1MGRiMzEwZjIzZDNhMzg3ZTc4MWMwMDMwNWJlMjdiMjlhYzQzYjZhNTgyMzcwZjI0ZWNhNWM3NWVmMjYwYjNmNGJiODMzN2UxM2UxOTRhNGQ3ZGRhZGE4MWJjMmY4YWQxNDFiZTdiZDRkYjg3NmM2Zjc5NWRjN2EzNTAxY2M0NTc0Yjg2Y2EwYWU0NjgwMzYzN2QzMDFlMzExZDFhMzNmYjFlY2MyY2VmZjFjNThhMDM3ZWNlNjI4MjQ3OTBiNTcwNTdhNyIsInNhbHQiOiI4N2Q1OWRiOTkwODE3ODYzYTAzM2E3MDkzMjE4OWI0ZTc5MzE1NWZkODRhMzA3ZmNmZjZhOThlMzJjNWJhYzEyIiwiYXBpIjoic2tfbGl2ZV93M1E0YkNKVkI4eGd5ZUlLSm1UQzREUzUiLCJmdWxsX2VtYWlsIjoiQnJhbmRvbiBIb29kIDxob29kYnJhbmRvbkB5YWhvby5jb20-IiwidXBkYXRlZF9hdCI6IjIwMTQtMDctMjJUMTk6MDU6MTcuMDAwWiIsImNyZWF0ZWRfYXQiOiIyMDE0LTA3LTIyVDE5OjA1OjE3LjAwMFoiLCJ0cmlhbF9lbmRfYXQiOiIyMDE1LTEyLTAxVDA1OjAwOjAwLjAwMFoifV0sInRpY2tlcnMiOltdLCJ0cmlhbCI6dHJ1ZSwiYWN0aXZlIjp0cnVlLCJncm91cCI6ImFkbWluIiwib2JqZWN0IjoidXNlciIsImlkIjoiNTNjZWI1ZWQ4NjgxOGExOTdiYThlYzIwIn0.htZ_xCqbdIE7OMlG6JSLbpqHu3AZWCDs8PytE8pKSns"</span><span class="w">
+  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfX3ZlcnNpb25zIjpbeyJjcmVhdGVkX2F0IjoiMjAxNC0wNy0yMlQxOTowNToxNy4wMDBaIiwidXBkYXRlZF9hdCI6IjIwMTQtMDctMjJUMTk6MDU6MTguMTgyWiIsImZ1bGxfZW1haWwiOiJCcmFuZG9uIEhvb2QgPGhvb2RicmFuZG9uQHlhaG9vLmNvbT4iLCJhcGkiOiJza19saXZlX3czUTRiQ0pWQjh4Z3llSUtKbVRDNERTNSIsInNhbHQiOiI4N2Q1OWRiOTkwODE3ODYzYTAzM2E3MDkzMjE4OWI0ZTc5MzE1NWZkODRhMzA3ZmNmZjZhOThlMzJjNWJhYzEyIiwiaGFzaCI6Ijg1YmIzMGQzMTllODg2ZmRhMDY3MGEzZTljMDhlOGVhMWJhYzEzNjQwOGQ5MjFjYzI1MzVhYmVhM2M0ZDY3MmQ2YzAzMjMwYTllNWY0MGZmY2RlNTkzMzZkNDYwMzZkMDk4NzczNGFhYTU4ZGQ1ZjAxMjkzZmFhMjAxYzdkY2FkMWViMGY2YzE3MzJkZTRkNmMzNjlmYjVhNGM2YmZiMjMxMGUxMzA2OWE0Zjg2OTFmNjI0Y2VlYWYyYjYyMjE5MGI2NDAzYzJhMWYwOWU4MjQwMjZlYzkxODM3OTU3MjUyYWNiZmRkZTNkYzQ2ZDQ3MThlZjExOTM4NWIzODVmOTNmNDA4ODI1NTI1MTUwZTNjNDA1M2FhOTYxYmRlMGY0MjIxZWY2Zjk2ZDVlMTM2Mzc4OWZlMzgzNWM3YjhmMjhiNGUzZGJiMzQ2OWVjNGZiY2FhZDBkMDU4NjJjMWQxZDQyNzFiYmFjZjk5Njg4MGVlNDgzMThkMTRiNmZmNzgwZDQwZjkyMjM0YjYwYzEwNmM0OTYwYjM1NmI1MGU3MDRkNmQ3Y2Q0NDM5Mjk4NjQ1YzUyNWRhZmYwNmZjYWExMjkxYjcyMjRjM2JjZTc3NWQ3OTZkNDAzY2IzNDEwYWUwNjViNmIzMjA2NDA4NjI5N2E3YWFmYjRjNmQzMmYxNzAwYTBhM2JkZGY5OTE3NDY0OWQwMDY5NDRhYmI1OWI0NDA1ODA3ZjJjNDBhM2UwNDk3Mjg0MWQ0YTdlZmNjMmY0NjQwNjk2MDQ2MzhiNGViMWYxNmVlZjIyZjQ2NGFkZDk2ODBhZTZkZTA5OGUwM2FmYmNmN2I3NTA2NTM5NDI2NWZhNTZhODI4MTJlNDkyMWNlN2IxMjczY2E1OTg3ZGM3NjIzZGQ4YWRhMTY3N2QxZTA4NjI1MWQ0ODViYzk3NjhjYzJhMzAxYWUxNDNmZDA4Njc4YjdiZjkwNTVkODZkNWIyZThlNDAwOGEwYjJlYTYyZDU3NTdiNjI2N2JmY2ZiNTNlYzdlYmM3MjZiYWM5ZGY5ZDc3ZTFjZTAzMjUzMTZhNDI5YWE0MTExODVkZDExODdmOTk3M2JlNDcwNTBkYjMxMGYyM2QzYTM4N2U3ODFjMDAzMDViZTI3YjI5YWM0M2I2YTU4MjM3MGYyNGVjYTVjNzVlZjI2MGIzZjRiYjgzMzdlMTNlMTk0YTRkN2RkYWRhODFiYzJmOGFkMTQxYmU3YmQ0ZGI4NzZjNmY3OTVkYzdhMzUwMWNjNDU3NGI4NmNhMGFlNDY4MDM2MzdkMzAxZTMxMWQxYTMzZmIxZWNjMmNlZmYxYzU4YTAzN2VjZTYyODI0NzkwYjU3MDU3YTciLCJlbWFpbCI6Imhvb2RicmFuZG9uQHlhaG9vLmNvbSIsIm5hbWUiOiJCcmFuZG9uIEhvb2QiLCJjb21wYW55IjoiTWFya2V0IFByb3BoaXQiLCJtZXNzYWdlIjoiKioqIFRoaXMgaXMgTmljayBCYXVnaCBqdXN0IHRlc3Rpbmcgb3V0IHRoaXMgYW5kIHNldHRpbmcgdXAgQnJhbmRvbiB3aXRoIGFuIGFjY291bnQgZm9yIHRlc3RpbmcgdG9kYXkuICoqKiIsIl9pZCI6IjUzY2ViNWVkODY4MThhMTk3YmE4ZWMyMCIsInRpY2tlcnMiOltdLCJ0cmlhbCI6dHJ1ZSwiYWN0aXZlIjpmYWxzZSwiZ3JvdXAiOiJ1c2VyIiwib2JqZWN0IjoidXNlciIsImlkIjoiNTNjZWI1ZWQ4NjgxOGExOTdiYThlYzIwIiwiX192IjowfSx7ImlkIjoiNTNjZWI1ZWQ4NjgxOGExOTdiYThlYzIwIiwib2JqZWN0IjoidXNlciIsImdyb3VwIjoiYWRtaW4iLCJhY3RpdmUiOnRydWUsInRyaWFsIjp0cnVlLCJ0aWNrZXJzIjpbXSwiX192IjoxLCJfaWQiOiI1M2NlYjVlZDg2ODE4YTE5N2JhOGVjMjAiLCJtZXNzYWdlIjoiKioqIFRoaXMgaXMgTmljayBCYXVnaCBqdXN0IHRlc3Rpbmcgb3V0IHRoaXMgYW5kIHNldHRpbmcgdXAgQnJhbmRvbiB3aXRoIGFuIGFjY291bnQgZm9yIHRlc3RpbmcgdG9kYXkuICoqKiIsImNvbXBhbnkiOiJNYXJrZXQgUHJvcGhpdCIsIm5hbWUiOiJCcmFuZG9uIEhvb2QiLCJlbWFpbCI6Imhvb2RicmFuZG9uQHlhaG9vLmNvbSIsImhhc2giOiI4NWJiMzBkMzE5ZTg4NmZkYTA2NzBhM2U5YzA4ZThlYTFiYWMxMzY0MDhkOTIxY2MyNTM1YWJlYTNjNGQ2NzJkNmMwMzIzMGE5ZTVmNDBmZmNkZTU5MzM2ZDQ2MDM2ZDA5ODc3MzRhYWE1OGRkNWYwMTI5M2ZhYTIwMWM3ZGNhZDFlYjBmNmMxNzMyZGU0ZDZjMzY5ZmI1YTRjNmJmYjIzMTBlMTMwNjlhNGY4NjkxZjYyNGNlZWFmMmI2MjIxOTBiNjQwM2MyYTFmMDllODI0MDI2ZWM5MTgzNzk1NzI1MmFjYmZkZGUzZGM0NmQ0NzE4ZWYxMTkzODViMzg1ZjkzZjQwODgyNTUyNTE1MGUzYzQwNTNhYTk2MWJkZTBmNDIyMWVmNmY5NmQ1ZTEzNjM3ODlmZTM4MzVjN2I4ZjI4YjRlM2RiYjM0NjllYzRmYmNhYWQwZDA1ODYyYzFkMWQ0MjcxYmJhY2Y5OTY4ODBlZTQ4MzE4ZDE0YjZmZjc4MGQ0MGY5MjIzNGI2MGMxMDZjNDk2MGIzNTZiNTBlNzA0ZDZkN2NkNDQzOTI5ODY0NWM1MjVkYWZmMDZmY2FhMTI5MWI3MjI0YzNiY2U3NzVkNzk2ZDQwM2NiMzQxMGFlMDY1YjZiMzIwNjQwODYyOTdhN2FhZmI0YzZkMzJmMTcwMGEwYTNiZGRmOTkxNzQ2NDlkMDA2OTQ0YWJiNTliNDQwNTgwN2YyYzQwYTNlMDQ5NzI4NDFkNGE3ZWZjYzJmNDY0MDY5NjA0NjM4YjRlYjFmMTZlZWYyMmY0NjRhZGQ5NjgwYWU2ZGUwOThlMDNhZmJjZjdiNzUwNjUzOTQyNjVmYTU2YTgyODEyZTQ5MjFjZTdiMTI3M2NhNTk4N2RjNzYyM2RkOGFkYTE2NzdkMWUwODYyNTFkNDg1YmM5NzY4Y2MyYTMwMWFlMTQzZmQwODY3OGI3YmY5MDU1ZDg2ZDViMmU4ZTQwMDhhMGIyZWE2MmQ1NzU3YjYyNjdiZmNmYjUzZWM3ZWJjNzI2YmFjOWRmOWQ3N2UxY2UwMzI1MzE2YTQyOWFhNDExMTg1ZGQxMTg3Zjk5NzNiZTQ3MDUwZGIzMTBmMjNkM2EzODdlNzgxYzAwMzA1YmUyN2IyOWFjNDNiNmE1ODIzNzBmMjRlY2E1Yzc1ZWYyNjBiM2Y0YmI4MzM3ZTEzZTE5NGE0ZDdkZGFkYTgxYmMyZjhhZDE0MWJlN2JkNGRiODc2YzZmNzk1ZGM3YTM1MDFjYzQ1NzRiODZjYTBhZTQ2ODAzNjM3ZDMwMWUzMTFkMWEzM2ZiMWVjYzJjZWZmMWM1OGEwMzdlY2U2MjgyNDc5MGI1NzA1N2E3Iiwic2FsdCI6Ijg3ZDU5ZGI5OTA4MTc4NjNhMDMzYTcwOTMyMTg5YjRlNzkzMTU1ZmQ4NGEzMDdmY2ZmNmE5OGUzMmM1YmFjMTIiLCJhcGkiOiJza19saXZlX3czUTRiQ0pWQjh4Z3llSUtKbVRDNERTNSIsImZ1bGxfZW1haWwiOiJCcmFuZG9uIEhvb2QgPGhvb2RicmFuZG9uQHlhaG9vLmNvbT4iLCJ1cGRhdGVkX2F0IjoiMjAxNC0wNy0yMlQxOTowNToxNy4wMDBaIiwiY3JlYXRlZF9hdCI6IjIwMTQtMDctMjJUMTk6MDU6MTcuMDAwWiIsInRyaWFsX2VuZF9hdCI6IjIwMTUtMTItMDFUMDU6MDA6MDAuMDAwWiJ9XSwiYXBpIjoic2tfbGl2ZV93M1E0YkNKVkI4eGd5ZUlLSm1UQzREUzUiLCJjb21wYW55IjoiTWFya2V0IFByb3BoaXQiLCJjcmVhdGVkX2F0IjoiMjAxNC0wNy0yMlQxOTowNToxNy4wMDBaIiwiY3VzdG9tZXJfbnVtYmVyIjoiMTQ3MDI2MzcwMyIsImVtYWlsIjoiaG9vZGJyYW5kb25AeWFob28uY29tIiwiZnVsbF9lbWFpbCI6IkJyYW5kb24gSG9vZCA8aG9vZGJyYW5kb25AeWFob28uY29tPiIsImZ1bGxfbmFtZSI6IkJyYW5kb24gSG9vZCIsIm1lc3NhZ2UiOiIqKiogVGhpcyBpcyBOaWNrIEJhdWdoIGp1c3QgdGVzdGluZyBvdXQgdGhpcyBhbmQgc2V0dGluZyB1cCBCcmFuZG9uIHdpdGggYW4gYWNjb3VudCBmb3IgdGVzdGluZyB0b2RheS4gKioqIiwibmFtZSI6IkJyYW5kb24iLCJwaG9uZSI6IjEyMy00NTYtNzg5MCIsInJlc2V0X2F0IjoiMjAxNC0wNy0zMFQwMDoxOTo1Ni4wMDBaIiwicmVzZXRfdG9rZW4iOiIiLCJzdXJuYW1lIjoiSG9vZCIsInRyaWFsX2VuZF9hdCI6IjIwMTUtMTItMDFUMDU6MDA6MDAuMDAwWiIsInVwZGF0ZWRfYXQiOiIyMDE0LTA3LTIyVDE5OjA1OjE3LjAwMFoiLCJyYXRlX2xpbWl0X292ZXJhZ2VfYW1vdW50IjowLCJyYXRlX2xpbWl0X292ZXJhZ2VfaW50ZXJ2YWwiOjAsImJpbGxpbmdfYW1vdW50X3Blcl9mcmVxdWVuY3kiOjAsImJpbGxpbmdfZnJlcXVlbmN5IjoiIiwiYmlsbGluZ19pbnRlcnZhbCI6IiIsImVuZHBvaW50X3BhdGhzIjpbIi9oaXN0b3JpY2FsL2Nyb3dkLXNlbnRpbWVudC1tb3ZpbmctYXZlcmFnZSIsIi9oaXN0b3JpY2FsL2Nyb3dkLXNlbnRpbWVudC16LXNjb3JlLW1vdmluZy1hdmVyYWdlIiwiL2hpc3RvcmljYWwvY3Jvd2Qtc2VudGltZW50LXotc2NvcmUiLCIvaGlzdG9yaWNhbC9jcm93ZC1zZW50aW1lbnQiLCIvaGlzdG9yaWNhbC9kYWlseS1jcm93ZC1zZW50aW1lbnQtbW92aW5nLWF2ZXJhZ2UiLCIvaGlzdG9yaWNhbC9kYWlseS1jcm93ZC1zZW50aW1lbnQtei1zY29yZS1tb3ZpbmctYXZlcmFnZSIsIi9oaXN0b3JpY2FsL2RhaWx5LWNyb3dkLXNlbnRpbWVudC16LXNjb3JlIiwiL2hpc3RvcmljYWwvZGFpbHktY3Jvd2Qtc2VudGltZW50IiwiL2hpc3RvcmljYWwvZGFpbHktbWFya2V0LXByb3BoaXQtc2VudGltZW50LW1vdmluZy1hdmVyYWdlIiwiL2hpc3RvcmljYWwvZGFpbHktbWFya2V0LXByb3BoaXQtc2VudGltZW50LXotc2NvcmUtbW92aW5nLWF2ZXJhZ2UiLCIvaGlzdG9yaWNhbC9kYWlseS1tYXJrZXQtcHJvcGhpdC1zZW50aW1lbnQtei1zY29yZSIsIi9oaXN0b3JpY2FsL2RhaWx5LW1hcmtldC1wcm9waGl0LXNlbnRpbWVudCIsIi9oaXN0b3JpY2FsL2RhaWx5LXR3ZWV0LWJ1enoiLCIvaGlzdG9yaWNhbC9kYWlseS10d2VldC12b2x1bWUiLCIvaGlzdG9yaWNhbC9kYWlseS11c2VyLXNjb3Jlcy1ieS11c2VyIiwiL2hpc3RvcmljYWwvbWFya2V0LXByb3BoaXQtc2VudGltZW50LW1vdmluZy1hdmVyYWdlIiwiL2hpc3RvcmljYWwvbWFya2V0LXByb3BoaXQtc2VudGltZW50LXotc2NvcmUtbW92aW5nLWF2ZXJhZ2UiLCIvaGlzdG9yaWNhbC9tYXJrZXQtcHJvcGhpdC1zZW50aW1lbnQtei1zY29yZSIsIi9oaXN0b3JpY2FsL21hcmtldC1wcm9waGl0LXNlbnRpbWVudCIsIi9oaXN0b3JpY2FsL3NlY3Rvci1zcGVjaWZpYy11c2VyLXJldHVybnMtYnktc2VjdG9yIiwiL2hpc3RvcmljYWwvc2VjdG9yLXNwZWNpZmljLXVzZXItcmV0dXJucy1ieS11c2VyIiwiL2hpc3RvcmljYWwvc2VjdG9yLXNwZWNpZmljLXVzZXItcmV0dXJucyIsIi9oaXN0b3JpY2FsL3NlY3Rvci1zcGVjaWZpYy11c2VyLXNjb3Jlcy1ieS1zZWN0b3IiLCIvaGlzdG9yaWNhbC9zZWN0b3Itc3BlY2lmaWMtdXNlci1zY29yZXMtYnktdXNlciIsIi9oaXN0b3JpY2FsL3NlY3Rvci1zcGVjaWZpYy11c2VyLXNjb3JlcyIsIi9oaXN0b3JpY2FsL3RpY2tlci1zcGVjaWZpYy11c2VyLXJldHVybnMtYnktdGlja2VyIiwiL2hpc3RvcmljYWwvdGlja2VyLXNwZWNpZmljLXVzZXItcmV0dXJucy1ieS11c2VyIiwiL2hpc3RvcmljYWwvdGlja2VyLXNwZWNpZmljLXVzZXItcmV0dXJucyIsIi9oaXN0b3JpY2FsL3RpY2tlci1zcGVjaWZpYy11c2VyLXNjb3Jlcy1ieS10aWNrZXIiLCIvaGlzdG9yaWNhbC90aWNrZXItc3BlY2lmaWMtdXNlci1zY29yZXMtYnktdXNlciIsIi9oaXN0b3JpY2FsL3RpY2tlci1zcGVjaWZpYy11c2VyLXNjb3JlcyIsIi9oaXN0b3JpY2FsL3R3ZWV0LWJ1enoiLCIvaGlzdG9yaWNhbC90d2VldC12b2x1bWUiLCIvaGlzdG9yaWNhbC91c2VyLXNjb3Jlcy1sYXN0IiwiL2hpc3RvcmljYWwvdXNlci1zY29yZXMiLCIvaGlzdG9yaWNhbC91c2VyLXNlbnRpbWVudC1ieS10aWNrZXIiLCIvaGlzdG9yaWNhbC91c2VyLXNlbnRpbWVudC1ieS11c2VyIiwiL3JlYWwtdGltZS9jcm93ZC1zZW50aW1lbnQtbW92aW5nLWF2ZXJhZ2UiLCIvcmVhbC10aW1lL2Nyb3dkLXNlbnRpbWVudC16LXNjb3JlLW1vdmluZy1hdmVyYWdlIiwiL3JlYWwtdGltZS9jcm93ZC1zZW50aW1lbnQtei1zY29yZSIsIi9yZWFsLXRpbWUvY3Jvd2Qtc2VudGltZW50IiwiL3JlYWwtdGltZS9tYXJrZXQtcHJvcGhpdC1zZW50aW1lbnQtbW92aW5nLWF2ZXJhZ2UiLCIvcmVhbC10aW1lL21hcmtldC1wcm9waGl0LXNlbnRpbWVudC16LXNjb3JlLW1vdmluZy1hdmVyYWdlIiwiL3JlYWwtdGltZS9tYXJrZXQtcHJvcGhpdC1zZW50aW1lbnQtei1zY29yZSIsIi9yZWFsLXRpbWUvbWFya2V0LXByb3BoaXQtc2VudGltZW50IiwiL3JlYWwtdGltZS90d2VldC1idXp6IiwiL3JlYWwtdGltZS90d2VldC12b2x1bWUiLCIvcmVhbC10aW1lL3VzZXItc2VudGltZW50LWxhc3QtbWludXRlIiwiL3JlYWwtdGltZS91c2VyLXNlbnRpbWVudCJdLCJ0aWNrZXJzIjpbXSwic3RyZWFtaW5nX2FjY2VzcyI6ZmFsc2UsInJhdGVfbGltaXRfY291bnQiOjUzLCJyYXRlX2xpbWl0IjowLCJ0cmlhbCI6dHJ1ZSwiYWN0aXZlIjp0cnVlLCJncm91cCI6ImFkbWluIiwib2JqZWN0IjoidXNlciIsImlkIjoiNTNjZWI1ZWQ4NjgxOGExOTdiYThlYzIwIn0.BpcwlgZtjjt-eO9_9AD9nBrb_o-OyM7vw4PBZGowVLk"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 
@@ -394,14 +308,97 @@ Connection: keep-alive
 <p>The flow of communication with the Market Prophit websocket server is as follows:</p>
 
 <ol>
-<li>Retrieve a JWT using your secret API key (do not expose your secret API key)</li>
+<li>Retrieve a JWT using your secret API key (do not expose your secret API key, set up your own <code class="prettyprint">/jwt</code> route on your server and send a server-side request to our <code class="prettyprint">/jwt</code> route with your secret key &ndash; basically create a proxy route)</li>
 <li>Pass the JWT as part of the request query object while connecting to the Market Prophit websocket server as the param <code class="prettyprint">token</code>.</li>
 <li>Every (5) hours from when the JWT was generated, re-generate a new JWT since the previous expires</li>
 </ol>
 <h3 id='http-request'>HTTP Request</h1>
 <p><code class="prettyprint">POST https://open.marketprophit.com/jwt</code></p>
 
-          <h1 id='crowd-sentiment'>Crowd Sentiment</h1><h2 id='crowd-sentiment'>Crowd Sentiment</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/real-time/crowd-sentiment?ticker=AAPL"</span>
+          <h1 id='streaming-intraday-data'>Streaming Intraday Data</h1><h2 id='get-crowd-sentiment'>Get Crowd Sentiment</h1>
+<p>Stream of one minute records for all tickers with data (AVG CROWD SENTIMENT).</p>
+
+<table><thead>
+<tr>
+<th>Path</th>
+<th>Frequency</th>
+<th>Payload</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>crowd-sentiment</td>
+<td>every minute</td>
+<td><code class="prettyprint">ts</code>, <code class="prettyprint">ticker</code>, <code class="prettyprint">crowd_sentiment</code></td>
+</tr>
+</tbody></table>
+<h2 id='get-user-sentiment'>Get User Sentiment</h1>
+<p>Stream of consolidated one second records for all tickers with data (RAW USER SENTIMENT).</p>
+
+<table><thead>
+<tr>
+<th>Path</th>
+<th>Frequency</th>
+<th>Payload</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user-sentiment</td>
+<td>every second</td>
+<td><code class="prettyprint">ts</code>, <code class="prettyprint">user_id</code>, <code class="prettyprint">ticker</code>, <code class="prettyprint">sentiment</code>, <code class="prettyprint">user_score</code></td>
+</tr>
+</tbody></table>
+<h2 id='getmarketprophitsentiment'>GetMarketProphitSentiment</h1>
+<p>Stream of one second records for all tickers with data (MP SENTIMENT).</p>
+
+<table><thead>
+<tr>
+<th>Path</th>
+<th>Frequency</th>
+<th>Payload</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>market-prophit-sentiment</td>
+<td>every second</td>
+<td><code class="prettyprint">ts</code>, <code class="prettyprint">ticker</code>, <code class="prettyprint">mp_sentiment</code></td>
+</tr>
+</tbody></table>
+<h1 id='streaming-intraday-bundled-chart-data'>Streaming Intraday Bundled Chart Data</h1>
+<p>Pushes the complete set of user sentiment records for all tickers and users for the most recent full second of data.</p>
+<h2 id='getcrowdsentimentchartdata'>GetCrowdSentimentChartData</h1>
+<p>Stream of latest consolidated one minute records for all tickers with data.</p>
+
+<table><thead>
+<tr>
+<th>Path</th>
+<th>Frequency</th>
+<th>Payload</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>crowd-sentiment-chart-data</td>
+<td>every minute</td>
+<td><code class="prettyprint">ts</code>, <code class="prettyprint">ticker</code>, <code class="prettyprint">crowd_sentiment</code>, <code class="prettyprint">crowd_sentiment_moving_average</code>, <code class="prettyprint">crowd_sentiment_z_score</code>, <code class="prettyprint">crowd_sentiment_z_score_moving_avg</code>, <code class="prettyprint">volume</code>, <code class="prettyprint">buzz</code></td>
+</tr>
+</tbody></table>
+<h2 id='getmarketprophitsentimentchartdata'>GetMarketProphitSentimentChartData</h1>
+<p>Stream of latest consolidated one second records for all tickers with data.</p>
+
+<table><thead>
+<tr>
+<th>Path</th>
+<th>Frequency</th>
+<th>Payload</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>market-prophit-sentiment-chart-data</td>
+<td>every second</td>
+<td><code class="prettyprint">ts</code>, <code class="prettyprint">ticker</code>, <code class="prettyprint">mp_sentiment</code>, <code class="prettyprint">mp_sentiment_moving_average</code>, <code class="prettyprint">mp_sentiment_z_score</code>, <code class="prettyprint">mp_sentiment_z_score_moving_avg</code></td>
+</tr>
+</tbody></table>
+
+          <h1 id='crowd-sentiment'>Crowd Sentiment</h1><h2 id='crowd-sentiment'>Crowd Sentiment</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:"</span> <span class="s2">"https://open.marketprophit.com/real-time/crowd-sentiment?ticker=AAPL"</span>
 </pre>
 
 <blockquote>
@@ -410,10 +407,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 3491
-ETag: W/<span class="s2">"da3-3018583834"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A7FEVVP9eOsH095ZvW-JHvoh5NG9_amZx.XmPGmQpABexT8284ER4zyn4mxFiMdVIwSs%2FRNgZSVdc; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 21 Jun 2014 21:31:36 GMT; HttpOnly
-Date: Fri, 20 Jun 2014 21:31:36 GMT
+Content-Length: 825
+ETag: W/<span class="s2">"339-18025870"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AOiNvVIJJVKfIycMFtC75sk2xe2KFygKc.r7fw8GmmR3khxELHjwKOU35pT5OGhMjS7Gtoh%2B4MVCs; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 86.14622ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -424,19 +422,19 @@ Connection: keep-alive
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-20T20:33:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-12T09:30:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.4648223986509972</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0563975450790895"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-20T20:34:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-12T09:34:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1045909036267269</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2663009179498587"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-20T20:36:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-12T09:36:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0412393088152574</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0793594238824163"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -460,7 +458,7 @@ Connection: keep-alive
 <td>none</td>
 </tr>
 </tbody></table>
-<h2 id='historical-crowd-sentiment'>Historical Crowd Sentiment</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/crowd-sentiment?ticker=AAPL"</span>
+<h2 id='historical-crowd-sentiment'>Historical Crowd Sentiment</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:"</span> <span class="s2">"https://open.marketprophit.com/historical/crowd-sentiment?ticker=AAPL"</span>
 </pre>
 
 <blockquote>
@@ -469,10 +467,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 57461
-ETag: W/<span class="s2">"e075-3925032003"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AHziRTmgtP7VUMgxK_kfigAZcHFAJZEKT.fsvKBTSQd%2BaAJ1n3oJY5qfbccNjs0aYib06THJpHlME; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 21 Jun 2014 21:31:37 GMT; HttpOnly
-Date: Fri, 20 Jun 2014 21:31:37 GMT
+Content-Length: 45391
+ETag: W/<span class="s2">"b14f-3565202276"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AbAqo_PAeOplVQvidbXr2wYjeQP7uli9N.go%2BK6LKKtsqq%2Bez0jxwDt56YUsfSRFmxlZRtKOK4Zos; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 107.08076ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -483,19 +482,19 @@ Connection: keep-alive
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-19T08:02:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T08:03:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1169283165310861</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.6236535129954819"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-19T08:05:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T08:30:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.2735787703082803</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0058248097104295"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-19T08:11:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T08:36:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2626316532746197</span><span class="w">
+    </span><span class="s2">"average_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.6328037423764221"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -531,7 +530,7 @@ Connection: keep-alive
 <td>now</td>
 </tr>
 </tbody></table>
-<h2 id='daily-crowd-sentiment'>Daily Crowd Sentiment</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_fXgDgry814qwakL41KDZin47:"</span> <span class="s2">"https://open.marketprophit.com/historical/daily-crowd-sentiment?ticker=AAPL"</span>
+<h2 id='daily-crowd-sentiment'>Daily Crowd Sentiment</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:"</span> <span class="s2">"https://open.marketprophit.com/historical/daily-crowd-sentiment?ticker=AAPL"</span>
 </pre>
 
 <blockquote>
@@ -542,8 +541,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AweUGt6RGPMXl3RkLiPQ0UWsiCdyg3ndZ.kXqbpTFfey7vQcn8FoRYO3WbeGGnbKXva2g70E8NHto; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 21 Jun 2014 21:31:36 GMT; HttpOnly
-Date: Fri, 20 Jun 2014 21:31:36 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AkDq_FnPGnWJpaRs-Bi1OTcGkrmr8TYi7.2Z6Z555LFrQEMG%2FK5Ud%2BkxdiUQRY9JYoXyOvDAvfFfA; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 132.11813ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -596,10 +596,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 4692
-ETag: W/<span class="s2">"1254-173775143"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AUiUJXYFaYM-PLBL6hpqhcVwT6bZwhirs.93p6%2Byec%2Fvr4v7w5zd49H5vvPC32WTFtqWvYJ%2F1V4Wk; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:01 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:01 GMT
+Content-Length: 709
+ETag: W/<span class="s2">"2c5-3544042483"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AC-Lkhru08MY9dnf1tq1-Ldf0bQ0XOdAn.3VRAQl69WxEGpRQ%2BwSBsqazvH5S7upquAWLZ%2BybDEJg; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:54 GMT; HttpOnly
+X-Response-Time: 85.02410ms
+Date: Tue, 12 Aug 2014 10:07:54 GMT
 Connection: keep-alive
 
 
@@ -610,19 +611,19 @@ Connection: keep-alive
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:58:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-12T09:34:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0227069672439365"</span><span class="w">
+    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0563975450790895"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:59:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-12T09:36:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0322101906932733"</span><span class="w">
+    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1049516864353846"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T16:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-12T09:40:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0200766331601287"</span><span class="w">
+    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0435146496627843"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -655,10 +656,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 105756
-ETag: W/<span class="s2">"19d1c-2555125685"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3Ay3Q9SvJEQ4QfKp-a3JFDz8QcaLTAh76m.sagTLEEfkipoBEY%2Bczk7Ero4opRvx80mLpLASS5PGwI; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+Content-Length: 43548
+ETag: W/<span class="s2">"aa1c-504963124"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ASVA7grEVBWxfaxZ_2i8xPwRqXuCsz3OF.vCfpM2u63Gsm2aXcipIvqijoKpNbF1xdd1Bi3gtVoAw; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 1590.94514ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 
@@ -669,19 +671,19 @@ Connection: keep-alive
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T08:03:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0399686846889795"</span><span class="w">
+    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1081331944208557"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:01:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T08:30:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0310668258857226"</span><span class="w">
+    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.6236535129954819"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:03:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T08:36:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0275633260416567"</span><span class="w">
+    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0058248097104295"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -728,8 +730,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ArpELUOWOZmnhQqDGjEIc8_FEMxaECk53.55d%2F5NBcsdpS6za8r10yEN88rdZzm2dVdyVH57Iyn1k; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:57:57 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:57:57 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3Aioz7cwfIx_eT6D8eqcGJsLBXyvdjCc9A.DpxUf5WnQHNBNeZcqhd%2FyKS%2FLJCC2ihAPwI%2FD3LHow4; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 1538.80559ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 
@@ -782,10 +785,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 13072
-ETag: W/<span class="s2">"3310-4005417567"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3Ad80cZevZoTqYP4U_GDOa3yxtdIvWizKI.PLezJyRb1sY80GgpDA%2FbhacHgcYUMBJGaMIBjOSy5Yc; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:57:59 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:57:59 GMT
+Content-Length: 697
+ETag: W/<span class="s2">"2b9-2599664480"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A_7OitIyoqHRi2pNytBrlYpcPtcToBa4f.z76SHC4r2wb0zi6xlBnezPgyTUov4oX%2F8jwYMDD0RZQ; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 1535.40598ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 
@@ -796,19 +800,19 @@ Connection: keep-alive
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:58:28.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-12T09:51:42.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.5416426385944375"</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.3259066607095499"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:58:39.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-12T09:51:43.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.5414254888680098"</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.3923478478567627"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:58:50.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-12T10:06:16.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.4866932872717223"</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1891888776233052"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -841,10 +845,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 235268
-ETag: W/<span class="s2">"39704-2686359017"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ABXrks-1n5kCD-Abl7a1AVMUrerjAFdmV.dvg59VGriVODG4Ibr3HefVTDZNvnDSM%2BG50KQ6Q0Cvc; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:03 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:03 GMT
+Content-Length: 41804
+ETag: W/<span class="s2">"a34c-1693176939"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AxdtEuhcJvdzrJ5hrYy27hFvvp1-wsI_P.rfyRhDcU98u4hcteThl85mKlevgS4OQllnhDxzO2lSI; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:56 GMT; HttpOnly
+X-Response-Time: 875.09916ms
+Date: Tue, 12 Aug 2014 10:07:56 GMT
 Connection: keep-alive
 
 
@@ -855,19 +860,19 @@ Connection: keep-alive
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:00:42.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T09:37:03.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0282828449721973"</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0517360936839325"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:01:19.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T09:37:04.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0367255209307690"</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0517360936839325"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:03:58.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T09:40:02.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1427331886560877"</span><span class="w">
+    </span><span class="s2">"signal_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0453071618228927"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -914,8 +919,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3Ak1-_pc0Zsr5WYB8ZrFkXJobxxu0CNwPj.2hLgedBF5wr9oiV%2Fr%2FSpXVCyAl1SR7PbjIkdbXbJVu4; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:03 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:03 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AadoJrz2Jtc7pyFXFW1i7zh2GF4sM8P7w.KK7dcVICla5LJInhdCISMRnfdIAO5Iev9pEoq1x%2F%2F90; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 124.17597ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -968,10 +974,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 13387
-ETag: W/<span class="s2">"344b-2253253502"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AHYqekU6s1h6gGFj_vZ0P2r7cYv8KpZYD.RuwvxTLIExlAZKHPDKc05ZG9i65WuRStnIzoG%2BzJj70; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+Content-Length: 624
+ETag: W/<span class="s2">"270-1431827967"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A3bRn_OtU6ejh3p4XCBiEdsV84_NfBwcr.M%2FRoNMuS3DKHpUpSo5%2B1vMbSWocQhhw%2FpIV3wo2f3no; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 87.97006ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -982,19 +989,19 @@ Connection: keep-alive
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:58:28.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-12T09:51:43.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0062994305048289"</span><span class="w">
+    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.3259066607095499"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:58:39.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-12T10:06:16.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0023784965367759"</span><span class="w">
+    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.3591272542831563"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:58:50.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-12T10:06:32.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0116724101976593"</span><span class="w">
+    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.3024811287298726"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -1027,10 +1034,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 241759
-ETag: W/<span class="s2">"3b05f-520284033"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ASG9bOvnwBJytLNJs-40i9qLX_R9ErizI.m2IoZC8FFfzPgRlU3Zgq1VX97%2Fzied8oPo1SP7XEKZA; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+Content-Length: 42226
+ETag: W/<span class="s2">"a4f2-3832764985"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AX0A0PEhwCChSaMZe1byo08zPlCm4wjze.CPqpHtxoJ5sw20rMNrct95Sr6o6uBXxbHgo2WV7g7F8; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 150.63365ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -1041,19 +1049,19 @@ Connection: keep-alive
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:00:42.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T09:37:04.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0400040042738742"</span><span class="w">
+    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0517360936839325"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:01:19.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T09:40:02.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0393871011527333"</span><span class="w">
+    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0517360936839325"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:03:58.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T09:51:08.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0318148534311287"</span><span class="w">
+    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0495931163969192"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -1100,8 +1108,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AlrVo4OWXZiXGZsB5k5rEOG2tP73rCA4P.1EB7WoCgzaqM75140BhO4t5orGD7l%2F1%2F%2FzVb7svCwF0; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:00 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:00 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AK6Wi6Of-PdYLKU88Cpr1BKbi3fj2y1ye.mDwRN3hkR0VKK8%2FdnZIXoucXBSeSqOBQ5KgcGmVUxb8; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 1482.92940ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 
@@ -1154,10 +1163,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 4318
-ETag: W/<span class="s2">"10de-2795663840"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AizKPbuTaK-RtVpakdcYrBuY_KEOzCQNX.BsJfhQgeQI%2FfP8ySnjvF8WPdp3GuL9x6LC6k5l%2BcQNQ; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:06 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:06 GMT
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AYndAKjnEu_7w42UIHcM8sqmZvOKFbIHp.3f1Rfos8E4ar7Fo6nKnXhXsYvOA7MBFVuJjRRK4CVis; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:54 GMT; HttpOnly
+X-Response-Time: 98.85232ms
+Date: Tue, 12 Aug 2014 10:07:54 GMT
 Connection: keep-alive
 
 
@@ -1166,23 +1176,7 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
 </blockquote>
-<pre class="highlight json"><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:58:00.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0381929759844908"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:59:00.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.7620999821050081"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T16:00:00.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.4018408493151008"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json"><span class="p">[]</span><span class="w">
 </span></pre>
 
 <p>Realtime intraday data</p>
@@ -1213,10 +1207,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 97133
-ETag: W/<span class="s2">"17b6d-2158680327"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AD0GtUDdpFLX_Dwk8zbzbxPPXjqVpDiPs.jpQPIAeU7X7J4DE%2FuXTWYBI3YU1WWfV4aZ%2BG2gR1FZA; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:57:56 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:57:56 GMT
+Content-Length: 28457
+ETag: W/<span class="s2">"6f29-3131687514"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AKfLYfLMcTTBJCgpbseba16_ltfG_kvP4.cmJIsyFNPHobhu0CQGWXEIOkp2Z8UiOf%2BF82zKppjMs; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:54 GMT; HttpOnly
+X-Response-Time: 132.70490ms
+Date: Tue, 12 Aug 2014 10:07:54 GMT
 Connection: keep-alive
 
 
@@ -1227,19 +1222,19 @@ Connection: keep-alive
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T11:42:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2331002710244123"</span><span class="w">
+    </span><span class="s2">"z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.1558816701940617"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:01:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T11:46:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2890198739388908"</span><span class="w">
+    </span><span class="s2">"z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.7048537204762636"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:03:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T11:48:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1.3892588290627323"</span><span class="w">
+    </span><span class="s2">"z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.4562986581253173"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -1286,8 +1281,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AIYwRmRgoiI0z_AaX9wJWPvo-fh0EwpQt.CFaUoTmrQfA6YOKp3Ftvy308x9qNG8wGV8RicvG1Llk; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:57:58 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:57:58 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ATJLU3HoMvJGRynn8-I_YWgWar6FoXQSj.e2Z4z053fqMi8YKCL72un3k%2BgKIJni8nMxpq%2Bhq9tPI; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 83.30460ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -1340,10 +1336,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 4779
-ETag: W/<span class="s2">"12ab-761816939"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AU_ijabAA-YzIBnNhdhKwmkmnfzzwMeVK.H%2FzyUYYRlN%2BibLp2%2Fcd1mMLP9EyvST5ixPJsg1OHXYY; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:57:58 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:57:58 GMT
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A67TBqm0wkHNiCDbte4XYoeVdBKXG2WbL.tVqHEE0X7ixJIvi3FpTdlzXCe2fmpPik4hbfPYcA3eA; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 99.74597ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -1352,23 +1349,7 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
 </blockquote>
-<pre class="highlight json"><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:59:00.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0422220711580377"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T16:00:00.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0269749508619967"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T16:01:00.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0793082590671081"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json"><span class="p">[]</span><span class="w">
 </span></pre>
 
 <p>Realtime intraday data</p>
@@ -1399,10 +1380,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 105490
-ETag: W/<span class="s2">"19c12-3351696619"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AjvWvZ8PVDH2vs2zXHmzWIObh3dXyoWmk.PhLuUBQN09BK77HA6GKYttCNPJApokR5qBaWJLlfRK4; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+Content-Length: 30507
+ETag: W/<span class="s2">"772b-789534985"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AkthkmF6IdZyuOyQRRYl5M-ELprmsAJI5.h4EgP5D0cmAP24wdKZJMn6bPJ4q2iNtSXHgP3EBQc6Y; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 606.78549ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -1413,19 +1395,19 @@ Connection: keep-alive
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T11:46:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0636228582562541"</span><span class="w">
+    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.1558816701940617"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:01:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T11:48:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0171353596011604"</span><span class="w">
+    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2255139748588991"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:03:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T11:59:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0043212447094358"</span><span class="w">
+    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.3024422026143718"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -1472,8 +1454,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AebyEud-p2zaRMXKuMmGaqaQrZolvqD50.t2g8XZ1vMGPlHveUU7tCBiFsT0ZcLQhL77RIh86r1IM; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:00 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:00 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ArlQYAA7V79RBxcPS8WeOgxgz8CK7oSAi.VioO8Bcm36qWO4Vs4lWdFmILbKnWrhJhM9%2FN28HudgM; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:54 GMT; HttpOnly
+X-Response-Time: 102.81947ms
+Date: Tue, 12 Aug 2014 10:07:54 GMT
 Connection: keep-alive
 
 
@@ -1526,10 +1509,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 12286
-ETag: W/<span class="s2">"2ffe-3207098607"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AnomKi-FYi6-ZfV2BnN0M52bc3btX9Yfs.olmxecCwCRlQTVAovbLG0v9aLWWuuZQ8FPASZDm8MQs; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:57:58 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:57:58 GMT
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AZBrLgK_kDUBYb6ZEPKzovKYg_ppqjSmB.35d4doyYd9Mp1ffwuQpkON1EJ3RIHrx59EBQn%2Fb48bw; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:56 GMT; HttpOnly
+X-Response-Time: 793.06801ms
+Date: Tue, 12 Aug 2014 10:07:56 GMT
 Connection: keep-alive
 
 
@@ -1538,23 +1522,7 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
 </blockquote>
-<pre class="highlight json"><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:58:28.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-2.3085548672937373"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:58:39.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-2.1740254714159781"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:58:50.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1.8583012888056751"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json"><span class="p">[]</span><span class="w">
 </span></pre>
 
 <p>Realtime intraday data</p>
@@ -1585,10 +1553,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 220017
-ETag: W/<span class="s2">"35b71-136852392"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AJyMB8PBtyMByzo524elpjC3EvQ_2pME7.ogctEdWYMME3tU1g1bIvrCitGrVwjeJf6yB%2FZjUXJGs; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:57:58 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:57:58 GMT
+Content-Length: 31726
+ETag: W/<span class="s2">"7bee-716870568"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AxksIcVvIPCU6uAl1guzuYbphyL0X7byI.tembp6y7yo78GL2xR2cV%2FhUzpI6JqvXbCv6LQLBsTX4; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 662.30276ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -1599,19 +1568,19 @@ Connection: keep-alive
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:00:42.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T09:51:36.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2322404846796725"</span><span class="w">
+    </span><span class="s2">"z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.4469812129044528"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:01:19.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T09:53:50.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1.5472092236959840"</span><span class="w">
+    </span><span class="s2">"z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.5684189810952880"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:03:58.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T09:54:05.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.2519885357574521"</span><span class="w">
+    </span><span class="s2">"z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.6457769166012428"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -1658,8 +1627,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A5Tc_jeOMFGfO3jHiNzzaslRnC8_7bUq1.7PKv16v48iJrhJEPkrkbVlk%2BaGQTeiQxG0i%2Bnw47WVU; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:57:58 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:57:58 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AqGIjq3UasGmpkdbZKSKTaJ3QT1NZr0OW.JkiDY7ULMP5NxzMYwrHrVN7Wj4kCZCi90DfOWuJ%2BMZI; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 90.25026ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -1712,10 +1682,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 13350
-ETag: W/<span class="s2">"3426-2045442396"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AM7PlUUMDnCnrAP281bj_eqq6hjcs9LQQ.iHyFdijpL3JnD%2Bx%2B6DFG1qg8SW8ttoDX%2FpLfKIlHA%2F8; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AKYW1J2ukfHFnbi9RLxvl4oniZxLsoLUo.jS3wwnG3bwBCHrqOOQ8ENSRoTYbvxDKLpuF18qkmeYY; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 110.61075ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -1724,23 +1695,7 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
 </blockquote>
-<pre class="highlight json"><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:58:28.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2751059380322919"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:58:39.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2343235956258067"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:58:50.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1928003358492243"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json"><span class="p">[]</span><span class="w">
 </span></pre>
 
 <p>Realtime intraday data</p>
@@ -1771,10 +1726,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 238792
-ETag: W/<span class="s2">"3a4c8-656450178"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ASAVeyAs8IpOIkfogESY8RB7u2a5pzsQu.DDC1zPBikDsn8F9I2bYSQQL6r62dWx%2FlgOuWt7nFEis; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+Content-Length: 34036
+ETag: W/<span class="s2">"84f4-2365262930"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AdZjY8LqYVfQ0xPqGseEn-V6BDyF4-WCB.o%2BN79xXTGaP3JIDWpHvKDuierzKmXTv7Cyo1HFbK6bs; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 149.99936ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -1785,19 +1741,19 @@ Connection: keep-alive
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:00:42.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T09:53:50.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.7318982464589436"</span><span class="w">
+    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.4469812129044528"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:01:19.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T09:54:05.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.6811541027148059"</span><span class="w">
+    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.5077000969998704"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:03:58.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T10:06:37.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.4869880239812134"</span><span class="w">
+    </span><span class="s2">"moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.5537257035336612"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -1844,8 +1800,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AnL9BeBTFaRIMs9B75D5MLX-7qea6RneM.OwcJTYaHKQNmp%2B2OvbmKXLVBnXGn%2B8%2BHaRJdPFlQpho; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A9YOmjx1Ct83MyBwYEaEiCDSo-IzC8p40.Ifdgzhhr2JjjN2fftJUhm3vHR4GtwMtk6wdy08I7KUM; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 106.19468ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -1898,10 +1855,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 3341
-ETag: W/<span class="s2">"d0d-2378665586"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ASjxKuoTE1gLESFty6bdacBAxWkl6BPuF.qLdHBp%2FHP5wwkT4bpyU%2Fcp2RCDw%2FsDx8Xusl%2BOsnuEs; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:03 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:03 GMT
+Content-Length: 569
+ETag: W/<span class="s2">"239-810754165"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AOtUevvv8dMuWXsdxeX4ZHYvcexG08c1t.vUSVohSqa7Qlzm8M%2FqTqJQDns5uTCflCbtLi0eR22v0; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 165.44277ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -1912,17 +1870,17 @@ Connection: keep-alive
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:59:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-12T09:30:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="w">
+    </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T16:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-12T09:34:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="w">
+    </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T16:01:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-12T09:36:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -1957,10 +1915,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 75228
-ETag: W/<span class="s2">"125dc-2403796162"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AS0iH9HbvvyY1-WCEVXFqlQWBYCdYZQvF.LPfsGo%2Bizvg4l%2Buljx6PHXo1tWzQDPG3mC%2FnSCWhUIc; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:57:59 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:57:59 GMT
+Content-Length: 31315
+ETag: W/<span class="s2">"7a53-770085037"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AaK0Zw-4g6HtRmfE8lVVYx601MiCtwJ5w.R7gYhgMyJg6xAikBrplpysJqWCf3fKhpDzAxX2KNgG8; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:56 GMT; HttpOnly
+X-Response-Time: 1004.13442ms
+Date: Tue, 12 Aug 2014 10:07:56 GMT
 Connection: keep-alive
 
 
@@ -1971,17 +1930,17 @@ Connection: keep-alive
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:00:00.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:01:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T08:03:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:03:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T08:30:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T08:36:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -2030,8 +1989,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ABP6hzZdQ6HQkTtMZkqk0w4nbZeef2CaW.AgUDG8JMjDBNGt26FtR2lVRJF8EI2LbLWEwFkIZaySk; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:57:59 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:57:59 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AtOYSDAiDl4acgnQtcLpgY_GMDflxQMrG.kQR5EUf2aojVXstGMwK8cduIMFyMVReKT%2F%2BR0vkFhYo; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 1365.85515ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 
@@ -2084,10 +2044,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 4135
-ETag: W/<span class="s2">"1027-3517710615"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A_6IGHKAD7jpG26T59e8p-p-riGTtlGcQ.Jey0tBIGZd6jyCDbH1h0f%2B2PKJRLLqyY2qsKC%2FZozTM; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:03 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:03 GMT
+Content-Length: 703
+ETag: W/<span class="s2">"2bf-2298492888"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AEv93cSv0MyF8IRcdjlRatjU_NxUdcfZK.LAKLzyn8eLy6ZaPFlqkvNwsQmtFngD41zIQtvODFISw; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 134.20821ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -2098,19 +2059,19 @@ Connection: keep-alive
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T15:59:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-12T09:30:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.1707491082045078"</span><span class="w">
+    </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5880859705533946"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T16:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-12T09:34:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.9512485136741797"</span><span class="w">
+    </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5880859705533946"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T16:01:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-12T09:36:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.3902497027348360"</span><span class="w">
+    </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5880859705533946"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -2143,10 +2104,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 93133
-ETag: W/<span class="s2">"16bcd-804391441"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ACoXNso3wkgCw4nE9GlZLuc6AbUVORLgL.M3jYkNJoGWRdvSZY%2Bzjh60zqofOAaehkPK6bDrykGmk; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:03 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:03 GMT
+Content-Length: 38767
+ETag: W/<span class="s2">"976f-1213310575"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ApLZIE2iAR5144EO97INMrwxQYCOJXGOe.OsELv%2BhUBltAH6QtRgFpM4aRTsjMhgpS1nxCoS97qVM; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:56 GMT; HttpOnly
+X-Response-Time: 1314.81389ms
+Date: Tue, 12 Aug 2014 10:07:56 GMT
 Connection: keep-alive
 
 
@@ -2157,19 +2119,19 @@ Connection: keep-alive
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T08:03:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.7838606030647600"</span><span class="w">
+    </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5936491764306357"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:01:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T08:30:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.3919303015323800"</span><span class="w">
+    </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5936491764306357"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T08:03:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-11T08:36:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.3919303015323800"</span><span class="w">
+    </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5936491764306357"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -2216,8 +2178,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ASjM6cQbMYX9Mbo5fics215TSOJ4mQPvy.UTwsgYbpLyelPkC0IVKG9RScowWI6RxFN0FLE8RxNFs; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AQfatJaRJIumrelfOS6W3__7wFHLKkuY2.WS3EuM5%2B60M102ir432kMEcRUVaX1aGMyivKhyy0XNQ; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 1335.46904ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 
@@ -2270,10 +2233,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 125
-ETag: W/<span class="s2">"7d-225856874"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A27QJq2QhwHHAbUYYjW7cnHMxySui9Rd5.33v4UXGIE3NTcGymQtau4BIJb86GS%2BXg0coBC%2BouM%2F8; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:05 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:05 GMT
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AFrZFaPQEkMDpMWEmbqLh-ALmzRLv0NE5.bec%2F2d2xe3df60BqBTBqLucIDX7mHQxyR62dePIB2ZA; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 1517.17479ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 
@@ -2282,15 +2246,7 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
 </blockquote>
-<pre class="highlight json"><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-25T20:57:46.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2724313540"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BRYN"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.6202991639475105"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json"><span class="p">[]</span><span class="w">
 </span></pre>
 
 <p>Pushes the complete set of user sentiment records for all tickers and users for the most recent full second of data.</p>
@@ -2302,13 +2258,14 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response headers such as:</p>
 </blockquote>
-<pre class="highlight shell">HTTP/1.1 500 Internal Server Error
+<pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
-Content-Type: text/plain; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 39
-ETag: W/<span class="s2">"27-1680212420"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A6sMPd48v5jbqVJO9lsOVlUk6EdQMxlJk.no%2BZ6gKuTom94pSUM7dr7%2BJNrNzCTL53ECNGx07wp8M; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AgAvDgBv34-Oanqjl4-dqsmyPl_85k2uh.wFGya%2BD%2Futo3cRPbjvOZH%2Bm9GcjA4Is8k14KdvJo1LA; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 1553.17598ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 
@@ -2317,7 +2274,7 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
 </blockquote>
-<pre class="highlight json"><span class="err">Unknown</span><span class="w"> </span><span class="err">column</span><span class="w"> </span><span class="err">'AAPL'</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">'where</span><span class="w"> </span><span class="err">clause'</span><span class="w">
+<pre class="highlight json"><span class="p">[]</span><span class="w">
 </span></pre>
 
 <p>Returns the complete set of user sentiment records for all tickers and users for the most recent full minute of data.</p>
@@ -2345,13 +2302,14 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response headers such as:</p>
 </blockquote>
-<pre class="highlight shell">HTTP/1.1 500 Internal Server Error
+<pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
-Content-Type: text/plain; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 87
-ETag: W/<span class="s2">"57-1119346246"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AMJFTcR29Vh9O5KvGuO586Co2FhFLT3-9.RHeCf1ViJ8JSKQyPS9Pfp0deSbiOelhpI9vgpoKFw7Q; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AsfLaWb7Dky4Vacr-JarG4KsTmQB2C6Gj.t28EvyEc2OFp7o%2BMo0D4h36V2Qp1UlsacLBpSh1Y6VY; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 1706.89541ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 
@@ -2360,7 +2318,7 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
 </blockquote>
-<pre class="highlight json"><span class="err">execute</span><span class="w"> </span><span class="err">command</span><span class="w"> </span><span class="err">denied</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">'nick'@'%'</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">routine</span><span class="w"> </span><span class="err">'mp_prod.GetTwitterUsernameForId'</span><span class="w">
+<pre class="highlight json"><span class="p">[]</span><span class="w">
 </span></pre>
 
 <p>Returns a complete range of historical intraday records for a given user based on a date range (start date, end date).</p>
@@ -2409,10 +2367,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 2
-ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A3NZzVauDfkzmUsCtezRRecHlwoXW1Etq.oWxE4AagJxGhK9uy8i1gy3A%2F0w7VUvDhqbQWZrmQXok; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+Content-Length: 5024206
+ETag: W/<span class="s2">"4ca9ce-2098979112"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A3DNzydHYb6TCQeSdLniS2YNKDtBtlhAh.clNR6yhHxXrCl%2FoUd%2FMOIqd8Lug1l%2BpQEbjBBKnH0nE; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:08:11 GMT; HttpOnly
+X-Response-Time: 16237.79669ms
+Date: Tue, 12 Aug 2014 10:08:11 GMT
 Connection: keep-alive
 
 
@@ -2423,22 +2382,22 @@ Connection: keep-alive
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-24T04:00:02.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2478003602"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-11T04:01:15.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2485561232"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5878476338280815"</span><span class="w">
+    </span><span class="s2">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.4564643833340774"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-24T04:08:25.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25709609"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-11T04:01:43.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2541107853"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.4435416652294616"</span><span class="w">
+    </span><span class="s2">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.3055079719965658"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-06-24T04:08:30.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"404613701"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-11T04:02:50.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2484874556"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1060097344203914"</span><span class="w">
+    </span><span class="s2">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1006008721400263"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -2492,8 +2451,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AVj-KP7rXgJpLuB0HeRciI3EiEYuQpDWh.PKoQ0ShbetnA3lbaSa4uwj%2FckIkchjHt%2BlK0zabcwBA; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AsnXbgidLdbrvicm0U-ErT9iC-qJqFyep.d4q7enUeFx94XTU%2Fcx4JK31T8ys9oymBHUT0j6z2UF0; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 113.47492ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -2517,10 +2477,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 505064
-ETag: W/<span class="s2">"7b4e8-1580733910"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AbffoecLgl_9RwSg-sbWfrs2Hwahz2v6o.2H7B0xFVokEmahtD4AhjBJsmhFJa%2F7LoPP6flbqs%2FYg; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:05 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+Content-Length: 551583
+ETag: W/<span class="s2">"86a9f-4104617079"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A4wZEzI5QuDiSiyj5CUhxIMmNTtEu7mIq.ax66nOttREv9BHKTD89fidbFwHsR4oXQr49AM1WM0lM; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 2380.21346ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 
@@ -2531,22 +2492,22 @@ Connection: keep-alive
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T04:00:00.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2663617496"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0351003602575661"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2951"</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-08T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"118840585"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2377401927536272"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4585"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T04:00:00.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2663616672"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0723533513177047"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1679"</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-08T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2728758695"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0680631214237277"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3344"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-07-24T04:00:00.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2659768237"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0115342911853007"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2678"</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-08T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2728774330"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.3391943186620021"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4962"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -2560,13 +2521,14 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response headers such as:</p>
 </blockquote>
-<pre class="highlight shell">HTTP/1.1 500 Internal Server Error
+<pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
-Content-Type: text/plain; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 87
-ETag: W/<span class="s2">"57-1119346246"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AurG3jcmQsUzIRdl0W-tUWj4mWsVuG5ye.9TBBvnZmetrnYQFkhUj6vbjxlzyhXUwRk7mbxUaFwpw; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A6zX2Jus5gEiWKdmitsAoAcqnl3ooy-aZ.cthRnJgNBT%2BTI6ymmvfziGLeTjRgEqM4C%2BA%2Fzf68Zug; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 2089.24547ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 
@@ -2575,7 +2537,7 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
 </blockquote>
-<pre class="highlight json"><span class="err">execute</span><span class="w"> </span><span class="err">command</span><span class="w"> </span><span class="err">denied</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">'nick'@'%'</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">routine</span><span class="w"> </span><span class="err">'mp_prod.GetTwitterUsernameForId'</span><span class="w">
+<pre class="highlight json"><span class="p">[]</span><span class="w">
 </span></pre>
 
 <p>Returns user scores for a given range of business dates and user id.</p>
@@ -2626,8 +2588,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AxFfpGEg-G_dqnGkCNxizvkscdCwCVfn5.yGIkbhw69C6YVjFsnkhhlCHsv0RtrN0b2ZOIGnrNSJU; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:05 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:05 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AVHcA7HdWxHRXSBrMDDc_h_qMoMIIJaR2.uWq0X2MVz%2BoIxDTaQZL%2F03Rku29eQku5c0b3pL2QCwU; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 186.79376ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -2676,13 +2639,14 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response headers such as:</p>
 </blockquote>
-<pre class="highlight shell">HTTP/1.1 500 Internal Server Error
+<pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
-Content-Type: text/plain; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 87
-ETag: W/<span class="s2">"57-1119346246"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AAtoY3jgzvBHzpHJOYKEO1kgZLtSSURed.0C2nXJTqFp6zM9RxoxoBYv9F%2BDVGYQV5fHBrAKP2ai0; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A0rVGBPGl4m8zwQLDA571IOrOuYaFXbCb.Xrtv0fLjUW3eLrqbFDdYGjN103hGLFCKE9a9a08Hv5c; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:59 GMT; HttpOnly
+X-Response-Time: 4016.55462ms
+Date: Tue, 12 Aug 2014 10:07:59 GMT
 Connection: keep-alive
 
 
@@ -2691,7 +2655,7 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
 </blockquote>
-<pre class="highlight json"><span class="err">execute</span><span class="w"> </span><span class="err">command</span><span class="w"> </span><span class="err">denied</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">'nick'@'%'</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">routine</span><span class="w"> </span><span class="err">'mp_prod.GetTwitterUsernameForId'</span><span class="w">
+<pre class="highlight json"><span class="p">[]</span><span class="w">
 </span></pre>
 
 <p>Ticker specific user score data for range of given business dates for a given user id.</p>
@@ -2748,8 +2712,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AuVFD6IAswjUqoZVxJMJojYR72x_xDy7M.8TQ1Vq9aZWR%2FHITBHmESxpxFguTHWif8GNhBXNfTvMI; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3Av0pEpRbDDoZ6jEdOUfMt-YaQ5YzpyOf9.NygeyJURSYCJbDb6OseQ%2BN9GQOhlN3GNIC%2By5VTsI2A; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 170.74480ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -2815,8 +2780,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ADT8-pqcAdS5tIRpsGDbCnXdMUU39aNdT.bUBOpq3sTHujF4Y2M5oiP0ToWr8gGJEQ9MR5BkNAMhs; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AbUxsX8YQ-303-Jo50501MHatFzDGaCVw.OtAxzpSVOnWnKIHyBJ7df3h5TViqUQ%2BxxIafGQxaQtg; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 216.29281ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -2865,13 +2831,14 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response headers such as:</p>
 </blockquote>
-<pre class="highlight shell">HTTP/1.1 500 Internal Server Error
+<pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
-Content-Type: text/plain; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 87
-ETag: W/<span class="s2">"57-1119346246"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A-2bnwv6CV3HEQgTB2OKqpPFBQ1mLQtb8.9y%2BB48Zc4ea10U8V2IZ7Vw2ebH7y5P9TMpeAaSASFGU; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:05 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:05 GMT
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AeHOvlfIgX2ILhH5p4lrcCf_XLPDia3nh.1Y%2BG7BJeE7X2s1fyzhuUs4nY8pIg2XCMjC4qZfByYVQ; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:08:02 GMT; HttpOnly
+X-Response-Time: 6987.06872ms
+Date: Tue, 12 Aug 2014 10:08:02 GMT
 Connection: keep-alive
 
 
@@ -2880,7 +2847,7 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
 </blockquote>
-<pre class="highlight json"><span class="err">execute</span><span class="w"> </span><span class="err">command</span><span class="w"> </span><span class="err">denied</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">'nick'@'%'</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">routine</span><span class="w"> </span><span class="err">'mp_prod.GetTwitterUsernameForId'</span><span class="w">
+<pre class="highlight json"><span class="p">[]</span><span class="w">
 </span></pre>
 
 <p>Returns sector specific user scores for a given range of business dates for a given user id.</p>
@@ -2937,8 +2904,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AfWnyVRy6LZT9nLJaFJtO6hTHoZdrJ4Jg.3oFb1AfXl8GCMtWVA0HAndvrhsRluGqDCdqrSR0KCaQ; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:05 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:05 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A09w-vc5nBXuhvNPSt8gtmNOkJx_Ec14I.X6gA1fiJEdF4EHLI6zB8Uw14ABf1Eov7Ta5ijBOdy9E; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 1661.85562ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 
@@ -3005,8 +2973,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AanTYLv-n6rFL7mUWTCRxU_fcoE-jgUXg.03rgY6v1aGZg12kxmB89fjTu6SnW%2F1ooC2xjGCRmB94; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AK6I4mzIwywejtaoE4-bsFwEk_CjHeR55.pofeatSmSlc5QpX7VWYp1oaHAoz56G%2FmQYLKSPmJ9SE; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:55 GMT; HttpOnly
+X-Response-Time: 230.23019ms
+Date: Tue, 12 Aug 2014 10:07:55 GMT
 Connection: keep-alive
 
 
@@ -3055,13 +3024,14 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response headers such as:</p>
 </blockquote>
-<pre class="highlight shell">HTTP/1.1 500 Internal Server Error
+<pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
-Content-Type: text/plain; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 87
-ETag: W/<span class="s2">"57-1119346246"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AzNqLX-ee7aZM_SHWL-6hk4cR5MYasxcA.XvSdt8rsFkwuDB6D87Iue2QXkdz9Foymv%2BKdENvS9Hw; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AY4KLgFGlFjDuxj9zg4azvAHFgDUsQpxy.ATgcs1MNBOMvRSwzAApBDHTk2WSmNfrGli847tl%2F55w; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:09:25 GMT; HttpOnly
+X-Response-Time: 89601.34970ms
+Date: Tue, 12 Aug 2014 10:09:25 GMT
 Connection: keep-alive
 
 
@@ -3070,7 +3040,7 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
 </blockquote>
-<pre class="highlight json"><span class="err">execute</span><span class="w"> </span><span class="err">command</span><span class="w"> </span><span class="err">denied</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">'nick'@'%'</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">routine</span><span class="w"> </span><span class="err">'mp_prod.GetTwitterUsernameForId'</span><span class="w">
+<pre class="highlight json"><span class="p">[]</span><span class="w">
 </span></pre>
 
 <p>Ticker specific user returns data for range of given business dates for a given user id.</p>
@@ -3127,8 +3097,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AVxpE13IdKSsf2rAoqJw6VxBWRld0Evi3.xPgqKMEmXJPkZktpMhmLofi6Fg2mrm1Ei5dIQr9RkHY; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:05 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:05 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ABdHbfAURvO91nVHMpf_mvMDgumRg1J7b.8GGGi4ZGlh4heWA5PQq%2FJdfeLsj2q4Fc2dj607Y%2BO%2Bw; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 1887.05766ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 
@@ -3194,8 +3165,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AoZNkkA6hzhqcuuTDWUWp-ocDt-USUdpJ.FP4%2FA7Wng%2FpKq2Nkx2dn%2B845cDPfkdeTNyudUf0Z%2FIw; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:04 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:04 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3ANcKt2SLcomoXiYaAAEApcfbzmGlKCeGT.z0TvYMw%2BJxdbLtZdmRTPkvGAXQ%2FfHy75OELxvjLEbo4; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:07:57 GMT; HttpOnly
+X-Response-Time: 1554.13324ms
+Date: Tue, 12 Aug 2014 10:07:57 GMT
 Connection: keep-alive
 
 
@@ -3244,13 +3216,14 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response headers such as:</p>
 </blockquote>
-<pre class="highlight shell">HTTP/1.1 500 Internal Server Error
+<pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
-Content-Type: text/plain; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 87
-ETag: W/<span class="s2">"57-1119346246"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3Ai5i9WINzfDYjJU89QJ3wo28REpuXruhM.OzIt8hEjSM8pecz9WVXf4OuJUnQqP00Et9JB8Ti7jew; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:03 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:03 GMT
+Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
+Content-Length: 2
+ETag: W/<span class="s2">"2-223132457"</span>
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AY4H85zIwpKJKVDkkbTsJ78eyBeLpIfVM.muvJFctgvdGdk1TMqWn2s2P%2Ft5gWJ4FZobo361z3e5Q; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:08:18 GMT; HttpOnly
+X-Response-Time: 22959.31858ms
+Date: Tue, 12 Aug 2014 10:08:18 GMT
 Connection: keep-alive
 
 
@@ -3259,7 +3232,7 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
 </blockquote>
-<pre class="highlight json"><span class="err">execute</span><span class="w"> </span><span class="err">command</span><span class="w"> </span><span class="err">denied</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">'nick'@'%'</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">routine</span><span class="w"> </span><span class="err">'mp_prod.GetTwitterUsernameForId'</span><span class="w">
+<pre class="highlight json"><span class="p">[]</span><span class="w">
 </span></pre>
 
 <p>Returns sector specific user returns for a given range of business dates for a given user id.</p>
@@ -3316,8 +3289,9 @@ Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
 Content-Length: 2
 ETag: W/<span class="s2">"2-223132457"</span>
-<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A3wJ27X5-5Vs4DjwfftZ_zAYNUpjody9-.fWW1REMHkPX3EeBByWLtXwsvKLPTbDiBLl%2BdVRTLCRw; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 26 Jul 2014 16:58:06 GMT; HttpOnly
-Date: Fri, 25 Jul 2014 16:58:06 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AMzjzEtEAs5kv5jz-R6NWVKrn0-HcSoEG.SeT7Oui9hnQsrNkHyS7VJBjUJ1n3d2tW92WscVTx78s; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 10:08:00 GMT; HttpOnly
+X-Response-Time: 4756.02309ms
+Date: Tue, 12 Aug 2014 10:08:00 GMT
 Connection: keep-alive
 
 
