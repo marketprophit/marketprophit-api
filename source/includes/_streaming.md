@@ -20,7 +20,7 @@ Path | Frequency | Payload
 user-sentiment | every second | `ts`, `user_id`, `ticker`, `sentiment`, `user_score`
 
 
-## GetMarketProphitSentiment
+## Get Market Prophit Sentiment
 
 Stream of one second records for all tickers with data (MP SENTIMENT).
 
@@ -35,7 +35,7 @@ market-prophit-sentiment | every second | `ts`, `ticker`, `mp_sentiment`
 Pushes the complete set of user sentiment records for all tickers and users for the most recent full second of data.
 
 
-## GetCrowdSentimentChartData
+## Get Crowd Sentiment Chart Data
 
 Stream of latest consolidated one minute records for all tickers with data.
 
@@ -44,7 +44,7 @@ Path | Frequency | Payload
 crowd-sentiment-chart-data | every minute | `ts`, `ticker`, `crowd_sentiment`, `crowd_sentiment_moving_average`, `crowd_sentiment_z_score`, `crowd_sentiment_z_score_moving_avg`, `volume`, `buzz`
 
 
-## GetMarketProphitSentimentChartData
+## Get Market Prophit Sentiment Chart Data
 
 Stream of latest consolidated one second records for all tickers with data.
 
