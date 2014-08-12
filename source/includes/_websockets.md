@@ -47,7 +47,7 @@ callback | Function | Returns an error object (if any) | No
 
 Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
-path | Endpoint path (e.g. "/real-time/crowd-sentiment") | yes | none
+path | Endpoint path (e.g. "crowd-sentiment", see below "Streaming Intraday Data" and "Streaming Intraday Bundled Chart Data" sections for a list of all possible paths) | yes | none
 params | Object of parameters to pass to endpoint (e.g. `{ ticker: 'AAPL' }`) | yes | none
 
 
