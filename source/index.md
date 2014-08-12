@@ -30,5 +30,5 @@ includes:
   - user_scores
   - user_returns
 
-search: true
+search: false
 ---
