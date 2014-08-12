@@ -63,8 +63,8 @@ Historical intraday data
 Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 ticker | 3-4 character long alphanumeric stock ticker symbol | yes | none
-start_ts | ISO-8601 timestamp | no | yesterday
-end_ts | ISO-8601 timestamp | no | now
+start_ts | ISO-8601 timestamp | no | last year from previous biz day
+end_ts | ISO-8601 timestamp | no | yesterday
 
 
 ## Daily Market Prophit Sentiment Moving Average
@@ -96,5 +96,5 @@ Daily market prophit sentiment moving average historical data
 Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 ticker | 3-4 character long alphanumeric stock ticker symbol | yes | none
-start_ts | ISO-8601 timestamp | no | yesterday
-end_ts | ISO-8601 timestamp | no | now
+start_ts | ISO-8601 timestamp | no | last year from previous biz day
+end_ts | ISO-8601 timestamp | no | yesterday
