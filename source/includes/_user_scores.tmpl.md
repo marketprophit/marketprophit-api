@@ -26,6 +26,11 @@ Returns a complete set of historical daily records for a single date.
 
 `GET <%= url %>/historical/user-scores`
 
+### Query Parameters
+
+Parameter | Description | Required | Default
+--------- | ----------- | -------- | -------
+date | Date (MM-DD-YYYY) | no | previous business day
 
 
 ## User Scores Last

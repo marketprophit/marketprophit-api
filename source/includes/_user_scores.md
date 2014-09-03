@@ -14,11 +14,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 994
-ETag: W/"3e2-991096164"
-set-cookie: igloo=s%3Aextv1cqokoiVjxpgDcvFfw_ItADbSsGB.OLaevApXHewTeYmisiK2Hv6tfJTv2g5bIitl1DRH3rs; Path=/; Expires=Wed, 13 Aug 2014 21:38:35 GMT; HttpOnly
-X-Response-Time: 50920.42047ms
-Date: Tue, 12 Aug 2014 21:38:30 GMT
+Content-Length: 2
+ETag: W/"2-223132457"
+set-cookie: igloo=s%3AATpcO23gHCkhlvR-K2gXTXbFuug38I7s.e4rlLU4t4Mt72YZlEv6JrbeDX%2BuKKfJhyQuSIK%2BL1DE; Path=/; Expires=Thu, 04 Sep 2014 21:06:37 GMT; HttpOnly
+X-Response-Time: 74538.73302ms
+Date: Wed, 03 Sep 2014 21:06:37 GMT
 Connection: keep-alive
 
 
@@ -29,21 +29,21 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-08-11T04:00:00.000Z",
-    "user_id": "1912437001",
-    "score": "2.3405694231130942",
+    "ts": "2014-09-02T04:00:00.000Z",
+    "user_id": "2775681704",
+    "score": "2.0001421921325333",
     "mp_rank": "1"
   },
   {
-    "ts": "2014-08-11T04:00:00.000Z",
-    "user_id": "312445120",
-    "score": "2.3405694231130942",
+    "ts": "2014-09-02T04:00:00.000Z",
+    "user_id": "1235173028",
+    "score": "1.3150460972868192",
     "mp_rank": "2"
   },
   {
-    "ts": "2014-08-11T04:00:00.000Z",
-    "user_id": "196380949",
-    "score": "2.3405694231130942",
+    "ts": "2014-09-02T04:00:00.000Z",
+    "user_id": "1342526569",
+    "score": "1.2986772979449543",
     "mp_rank": "3"
   }
 ]
@@ -55,6 +55,11 @@ Returns a complete set of historical daily records for a single date.
 
 `GET https://open.marketprophit.com/historical/user-scores`
 
+### Query Parameters
+
+Parameter | Description | Required | Default
+--------- | ----------- | -------- | -------
+date | Date (MM-DD-YYYY) | no | previous business day
 
 
 ## User Scores Last
@@ -69,11 +74,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 1038
-ETag: W/"40e-1496154372"
-set-cookie: igloo=s%3A2hGpxFzu0F9DDfwbxeBfyM5F7HqbmdtY.vmacoIeMf%2FAiuKSfjeoTEhIIgtWwmpg1NYtTQMgiReY; Path=/; Expires=Wed, 13 Aug 2014 21:39:02 GMT; HttpOnly
-X-Response-Time: 77848.47744ms
-Date: Tue, 12 Aug 2014 21:39:01 GMT
+Content-Length: 347428
+ETag: W/"54d24-3942949263"
+set-cookie: igloo=s%3AWqhFT-iaDBaTVtYRb0MSWluoODgY_mG9.IKV4BevKvReJ03eqFDv%2Fs83lQOm8lA2d3glqHGI5FhI; Path=/; Expires=Thu, 04 Sep 2014 21:06:02 GMT; HttpOnly
+X-Response-Time: 41915.65650ms
+Date: Wed, 03 Sep 2014 21:06:00 GMT
 Connection: keep-alive
 
 
@@ -84,22 +89,22 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2014-08-11T04:00:00.000Z",
+    "ts": "2014-09-02T04:00:00.000Z",
     "user_id": "118840585",
-    "score": "-0.2143974594667337",
-    "mp_rank": "4444"
+    "score": "0.1943254240169530",
+    "mp_rank": "810"
   },
   {
-    "ts": "2014-08-11T04:00:00.000Z",
-    "user_id": "2728758695",
-    "score": "-0.0680631214237277",
-    "mp_rank": "3291"
+    "ts": "2014-09-02T04:00:00.000Z",
+    "user_id": "408677509",
+    "score": "0.2186445835267166",
+    "mp_rank": "744"
   },
   {
-    "ts": "2014-08-11T04:00:00.000Z",
-    "user_id": "2728774330",
-    "score": "-0.3391943186620021",
-    "mp_rank": "4955"
+    "ts": "2014-09-02T04:00:00.000Z",
+    "user_id": "399673647",
+    "score": "0.0131685023390215",
+    "mp_rank": "1734"
   }
 ]
 ```
@@ -130,8 +135,6 @@ set-cookie: igloo=s%3AfDNrZN91VOwIoU3eg9pTd34aiGSZ2PVj.OQqa%2B2FIcR9z2GQkt7pTdTs
 X-Response-Time: 15912.90525ms
 Date: Tue, 12 Aug 2014 21:37:57 GMT
 Connection: keep-alive
-
-
 ```
 
 > Returns response such as (limited `results` for brevity):
@@ -194,8 +197,6 @@ set-cookie: igloo=s%3A8lmBcHKuQhFyN1NKm4dm5uXguwazxWD8.LvE56ccKP63ujzIZJRt7pliN3
 X-Response-Time: 51610.17090ms
 Date: Tue, 12 Aug 2014 21:38:30 GMT
 Connection: keep-alive
-
-
 ```
 
 > Returns response such as (limited `results` for brevity):
@@ -262,9 +263,9 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AYa76R3z31jf7PVNLRHsKo5UC0GuEzRKO.luvmKCWDvuMtiBr%2BNVJStGS%2FiibpW4WD36q1ZTvtUz4; Path=/; Expires=Wed, 13 Aug 2014 21:37:57 GMT; HttpOnly
-X-Response-Time: 15861.59238ms
-Date: Tue, 12 Aug 2014 21:37:57 GMT
+set-cookie: igloo=s%3AbJBMuvhtiFPGeIfrfFr-qFhNqsFrxPwI.0ZSSsp8fhwVICqscFaI%2BpMg%2Fcff6Uz%2BYtFar39AbxIA; Path=/; Expires=Thu, 04 Sep 2014 21:07:02 GMT; HttpOnly
+X-Response-Time: 90719.95637ms
+Date: Wed, 03 Sep 2014 21:07:02 GMT
 Connection: keep-alive
 
 
@@ -306,11 +307,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 1824
-ETag: W/"720-3302940062"
-set-cookie: igloo=s%3AZgZnQlWwvtfL8ESds9V5SgmackVE9GiV.tzanGK32LpfPH4pbwS6WWLrdsZWrB0vKtepkjxmzE60; Path=/; Expires=Wed, 13 Aug 2014 21:38:46 GMT; HttpOnly
-X-Response-Time: 61663.02357ms
-Date: Tue, 12 Aug 2014 21:38:46 GMT
+Content-Length: 2
+ETag: W/"2-223132457"
+set-cookie: igloo=s%3Az36zBqtp0u-CMMHvHmDve6P5O_YAIr8d.phr4xYXWN3alyvbi8oB2smhNa4Z5sPWVZYiPEjGDIJM; Path=/; Expires=Thu, 04 Sep 2014 21:06:06 GMT; HttpOnly
+X-Response-Time: 35236.41063ms
+Date: Wed, 03 Sep 2014 21:06:06 GMT
 Connection: keep-alive
 
 
@@ -319,35 +320,7 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[
-  {
-    "ts": "2014-08-04T04:00:00.000Z",
-    "user_id": "39546678",
-    "user_score": "0.0407264434623135",
-    "mp_rank": "1914",
-    "ticker": "AAPL",
-    "ticker_user_score": "1.7242398853672622",
-    "ticker_rank": "1"
-  },
-  {
-    "ts": "2014-08-04T04:00:00.000Z",
-    "user_id": "2377574335",
-    "user_score": "0.3268222653142548",
-    "mp_rank": "454",
-    "ticker": "AAPL",
-    "ticker_user_score": "0.9824404578760511",
-    "ticker_rank": "2"
-  },
-  {
-    "ts": "2014-08-04T04:00:00.000Z",
-    "user_id": "2305140048",
-    "user_score": "0.4816157091344744",
-    "mp_rank": "222",
-    "ticker": "AAPL",
-    "ticker_user_score": "0.7152576774099989",
-    "ticker_rank": "3"
-  }
-]
+[]
 ```
 
 Ticker specific user score data for range of given business dates for a given ticker.
@@ -380,11 +353,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2198
-ETag: W/"896-417811687"
-set-cookie: igloo=s%3AxrJCgeKK1VokGSyjTOEpcREhqwMCAyDN.bQIIwIDYOgOGo%2B3DUfOfAe4aRyVOXbDls0wfCoqxB5k; Path=/; Expires=Wed, 13 Aug 2014 21:38:49 GMT; HttpOnly
-X-Response-Time: 64912.86781ms
-Date: Tue, 12 Aug 2014 21:38:46 GMT
+Content-Length: 716582
+ETag: W/"aef26-3851160489"
+set-cookie: igloo=s%3AKP84Uv-Pnvw9nYNp1UkG92gioVmWlXni.wFJ71Nw7TylMltKtBHuZU27aLRVngLQw5Uu3UqFGy7o; Path=/; Expires=Thu, 04 Sep 2014 21:06:46 GMT; HttpOnly
+X-Response-Time: 83719.51932ms
+Date: Wed, 03 Sep 2014 21:06:37 GMT
 Connection: keep-alive
 
 
@@ -393,7 +366,38 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[]
+[
+  {
+    "ts": "2014-09-02T04:00:00.000Z",
+    "user_id": "246134345",
+    "user_score": "0.0249420818533537",
+    "mp_rank": "1670",
+    "sector": "Agriculture",
+    "sector_user_score": "0.5885757038418225",
+    "sector_rank": "1",
+    "tickers": "ZW_F, CT_F, CC_F, ZS_F, ZC_F"
+  },
+  {
+    "ts": "2014-09-02T04:00:00.000Z",
+    "user_id": "120004341",
+    "user_score": "0.1943121648507866",
+    "mp_rank": "811",
+    "sector": "BasicMaterials",
+    "sector_user_score": "1.8568091196540009",
+    "sector_rank": "1",
+    "tickers": "EMES, PKD"
+  },
+  {
+    "ts": "2014-09-02T04:00:00.000Z",
+    "user_id": "192759988",
+    "user_score": "0.0286673252697910",
+    "mp_rank": "1650",
+    "sector": "Conglomerates",
+    "sector_user_score": "0.4335308787167536",
+    "sector_rank": "1",
+    "tickers": "REE"
+  }
+]
 ```
 
 Returns sector specific user scores for a given business date.
@@ -426,9 +430,9 @@ Vary: Accept
 Content-Type: application/json; charset=utf-8
 Content-Length: 2
 ETag: W/"2-223132457"
-set-cookie: igloo=s%3AIuNGog8AUIwqqQX19LsL7FIeEYSZziU-.bWo3K0%2BPdakC7UEgLHSa8zxOd%2FWlvUsSxPDl4vBC1NQ; Path=/; Expires=Wed, 13 Aug 2014 21:38:05 GMT; HttpOnly
-X-Response-Time: 23579.81890ms
-Date: Tue, 12 Aug 2014 21:38:05 GMT
+set-cookie: igloo=s%3AYaTm-3GSeiBU-nfhyz09kqhV4IBRcHjA.SvZf2RdfmhAQAkkgafITCC8FQh0ZYGhGe9gA9hCFAf4; Path=/; Expires=Thu, 04 Sep 2014 21:06:37 GMT; HttpOnly
+X-Response-Time: 74861.60121ms
+Date: Wed, 03 Sep 2014 21:06:37 GMT
 Connection: keep-alive
 
 

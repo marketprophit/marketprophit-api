@@ -16,11 +16,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2965
-ETag: W/"b95-3643403431"
-set-cookie: igloo=s%3AE7BEtjmNQdjOgw_VAAWFwyb088UBMixC.7P9brP4UEq%2FxMPlBQOuGhGeky%2B0BSMh2R2MgO0DO9Vc; Path=/; Expires=Wed, 13 Aug 2014 21:37:38 GMT; HttpOnly
-X-Response-Time: 7594.65826ms
-Date: Tue, 12 Aug 2014 21:37:38 GMT
+Content-Length: 74862
+ETag: W/"1246e-4172623629"
+set-cookie: igloo=s%3AWQUKfl4Ky4LhMjrafNqTe22rfSCA2SGu.P0lTZLprIB39wBXe%2BK0jmcvQP8FYjeqKsgy8owQdbc8; Path=/; Expires=Thu, 04 Sep 2014 21:05:48 GMT; HttpOnly
+X-Response-Time: 28156.28194ms
+Date: Wed, 03 Sep 2014 21:05:47 GMT
 Connection: keep-alive
 
 
@@ -31,34 +31,34 @@ Connection: keep-alive
 ```json
 [
   {
-    "ts": "2013-08-12T04:00:00.000Z",
+    "ts": "2013-09-03T04:00:00.000Z",
     "ticker": "AAPL",
-    "crowd_sentiment": "0.0655677621539281",
-    "crowd_sentiment_moving_average": "0.0248213637577311",
-    "crowd_sentiment_z_score": "1.0503527659059142",
-    "crowd_sentiment_z_score_moving_average": "0.0648624193767667",
-    "volume": "1300",
-    "buzz": "1.1332221237110470"
+    "crowd_sentiment": "-0.0126064047303888",
+    "crowd_sentiment_moving_average": "0.0372128063117339",
+    "crowd_sentiment_z_score": "-1.4353067630458214",
+    "crowd_sentiment_z_score_moving_average": "0.0068693110284658",
+    "volume": "1114",
+    "buzz": "0.9207910178289327"
   },
   {
-    "ts": "2013-08-13T04:00:00.000Z",
+    "ts": "2013-09-04T04:00:00.000Z",
     "ticker": "AAPL",
-    "crowd_sentiment": "0.0839128251237732",
-    "crowd_sentiment_moving_average": "0.0314445999397785",
-    "crowd_sentiment_z_score": "1.5653893143069957",
-    "crowd_sentiment_z_score_moving_average": "0.2077552673683673",
-    "volume": "4019",
-    "buzz": "2.5277599695744970"
+    "crowd_sentiment": "0.0651780828663888",
+    "crowd_sentiment_moving_average": "0.0334003281410289",
+    "crowd_sentiment_z_score": "0.8884218438623824",
+    "crowd_sentiment_z_score_moving_average": "-0.1095109573098801",
+    "volume": "1659",
+    "buzz": "1.1353296784216074"
   },
   {
-    "ts": "2013-08-14T04:00:00.000Z",
+    "ts": "2013-09-05T04:00:00.000Z",
     "ticker": "AAPL",
-    "crowd_sentiment": "0.0380635920137041",
-    "crowd_sentiment_moving_average": "0.0322217702426695",
-    "crowd_sentiment_z_score": "0.1691821954858430",
-    "crowd_sentiment_z_score_moving_average": "0.2298030781046750",
-    "volume": "3246",
-    "buzz": "1.5415269201662773"
+    "crowd_sentiment": "0.0087030297466099",
+    "crowd_sentiment_moving_average": "0.0367511563869996",
+    "crowd_sentiment_z_score": "-0.7912412280133767",
+    "crowd_sentiment_z_score_moving_average": "-0.0321145941304713",
+    "volume": "1056",
+    "buzz": "0.8940075442868701"
   }
 ]
 ```
@@ -91,11 +91,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2067
-ETag: W/"813-3199862359"
-set-cookie: igloo=s%3Af3Mb1lczObH_noSCLzKSSWKnt9DKV-TY.LG23iTRLpsij1DE65s4fX4PF%2BcS4Yvc8MMkpiunenCk; Path=/; Expires=Wed, 13 Aug 2014 21:37:38 GMT; HttpOnly
-X-Response-Time: 7345.31196ms
-Date: Tue, 12 Aug 2014 21:37:38 GMT
+Content-Length: 46292
+ETag: W/"b4d4-3643036842"
+set-cookie: igloo=s%3AuCX0DQWvaj1V0JXHLrlVapzyI_C3DJOW.KkZaDtKd4VKMTJGyTgbJnvC9J6nriB1Y8DiIPMp8uMQ; Path=/; Expires=Thu, 04 Sep 2014 21:05:54 GMT; HttpOnly
+X-Response-Time: 34462.14427ms
+Date: Wed, 03 Sep 2014 21:05:53 GMT
 Connection: keep-alive
 
 
@@ -108,7 +108,7 @@ Connection: keep-alive
   {
     "ts": "2013-11-25T05:00:00.000Z",
     "ticker": "AAPL",
-    "mp_sentiment": "0.0352639338098013",
+    "mp_sentiment": "0.0317689117273811",
     "mp_sentiment_moving_average": null,
     "mp_sentiment_z_score": null,
     "mp_sentiment_z_score_moving_average": null
@@ -116,16 +116,16 @@ Connection: keep-alive
   {
     "ts": "2013-11-26T05:00:00.000Z",
     "ticker": "AAPL",
-    "mp_sentiment": "0.0433387814683065",
-    "mp_sentiment_moving_average": "0.0352639338098013",
+    "mp_sentiment": "0.0423878809037944",
+    "mp_sentiment_moving_average": "0.0317689117273811",
     "mp_sentiment_z_score": null,
     "mp_sentiment_z_score_moving_average": null
   },
   {
     "ts": "2013-11-27T05:00:00.000Z",
     "ticker": "AAPL",
-    "mp_sentiment": "0.0623340566957021",
-    "mp_sentiment_moving_average": "0.0393013576390539",
+    "mp_sentiment": "0.0482955213890253",
+    "mp_sentiment_moving_average": "0.0370783963155878",
     "mp_sentiment_z_score": null,
     "mp_sentiment_z_score_moving_average": null
   }
