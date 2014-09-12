@@ -2795,20 +2795,56 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 2
-ETag: W/<span class="s2">"2-223132457"</span>
+Content-Length: 617
+ETag: W/<span class="s2">"269-952293755"</span>
 <span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3A5B_kmCSGwSW9xx6ybxg-ZT1Je1GhFG7Z.V0HumQfJ2rj2Po02NT0LH1k0YAotTx131UVsGLJfcUM; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Thu, 04 Sep 2014 21:06:37 GMT; HttpOnly
-X-Response-Time: 74437.35592ms
-Date: Wed, 03 Sep 2014 21:06:37 GMT
+<span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AOEhhiCZ8NxeN4dC_U58v0XjlRUYqrBaD.NwUisBEbpXYK5TgYtw3Zctw6E3tDuXgbtRWoCf5eHaE; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Sat, 13 Sep 2014 05:22:35 GMT; HttpOnly
+X-Response-Time: 110.22766ms
+Date: Fri, 12 Sep 2014 05:22:35 GMT
 Connection: keep-alive
-
 
 </pre>
 
 <blockquote>
 <p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
 </blockquote>
-<pre class="highlight json"><span class="p">[]</span><span class="w">
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-12T09:22:16.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"306380230"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABBV"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2588996033555621"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-12T09:22:16.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"306380230"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BKW"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2125797315247087"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-12T09:22:16.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"306380230"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CQB"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2175806295716652"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-12T09:22:16.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"306380230"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MDT"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2143790834311274"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-12T09:22:16.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"306380230"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MYL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2509134584133897"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></pre>
 
 <p>Pushes the complete set of user sentiment records for all tickers and users for the most recent full second of data.</p>
@@ -3307,7 +3343,7 @@ Connection: keep-alive
 <td>none</td>
 </tr>
 </tbody></table>
-<h2 id='ticker-specific-user-scores-by-user'>Ticker Specific User Scores by User</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:"</span> <span class="s2">"https://open.marketprophit.com/historical/ticker-specific-user-scores-by-user?user_id=14216123"</span>
+<h2 id='ticker-specific-user-scores-by-user'>Ticker Specific User Scores by User</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:"</span> <span class="s2">"https://open.marketprophit.com/historical/ticker-specific-user-scores-by-user?user_id=465618822"</span>
 </pre>
 
 <blockquote>
@@ -3316,11 +3352,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 2
-ETag: W/<span class="s2">"2-223132457"</span>
+Content-Length: 1110
+ETag: W/<span class="s2">"456-3105583181"</span>
 <span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AbJBMuvhtiFPGeIfrfFr-qFhNqsFrxPwI.0ZSSsp8fhwVICqscFaI%2BpMg%2Fcff6Uz%2BYtFar39AbxIA; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Thu, 04 Sep 2014 21:07:02 GMT; HttpOnly
-X-Response-Time: 90719.95637ms
-Date: Wed, 03 Sep 2014 21:07:02 GMT
+X-Response-Time: 342.90979ms
+Date: Fri, 12 Sep 2014 05:25:59 GMT
 Connection: keep-alive
 
 
@@ -3329,7 +3365,62 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
 </blockquote>
-<pre class="highlight json"><span class="p">[]</span><span class="w">
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-03T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"465618822"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.3166236509574362"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2963"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.4010001389306833"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"53"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-04T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"465618822"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2999747437813455"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2937"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.4170674649261886"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"52"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-05T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"465618822"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2928999373117233"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2927"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.4170674649261886"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"52"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-08T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"465618822"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.3347460876384579"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3075"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.3529048272387204"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"47"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-09T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"465618822"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1681273857207610"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2616"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1379360297089378"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"85"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-10T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"465618822"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1633934595290730"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2625"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0584702095933377"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"69"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></pre>
 
 <p>Ticker specific user score data for range of given business dates for a given user id.</p>
@@ -3384,11 +3475,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 2
+Content-Length: 88094
 ETag: W/<span class="s2">"2-223132457"</span>
 <span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3Az36zBqtp0u-CMMHvHmDve6P5O_YAIr8d.phr4xYXWN3alyvbi8oB2smhNa4Z5sPWVZYiPEjGDIJM; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Thu, 04 Sep 2014 21:06:06 GMT; HttpOnly
-X-Response-Time: 35236.41063ms
-Date: Wed, 03 Sep 2014 21:06:06 GMT
+X-Response-Time: 108.18530ms
+Date: Fri, 12 Sep 2014 05:31:22 GMT
 Connection: keep-alive
 
 
@@ -3397,7 +3488,97 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
 </blockquote>
-<pre class="highlight json"><span class="p">[]</span><span class="w">
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-03T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"260474791"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.4069735531424589"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"240"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.2893778888772951"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-03T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"299891017"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2056431365158536"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2680"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.8120899699958904"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-03T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39546678"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0157165861892973"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1860"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.6732607748584487"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-03T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1919041363"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1551041009180494"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"914"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.6442132466192081"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-03T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"368615592"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0938900018284354"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2259"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.6156029172949623"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-03T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1565751108"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1464364439322250"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2474"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5626091145546215"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-03T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"143955071"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.3995411533585751"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"256"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5600109988680823"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-03T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"32161395"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0278641259919121"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1924"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.4843988354008905"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-03T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2260954471"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0766078506928667"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1302"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.4833892835756675"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-03T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"216798259"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1813297539250174"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"801"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.4679698301420958"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ticker_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
 </span></pre>
 
 <p>Ticker specific user score data for range of given business dates for a given ticker.</p>
@@ -3530,7 +3711,7 @@ Connection: keep-alive
 <td>none</td>
 </tr>
 </tbody></table>
-<h2 id='sector-specific-user-scores-by-user'>Sector Specific User Scores by User</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:"</span> <span class="s2">"https://open.marketprophit.com/historical/sector-specific-user-scores-by-user?user_id=14216123"</span>
+<h2 id='sector-specific-user-scores-by-user'>Sector Specific User Scores by User</h1><pre class="highlight shell">curl -u <span class="s2">"sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:"</span> <span class="s2">"https://open.marketprophit.com/historical/sector-specific-user-scores-by-user?user_id=465618822"</span>
 </pre>
 
 <blockquote>
@@ -3552,7 +3733,58 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
 </blockquote>
-<pre class="highlight json"><span class="p">[]</span><span class="w">
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-04T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"465618822"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2999747437813455"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2937"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ConsumerGoods"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.4063673006821496"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"219"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tickers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TSLA, AAPL"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-05T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"465618822"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2928999373117233"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2927"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ConsumerGoods"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.4063673006821496"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"224"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tickers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TSLA, AAPL"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-08T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"465618822"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.3347460876384579"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3075"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ConsumerGoods"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.3449787909758946"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"218"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tickers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TSLA, AAPL"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-09T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"465618822"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1681273857207610"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2616"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ConsumerGoods"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1351355502881755"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"208"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tickers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TSLA, AAPL"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-10T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"465618822"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1633934595290730"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2625"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ConsumerGoods"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0614723001211677"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"143"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tickers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TSLA, AAPL"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></pre>
 
 <p>Returns sector specific user scores for a given range of business dates for a given user id.</p>
@@ -4169,11 +4401,11 @@ Connection: keep-alive
 <pre class="highlight shell">HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; <span class="nv">charset</span><span class="o">=</span>utf-8
-Content-Length: 2052
+Content-Length: 4934718
 ETag: W/<span class="s2">"804-1016644265"</span>
 <span class="nb">set</span>-cookie: <span class="nv">igloo</span><span class="o">=</span>s%3AkatUZ0Ykoq9KeXr4mKC4Vtc14X0daITU.QNPJ36PLfqz%2FUkbZIS4pVfRdTAzY73WhLmYmj7XIzig; <span class="nv">Path</span><span class="o">=</span>/; <span class="nv">Expires</span><span class="o">=</span>Wed, 13 Aug 2014 21:39:04 GMT; HttpOnly
-X-Response-Time: 79298.98423ms
-Date: Tue, 12 Aug 2014 21:39:04 GMT
+X-Response-Time: 1633.64696ms
+Date: Fri, 12 Sep 2014 05:43:41 GMT
 Connection: keep-alive
 
 
@@ -4182,7 +4414,108 @@ Connection: keep-alive
 <blockquote>
 <p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
 </blockquote>
-<pre class="highlight json"><span class="p">[]</span><span class="w">
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-04T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2344364964"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2449865693742646"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"559"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Technology"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_return"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.8191489361702127"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tickers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IWEB, BRNW, HPNN"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-04T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"351709067"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Technology"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_return"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.7500000000000000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tickers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTZO"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-04T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"770539957"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2280193678521851"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"604"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Technology"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_return"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.7104635817827771"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tickers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JRJC, CAMT, OTIV, WPCS, ISNS, VII, GIGA, HIMX, DGLY"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-04T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"68895541"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1964084575700404"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"687"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Technology"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_return"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5319374623017363"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tickers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HTCH, TWTR, DGLY"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-04T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2399298517"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.3227776092795684"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"370"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Technology"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_return"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5182481751824819"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tickers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NEOM, IACH"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-04T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2776295942"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1836033025095046"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"737"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Technology"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_return"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5000000000000000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tickers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NSAV, SFOR"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-04T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17475489"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Technology"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_return"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5000000000000000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tickers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MSOA"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-04T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"550340371"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2077507917417668"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2663"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Technology"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_return"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.4999999999999998"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tickers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MSPC"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-04T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"395016696"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2701673196907900"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"497"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Technology"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_return"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.4926968415987898"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tickers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MNDO, DGLY"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-04T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1232728544"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1950747923766352"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"691"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Technology"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_return"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.4922397082349410"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sector_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tickers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CYBL, CEHC, NANI, TXTM"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></pre>
 
 <p>Sector specific user returns data for range of given business dates for a given sector.</p>
