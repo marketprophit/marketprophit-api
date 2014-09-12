@@ -386,11 +386,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2052
+Content-Length: 4934718
 ETag: W/"804-1016644265"
 set-cookie: igloo=s%3AkatUZ0Ykoq9KeXr4mKC4Vtc14X0daITU.QNPJ36PLfqz%2FUkbZIS4pVfRdTAzY73WhLmYmj7XIzig; Path=/; Expires=Wed, 13 Aug 2014 21:39:04 GMT; HttpOnly
-X-Response-Time: 79298.98423ms
-Date: Tue, 12 Aug 2014 21:39:04 GMT
+X-Response-Time: 1633.64696ms
+Date: Fri, 12 Sep 2014 05:43:41 GMT
 Connection: keep-alive
 
 
@@ -399,7 +399,108 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[]
+[
+  {
+    "ts": "2014-09-04T04:00:00.000Z",
+    "user_id": "2344364964",
+    "user_score": "0.2449865693742646",
+    "mp_rank": "559",
+    "sector": "Technology",
+    "sector_return": "0.8191489361702127",
+    "sector_rank": "1",
+    "tickers": "IWEB, BRNW, HPNN"
+  },
+  {
+    "ts": "2014-09-04T04:00:00.000Z",
+    "user_id": "351709067",
+    "user_score": null,
+    "mp_rank": null,
+    "sector": "Technology",
+    "sector_return": "0.7500000000000000",
+    "sector_rank": "2",
+    "tickers": "BTZO"
+  },
+  {
+    "ts": "2014-09-04T04:00:00.000Z",
+    "user_id": "770539957",
+    "user_score": "0.2280193678521851",
+    "mp_rank": "604",
+    "sector": "Technology",
+    "sector_return": "0.7104635817827771",
+    "sector_rank": "3",
+    "tickers": "JRJC, CAMT, OTIV, WPCS, ISNS, VII, GIGA, HIMX, DGLY"
+  },
+  {
+    "ts": "2014-09-04T04:00:00.000Z",
+    "user_id": "68895541",
+    "user_score": "0.1964084575700404",
+    "mp_rank": "687",
+    "sector": "Technology",
+    "sector_return": "0.5319374623017363",
+    "sector_rank": "4",
+    "tickers": "HTCH, TWTR, DGLY"
+  },
+  {
+    "ts": "2014-09-04T04:00:00.000Z",
+    "user_id": "2399298517",
+    "user_score": "0.3227776092795684",
+    "mp_rank": "370",
+    "sector": "Technology",
+    "sector_return": "0.5182481751824819",
+    "sector_rank": "5",
+    "tickers": "NEOM, IACH"
+  },
+  {
+    "ts": "2014-09-04T04:00:00.000Z",
+    "user_id": "2776295942",
+    "user_score": "0.1836033025095046",
+    "mp_rank": "737",
+    "sector": "Technology",
+    "sector_return": "0.5000000000000000",
+    "sector_rank": "6",
+    "tickers": "NSAV, SFOR"
+  },
+  {
+    "ts": "2014-09-04T04:00:00.000Z",
+    "user_id": "17475489",
+    "user_score": null,
+    "mp_rank": null,
+    "sector": "Technology",
+    "sector_return": "0.5000000000000000",
+    "sector_rank": "7",
+    "tickers": "MSOA"
+  },
+  {
+    "ts": "2014-09-04T04:00:00.000Z",
+    "user_id": "550340371",
+    "user_score": "-0.2077507917417668",
+    "mp_rank": "2663",
+    "sector": "Technology",
+    "sector_return": "0.4999999999999998",
+    "sector_rank": "8",
+    "tickers": "MSPC"
+  },
+  {
+    "ts": "2014-09-04T04:00:00.000Z",
+    "user_id": "395016696",
+    "user_score": "0.2701673196907900",
+    "mp_rank": "497",
+    "sector": "Technology",
+    "sector_return": "0.4926968415987898",
+    "sector_rank": "9",
+    "tickers": "MNDO, DGLY"
+  },
+  {
+    "ts": "2014-09-04T04:00:00.000Z",
+    "user_id": "1232728544",
+    "user_score": "0.1950747923766352",
+    "mp_rank": "691",
+    "sector": "Technology",
+    "sector_return": "0.4922397082349410",
+    "sector_rank": "10",
+    "tickers": "CYBL, CEHC, NANI, TXTM"
+  }
+]
 ```
 
 Sector specific user returns data for range of given business dates for a given sector.

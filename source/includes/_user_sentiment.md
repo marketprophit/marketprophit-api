@@ -14,20 +14,56 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/real
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2
-ETag: W/"2-223132457"
+Content-Length: 617
+ETag: W/"269-952293755"
 set-cookie: igloo=s%3A5B_kmCSGwSW9xx6ybxg-ZT1Je1GhFG7Z.V0HumQfJ2rj2Po02NT0LH1k0YAotTx131UVsGLJfcUM; Path=/; Expires=Thu, 04 Sep 2014 21:06:37 GMT; HttpOnly
-X-Response-Time: 74437.35592ms
-Date: Wed, 03 Sep 2014 21:06:37 GMT
+set-cookie: igloo=s%3AOEhhiCZ8NxeN4dC_U58v0XjlRUYqrBaD.NwUisBEbpXYK5TgYtw3Zctw6E3tDuXgbtRWoCf5eHaE; Path=/; Expires=Sat, 13 Sep 2014 05:22:35 GMT; HttpOnly
+X-Response-Time: 110.22766ms
+Date: Fri, 12 Sep 2014 05:22:35 GMT
 Connection: keep-alive
-
 
 ```
 
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[]
+[
+  {
+    "ts": "2014-09-12T09:22:16.000Z",
+    "user_id": "306380230",
+    "ticker": "ABBV",
+    "sentiment": "-0.2588996033555621",
+    "user_score": null
+  },
+  {
+    "ts": "2014-09-12T09:22:16.000Z",
+    "user_id": "306380230",
+    "ticker": "BKW",
+    "sentiment": "-0.2125797315247087",
+    "user_score": null
+  },
+  {
+    "ts": "2014-09-12T09:22:16.000Z",
+    "user_id": "306380230",
+    "ticker": "CQB",
+    "sentiment": "-0.2175806295716652",
+    "user_score": null
+  },
+  {
+    "ts": "2014-09-12T09:22:16.000Z",
+    "user_id": "306380230",
+    "ticker": "MDT",
+    "sentiment": "-0.2143790834311274",
+    "user_score": null
+  },
+  {
+    "ts": "2014-09-12T09:22:16.000Z",
+    "user_id": "306380230",
+    "ticker": "MYL",
+    "sentiment": "-0.2509134584133897",
+    "user_score": null
+  }
+]
 ```
 
 Pushes the complete set of user sentiment records for all tickers and users for the most recent full second of data.

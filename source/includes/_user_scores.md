@@ -252,7 +252,7 @@ ticker | 3-4 character long alphanumeric stock ticker symbol | no | none
 ## Ticker Specific User Scores by User
 
 ```shell
-curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/historical/ticker-specific-user-scores-by-user?user_id=14216123"
+curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/historical/ticker-specific-user-scores-by-user?user_id=465618822"
 ```
 
 > Returns response headers such as:
@@ -261,11 +261,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2
-ETag: W/"2-223132457"
+Content-Length: 1110
+ETag: W/"456-3105583181"
 set-cookie: igloo=s%3AbJBMuvhtiFPGeIfrfFr-qFhNqsFrxPwI.0ZSSsp8fhwVICqscFaI%2BpMg%2Fcff6Uz%2BYtFar39AbxIA; Path=/; Expires=Thu, 04 Sep 2014 21:07:02 GMT; HttpOnly
-X-Response-Time: 90719.95637ms
-Date: Wed, 03 Sep 2014 21:07:02 GMT
+X-Response-Time: 342.90979ms
+Date: Fri, 12 Sep 2014 05:25:59 GMT
 Connection: keep-alive
 
 
@@ -274,7 +274,62 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[]
+[
+  {
+    "ts": "2014-09-03T04:00:00.000Z",
+    "user_id": "465618822",
+    "user_score": "-0.3166236509574362",
+    "mp_rank": "2963",
+    "ticker": "AAPL",
+    "ticker_user_score": "-0.4010001389306833",
+    "ticker_rank": "53"
+  },
+  {
+    "ts": "2014-09-04T04:00:00.000Z",
+    "user_id": "465618822",
+    "user_score": "-0.2999747437813455",
+    "mp_rank": "2937",
+    "ticker": "AAPL",
+    "ticker_user_score": "-0.4170674649261886",
+    "ticker_rank": "52"
+  },
+  {
+    "ts": "2014-09-05T04:00:00.000Z",
+    "user_id": "465618822",
+    "user_score": "-0.2928999373117233",
+    "mp_rank": "2927",
+    "ticker": "AAPL",
+    "ticker_user_score": "-0.4170674649261886",
+    "ticker_rank": "52"
+  },
+  {
+    "ts": "2014-09-08T04:00:00.000Z",
+    "user_id": "465618822",
+    "user_score": "-0.3347460876384579",
+    "mp_rank": "3075",
+    "ticker": "AAPL",
+    "ticker_user_score": "-0.3529048272387204",
+    "ticker_rank": "47"
+  },
+  {
+    "ts": "2014-09-09T04:00:00.000Z",
+    "user_id": "465618822",
+    "user_score": "-0.1681273857207610",
+    "mp_rank": "2616",
+    "ticker": "AAPL",
+    "ticker_user_score": "-0.1379360297089378",
+    "ticker_rank": "85"
+  },
+  {
+    "ts": "2014-09-10T04:00:00.000Z",
+    "user_id": "465618822",
+    "user_score": "-0.1633934595290730",
+    "mp_rank": "2625",
+    "ticker": "AAPL",
+    "ticker_user_score": "0.0584702095933377",
+    "ticker_rank": "69"
+  }
+]
 ```
 
 Ticker specific user score data for range of given business dates for a given user id.
@@ -307,11 +362,11 @@ curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/hist
 HTTP/1.1 200 OK
 Vary: Accept
 Content-Type: application/json; charset=utf-8
-Content-Length: 2
+Content-Length: 88094
 ETag: W/"2-223132457"
 set-cookie: igloo=s%3Az36zBqtp0u-CMMHvHmDve6P5O_YAIr8d.phr4xYXWN3alyvbi8oB2smhNa4Z5sPWVZYiPEjGDIJM; Path=/; Expires=Thu, 04 Sep 2014 21:06:06 GMT; HttpOnly
-X-Response-Time: 35236.41063ms
-Date: Wed, 03 Sep 2014 21:06:06 GMT
+X-Response-Time: 108.18530ms
+Date: Fri, 12 Sep 2014 05:31:22 GMT
 Connection: keep-alive
 
 
@@ -320,7 +375,97 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[]
+[
+  {
+    "ts": "2014-09-03T04:00:00.000Z",
+    "user_id": "260474791",
+    "user_score": "0.4069735531424589",
+    "mp_rank": "240",
+    "ticker": "AAPL",
+    "ticker_user_score": "1.2893778888772951",
+    "ticker_rank": "1"
+  },
+  {
+    "ts": "2014-09-03T04:00:00.000Z",
+    "user_id": "299891017",
+    "user_score": "-0.2056431365158536",
+    "mp_rank": "2680",
+    "ticker": "AAPL",
+    "ticker_user_score": "0.8120899699958904",
+    "ticker_rank": "2"
+  },
+  {
+    "ts": "2014-09-03T04:00:00.000Z",
+    "user_id": "39546678",
+    "user_score": "-0.0157165861892973",
+    "mp_rank": "1860",
+    "ticker": "AAPL",
+    "ticker_user_score": "0.6732607748584487",
+    "ticker_rank": "3"
+  },
+  {
+    "ts": "2014-09-03T04:00:00.000Z",
+    "user_id": "1919041363",
+    "user_score": "0.1551041009180494",
+    "mp_rank": "914",
+    "ticker": "AAPL",
+    "ticker_user_score": "0.6442132466192081",
+    "ticker_rank": "4"
+  },
+  {
+    "ts": "2014-09-03T04:00:00.000Z",
+    "user_id": "368615592",
+    "user_score": "-0.0938900018284354",
+    "mp_rank": "2259",
+    "ticker": "AAPL",
+    "ticker_user_score": "0.6156029172949623",
+    "ticker_rank": "5"
+  },
+  {
+    "ts": "2014-09-03T04:00:00.000Z",
+    "user_id": "1565751108",
+    "user_score": "-0.1464364439322250",
+    "mp_rank": "2474",
+    "ticker": "AAPL",
+    "ticker_user_score": "0.5626091145546215",
+    "ticker_rank": "6"
+  },
+  {
+    "ts": "2014-09-03T04:00:00.000Z",
+    "user_id": "143955071",
+    "user_score": "0.3995411533585751",
+    "mp_rank": "256",
+    "ticker": "AAPL",
+    "ticker_user_score": "0.5600109988680823",
+    "ticker_rank": "7"
+  },
+  {
+    "ts": "2014-09-03T04:00:00.000Z",
+    "user_id": "32161395",
+    "user_score": "-0.0278641259919121",
+    "mp_rank": "1924",
+    "ticker": "AAPL",
+    "ticker_user_score": "0.4843988354008905",
+    "ticker_rank": "8"
+  },
+  {
+    "ts": "2014-09-03T04:00:00.000Z",
+    "user_id": "2260954471",
+    "user_score": "0.0766078506928667",
+    "mp_rank": "1302",
+    "ticker": "AAPL",
+    "ticker_user_score": "0.4833892835756675",
+    "ticker_rank": "9"
+  },
+  {
+    "ts": "2014-09-03T04:00:00.000Z",
+    "user_id": "216798259",
+    "user_score": "0.1813297539250174",
+    "mp_rank": "801",
+    "ticker": "AAPL",
+    "ticker_user_score": "0.4679698301420958",
+    "ticker_rank": "10"
+  },
 ```
 
 Ticker specific user score data for range of given business dates for a given ticker.
@@ -419,7 +564,7 @@ sector | Sector (must be one of Agriculture, BasicMaterials, Conglomerates, Cons
 ## Sector Specific User Scores by User
 
 ```shell
-curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/historical/sector-specific-user-scores-by-user?user_id=14216123"
+curl -u "sk_live_w3Q4bCJVB8xgyeIKJmTC4DS5:" "https://open.marketprophit.com/historical/sector-specific-user-scores-by-user?user_id=465618822"
 ```
 
 > Returns response headers such as:
@@ -441,7 +586,58 @@ Connection: keep-alive
 > Returns response such as (limited `results` for brevity):
 
 ```json
-[]
+[
+  {
+    "ts": "2014-09-04T04:00:00.000Z",
+    "user_id": "465618822",
+    "user_score": "-0.2999747437813455",
+    "mp_rank": "2937",
+    "sector": "ConsumerGoods",
+    "sector_user_score": "-0.4063673006821496",
+    "sector_rank": "219",
+    "tickers": "TSLA, AAPL"
+  },
+  {
+    "ts": "2014-09-05T04:00:00.000Z",
+    "user_id": "465618822",
+    "user_score": "-0.2928999373117233",
+    "mp_rank": "2927",
+    "sector": "ConsumerGoods",
+    "sector_user_score": "-0.4063673006821496",
+    "sector_rank": "224",
+    "tickers": "TSLA, AAPL"
+  },
+  {
+    "ts": "2014-09-08T04:00:00.000Z",
+    "user_id": "465618822",
+    "user_score": "-0.3347460876384579",
+    "mp_rank": "3075",
+    "sector": "ConsumerGoods",
+    "sector_user_score": "-0.3449787909758946",
+    "sector_rank": "218",
+    "tickers": "TSLA, AAPL"
+  },
+  {
+    "ts": "2014-09-09T04:00:00.000Z",
+    "user_id": "465618822",
+    "user_score": "-0.1681273857207610",
+    "mp_rank": "2616",
+    "sector": "ConsumerGoods",
+    "sector_user_score": "-0.1351355502881755",
+    "sector_rank": "208",
+    "tickers": "TSLA, AAPL"
+  },
+  {
+    "ts": "2014-09-10T04:00:00.000Z",
+    "user_id": "465618822",
+    "user_score": "-0.1633934595290730",
+    "mp_rank": "2625",
+    "sector": "ConsumerGoods",
+    "sector_user_score": "0.0614723001211677",
+    "sector_rank": "143",
+    "tickers": "TSLA, AAPL"
+  }
+]
 ```
 
 Returns sector specific user scores for a given range of business dates for a given user id.
