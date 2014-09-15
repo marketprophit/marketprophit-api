@@ -26,6 +26,7 @@ Connection: keep-alive
 
 > Returns response such as (limited `results` for brevity):
 
+
 ```json
 [
   {
@@ -33,35 +34,35 @@ Connection: keep-alive
     "user_id": "306380230",
     "ticker": "ABBV",
     "sentiment": "-0.2588996033555621",
-    "user_score": null
+    "user_score": "-0.0302670281535698"
   },
   {
     "ts": "2014-09-12T09:22:16.000Z",
     "user_id": "306380230",
     "ticker": "BKW",
     "sentiment": "-0.2125797315247087",
-    "user_score": null
+    "user_score": "-0.0302670281535698"
   },
   {
     "ts": "2014-09-12T09:22:16.000Z",
     "user_id": "306380230",
     "ticker": "CQB",
     "sentiment": "-0.2175806295716652",
-    "user_score": null
+    "user_score": "-0.0302670281535698"
   },
   {
     "ts": "2014-09-12T09:22:16.000Z",
     "user_id": "306380230",
     "ticker": "MDT",
     "sentiment": "-0.2143790834311274",
-    "user_score": null
+    "user_score": "-0.0302670281535698"
   },
   {
     "ts": "2014-09-12T09:22:16.000Z",
     "user_id": "306380230",
     "ticker": "MYL",
     "sentiment": "-0.2509134584133897",
-    "user_score": null
+    "user_score": "-0.0302670281535698"
   }
 ]
 ```

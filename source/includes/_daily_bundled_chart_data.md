@@ -109,25 +109,25 @@ Connection: keep-alive
     "ts": "2013-11-25T05:00:00.000Z",
     "ticker": "AAPL",
     "mp_sentiment": "0.0317689117273811",
-    "mp_sentiment_moving_average": null,
-    "mp_sentiment_z_score": null,
-    "mp_sentiment_z_score_moving_average": null
+    "mp_sentiment_moving_average": "0.0317689117273811",
+    "mp_sentiment_z_score": "1.2924519236334542",
+    "mp_sentiment_z_score_moving_average": "0.0068693110284658"
   },
   {
     "ts": "2013-11-26T05:00:00.000Z",
     "ticker": "AAPL",
     "mp_sentiment": "0.0423878809037944",
     "mp_sentiment_moving_average": "0.0317689117273811",
-    "mp_sentiment_z_score": null,
-    "mp_sentiment_z_score_moving_average": null
+    "mp_sentiment_z_score": "1.2924519236334542",
+    "mp_sentiment_z_score_moving_average": "0.0068693110284658"
   },
   {
     "ts": "2013-11-27T05:00:00.000Z",
     "ticker": "AAPL",
     "mp_sentiment": "0.0482955213890253",
     "mp_sentiment_moving_average": "0.0370783963155878",
-    "mp_sentiment_z_score": null,
-    "mp_sentiment_z_score_moving_average": null
+    "mp_sentiment_z_score": "1.2924519236334542",
+    "mp_sentiment_z_score_moving_average": "0.0068693110284658"
   }
 ]
 ```

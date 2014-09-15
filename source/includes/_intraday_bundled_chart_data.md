@@ -35,8 +35,8 @@ Connection: keep-alive
     "ticker": "AAPL",
     "crowd_sentiment": "0.0096442612293301",
     "crowd_sentiment_moving_average": "0.0472162020321326",
-    "crowd_sentiment_z_score": null,
-    "crowd_sentiment_z_score_moving_average": null,
+    "crowd_sentiment_z_score": "-1.4353067630458214",
+    "crowd_sentiment_z_score_moving_average": "0.0068693110284658",
     "volume": "1",
     "buzz": "0.4655859321335315"
   },
@@ -45,8 +45,8 @@ Connection: keep-alive
     "ticker": "AAPL",
     "crowd_sentiment": "0.1814690181269212",
     "crowd_sentiment_moving_average": "0.0393281377346668",
-    "crowd_sentiment_z_score": null,
-    "crowd_sentiment_z_score_moving_average": null,
+    "crowd_sentiment_z_score": "-1.4353067630458214",
+    "crowd_sentiment_z_score_moving_average": "0.0068693110284658",
     "volume": "2",
     "buzz": "0.9311718642670630"
   },
@@ -55,8 +55,8 @@ Connection: keep-alive
     "ticker": "AAPL",
     "crowd_sentiment": "-0.1409181494437186",
     "crowd_sentiment_moving_average": "0.0570957477836986",
-    "crowd_sentiment_z_score": null,
-    "crowd_sentiment_z_score_moving_average": null,
+    "crowd_sentiment_z_score": "-1.4353067630458214",
+    "crowd_sentiment_z_score_moving_average": "0.0068693110284658",
     "volume": "1",
     "buzz": "0.4655859321335315"
   }
@@ -109,25 +109,25 @@ Connection: keep-alive
     "ts": "2014-08-26T08:21:27.000Z",
     "ticker": "AAPL",
     "mp_sentiment": "0.0640749800780658",
-    "mp_sentiment_moving_average": null,
-    "mp_sentiment_z_score": null,
-    "mp_sentiment_z_score_moving_average": null
+    "mp_sentiment_moving_average": "0.0317689117273811",
+    "mp_sentiment_z_score": "1.2924519236334542",
+    "mp_sentiment_z_score_moving_average": "0.0068693110284658"
   },
   {
     "ts": "2014-08-26T10:45:02.000Z",
     "ticker": "AAPL",
     "mp_sentiment": "0.0710010821847628",
-    "mp_sentiment_moving_average": null,
-    "mp_sentiment_z_score": null,
-    "mp_sentiment_z_score_moving_average": null
+    "mp_sentiment_moving_average": "0.0317689117273811",
+    "mp_sentiment_z_score": "1.2924519236334542",
+    "mp_sentiment_z_score_moving_average": "0.0068693110284658"
   },
   {
     "ts": "2014-08-26T11:25:45.000Z",
     "ticker": "AAPL",
     "mp_sentiment": "0.0106183761868529",
-    "mp_sentiment_moving_average": null,
-    "mp_sentiment_z_score": null,
-    "mp_sentiment_z_score_moving_average": null
+    "mp_sentiment_moving_average": "0.0317689117273811",
+    "mp_sentiment_z_score": "1.2924519236334542",
+    "mp_sentiment_z_score_moving_average": "0.0068693110284658"
   }
 ]
 ```

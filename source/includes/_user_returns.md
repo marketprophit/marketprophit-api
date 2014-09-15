@@ -186,8 +186,8 @@ Connection: keep-alive
   {
     "ts": "2014-08-04T04:00:00.000Z",
     "user_id": "263246119",
-    "user_score": null,
-    "mp_rank": null,
+    "user_score": "-0.0302670281535698",
+    "mp_rank": "1234",
     "ticker": "AAPL",
     "ticker_return": "0.0179763739085772",
     "ticker_rank": "2"
@@ -413,8 +413,8 @@ Connection: keep-alive
   {
     "ts": "2014-09-04T04:00:00.000Z",
     "user_id": "351709067",
-    "user_score": null,
-    "mp_rank": null,
+    "user_score": "-0.0302670281535698",
+    "mp_rank": "1234",
     "sector": "Technology",
     "sector_return": "0.7500000000000000",
     "sector_rank": "2",
@@ -463,8 +463,8 @@ Connection: keep-alive
   {
     "ts": "2014-09-04T04:00:00.000Z",
     "user_id": "17475489",
-    "user_score": null,
-    "mp_rank": null,
+    "user_score": "-0.0302670281535698",
+    "mp_rank": "1234",
     "sector": "Technology",
     "sector_return": "0.5000000000000000",
     "sector_rank": "7",
