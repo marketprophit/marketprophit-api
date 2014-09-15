@@ -327,6 +327,43 @@ Connection: keep-alive
 <td><code class="prettyprint">ts</code>, <code class="prettyprint">ticker</code>, <code class="prettyprint">crowd_sentiment</code></td>
 </tr>
 </tbody></table>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"crowd-sentiment"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-15T05:06:01.321Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-15T09:04:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANY"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"crowd_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0337734249681757"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-15T09:04:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CMGO"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"crowd_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2301403504966760"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-15T09:04:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CSCO"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"crowd_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0511838856522857"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-15T09:04:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EURAUD"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"crowd_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2983217845157061"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-15T09:04:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FSD"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"crowd_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.6361262297611769"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
 <h2 id='get-user-sentiment'>Get User Sentiment</h1>
 <p>Stream of consolidated one second records for all tickers with data (RAW USER SENTIMENT).</p>
 
@@ -343,6 +380,25 @@ Connection: keep-alive
 <td><code class="prettyprint">ts</code>, <code class="prettyprint">user_id</code>, <code class="prettyprint">ticker</code>, <code class="prettyprint">sentiment</code>, <code class="prettyprint">user_score</code></td>
 </tr>
 </tbody></table>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user-sentiment"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-15T05:00:51.390Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-15T09:00:30.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2243075472"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JABA"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.067644772321236"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0348298733495368"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
 <h2 id='get-market-prophit-sentiment'>Get Market Prophit Sentiment</h1>
 <p>Stream of one second records for all tickers with data (MP SENTIMENT).</p>
 
@@ -359,6 +415,17 @@ Connection: keep-alive
 <td><code class="prettyprint">ts</code>, <code class="prettyprint">ticker</code>, <code class="prettyprint">mp_sentiment</code></td>
 </tr>
 </tbody></table>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"market-prophit-sentiment"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-15T05:03:05.458Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
 <h1 id='streaming-intraday-bundled-chart-data'>Streaming Intraday Bundled Chart Data</h1>
 <p>Pushes the complete set of user sentiment records for all tickers and users for the most recent full second of data.</p>
 <h2 id='get-crowd-sentiment-chart-data'>Get Crowd Sentiment Chart Data</h1>
@@ -377,6 +444,28 @@ Connection: keep-alive
 <td><code class="prettyprint">ts</code>, <code class="prettyprint">ticker</code>, <code class="prettyprint">crowd_sentiment</code>, <code class="prettyprint">crowd_sentiment_moving_average</code>, <code class="prettyprint">crowd_sentiment_z_score</code>, <code class="prettyprint">crowd_sentiment_z_score_moving_avg</code>, <code class="prettyprint">volume</code>, <code class="prettyprint">buzz</code></td>
 </tr>
 </tbody></table>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"crowd-sentiment-chart-data"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-15T04:58:00.404Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-15T08:56:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TSLA"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"crowd_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.6908441588708437"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"crowd_sentiment_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0472162020321326"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"crowd_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1.4353067630458214"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"crowd_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0068693110284658"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.7897299690128375"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
 <h2 id='get-market-prophit-sentiment-chart-data'>Get Market Prophit Sentiment Chart Data</h1>
 <p>Stream of latest consolidated one second records for all tickers with data.</p>
 
@@ -393,6 +482,17 @@ Connection: keep-alive
 <td><code class="prettyprint">ts</code>, <code class="prettyprint">ticker</code>, <code class="prettyprint">mp_sentiment</code>, <code class="prettyprint">mp_sentiment_moving_average</code>, <code class="prettyprint">mp_sentiment_z_score</code>, <code class="prettyprint">mp_sentiment_z_score_moving_avg</code></td>
 </tr>
 </tbody></table>
+
+<blockquote>
+<p>Returns response such as (limited <code class="prettyprint">results</code> for brevity):</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"market-prophit-sentiment-chart-data"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-15T05:04:17.963Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
 
           <h1 id='intraday-bundled-chart-data'>Intraday Bundled Chart Data</h1>
 <p>Returns a complete range of historical intraday records for a given ticker based on a date range (start date, end date).</p>
@@ -424,8 +524,8 @@ Connection: keep-alive
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"crowd_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0096442612293301"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"crowd_sentiment_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0472162020321326"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"crowd_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"crowd_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"crowd_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1.4353067630458214"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"crowd_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0068693110284658"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.4655859321335315"</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -434,8 +534,8 @@ Connection: keep-alive
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"crowd_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1814690181269212"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"crowd_sentiment_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0393281377346668"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"crowd_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"crowd_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"crowd_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1.4353067630458214"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"crowd_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0068693110284658"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.9311718642670630"</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -444,8 +544,8 @@ Connection: keep-alive
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"crowd_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1409181494437186"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"crowd_sentiment_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0570957477836986"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"crowd_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"crowd_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"crowd_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1.4353067630458214"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"crowd_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0068693110284658"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"buzz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.4655859321335315"</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -510,25 +610,25 @@ Connection: keep-alive
     </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-26T08:21:27.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"mp_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0640749800780658"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_sentiment_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
+    </span><span class="s2">"mp_sentiment_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0317689117273811"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.2924519236334542"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0068693110284658"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-26T10:45:02.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"mp_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0710010821847628"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_sentiment_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
+    </span><span class="s2">"mp_sentiment_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0317689117273811"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.2924519236334542"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0068693110284658"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-26T11:25:45.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"mp_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0106183761868529"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_sentiment_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
+    </span><span class="s2">"mp_sentiment_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0317689117273811"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.2924519236334542"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0068693110284658"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -681,25 +781,25 @@ Connection: keep-alive
     </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-11-25T05:00:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"mp_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0317689117273811"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_sentiment_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
+    </span><span class="s2">"mp_sentiment_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0317689117273811"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.2924519236334542"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0068693110284658"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-11-26T05:00:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"mp_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0423878809037944"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"mp_sentiment_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0317689117273811"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
+    </span><span class="s2">"mp_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.2924519236334542"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0068693110284658"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-11-27T05:00:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"mp_sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0482955213890253"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"mp_sentiment_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0370783963155878"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
+    </span><span class="s2">"mp_sentiment_z_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.2924519236334542"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_sentiment_z_score_moving_average"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0068693110284658"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -928,16 +1028,16 @@ Connection: keep-alive
 <td>none</td>
 </tr>
 <tr>
-<td>start_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>start_date</td>
+<td>Start date range (MM-DD-YYYY)</td>
 <td>no</td>
 <td>last year from previous biz day</td>
 </tr>
 <tr>
-<td>end_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>end_date</td>
+<td>End date range (MM-DD-YYYY)</td>
 <td>no</td>
-<td>yesterday</td>
+<td>previous business day</td>
 </tr>
 </tbody></table>
 
@@ -1133,16 +1233,16 @@ Connection: keep-alive
 <td>none</td>
 </tr>
 <tr>
-<td>start_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>start_date</td>
+<td>Start date range (MM-DD-YYYY)</td>
 <td>no</td>
 <td>last year from previous biz day</td>
 </tr>
 <tr>
-<td>end_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>end_date</td>
+<td>End date range (MM-DD-YYYY)</td>
 <td>no</td>
-<td>yesterday</td>
+<td>previous business day</td>
 </tr>
 </tbody></table>
 
@@ -1338,16 +1438,16 @@ Connection: keep-alive
 <td>none</td>
 </tr>
 <tr>
-<td>start_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>start_date</td>
+<td>Start date range (MM-DD-YYYY)</td>
 <td>no</td>
 <td>last year from previous biz day</td>
 </tr>
 <tr>
-<td>end_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>end_date</td>
+<td>End date range (MM-DD-YYYY)</td>
 <td>no</td>
-<td>yesterday</td>
+<td>previous business day</td>
 </tr>
 </tbody></table>
 
@@ -1543,16 +1643,16 @@ Connection: keep-alive
 <td>none</td>
 </tr>
 <tr>
-<td>start_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>start_date</td>
+<td>Start date range (MM-DD-YYYY)</td>
 <td>no</td>
 <td>last year from previous biz day</td>
 </tr>
 <tr>
-<td>end_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>end_date</td>
+<td>End date range (MM-DD-YYYY)</td>
 <td>no</td>
-<td>yesterday</td>
+<td>previous business day</td>
 </tr>
 </tbody></table>
 
@@ -1748,16 +1848,16 @@ Connection: keep-alive
 <td>none</td>
 </tr>
 <tr>
-<td>start_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>start_date</td>
+<td>Start date range (MM-DD-YYYY)</td>
 <td>no</td>
 <td>last year from previous biz day</td>
 </tr>
 <tr>
-<td>end_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>end_date</td>
+<td>End date range (MM-DD-YYYY)</td>
 <td>no</td>
-<td>yesterday</td>
+<td>previous business day</td>
 </tr>
 </tbody></table>
 
@@ -1953,16 +2053,16 @@ Connection: keep-alive
 <td>none</td>
 </tr>
 <tr>
-<td>start_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>start_date</td>
+<td>Start date range (MM-DD-YYYY)</td>
 <td>no</td>
 <td>last year from previous biz day</td>
 </tr>
 <tr>
-<td>end_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>end_date</td>
+<td>End date range (MM-DD-YYYY)</td>
 <td>no</td>
-<td>yesterday</td>
+<td>previous business day</td>
 </tr>
 </tbody></table>
 
@@ -2158,16 +2258,16 @@ Connection: keep-alive
 <td>none</td>
 </tr>
 <tr>
-<td>start_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>start_date</td>
+<td>Start date range (MM-DD-YYYY)</td>
 <td>no</td>
 <td>last year from previous biz day</td>
 </tr>
 <tr>
-<td>end_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>end_date</td>
+<td>End date range (MM-DD-YYYY)</td>
 <td>no</td>
-<td>yesterday</td>
+<td>previous business day</td>
 </tr>
 </tbody></table>
 
@@ -2363,16 +2463,16 @@ Connection: keep-alive
 <td>none</td>
 </tr>
 <tr>
-<td>start_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>start_date</td>
+<td>Start date range (MM-DD-YYYY)</td>
 <td>no</td>
 <td>last year from previous biz day</td>
 </tr>
 <tr>
-<td>end_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>end_date</td>
+<td>End date range (MM-DD-YYYY)</td>
 <td>no</td>
-<td>yesterday</td>
+<td>previous business day</td>
 </tr>
 </tbody></table>
 
@@ -2568,16 +2668,16 @@ Connection: keep-alive
 <td>none</td>
 </tr>
 <tr>
-<td>start_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>start_date</td>
+<td>Start date range (MM-DD-YYYY)</td>
 <td>no</td>
 <td>last year from previous biz day</td>
 </tr>
 <tr>
-<td>end_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>end_date</td>
+<td>End date range (MM-DD-YYYY)</td>
 <td>no</td>
-<td>yesterday</td>
+<td>previous business day</td>
 </tr>
 </tbody></table>
 
@@ -2773,16 +2873,16 @@ Connection: keep-alive
 <td>none</td>
 </tr>
 <tr>
-<td>start_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>start_date</td>
+<td>Start date range (MM-DD-YYYY)</td>
 <td>no</td>
 <td>last year from previous biz day</td>
 </tr>
 <tr>
-<td>end_ts</td>
-<td>ISO-8601 timestamp</td>
+<td>end_date</td>
+<td>End date range (MM-DD-YYYY)</td>
 <td>no</td>
-<td>yesterday</td>
+<td>previous business day</td>
 </tr>
 </tbody></table>
 
@@ -2814,35 +2914,35 @@ Connection: keep-alive
     </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"306380230"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABBV"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2588996033555621"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0302670281535698"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-12T09:22:16.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"306380230"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BKW"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2125797315247087"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0302670281535698"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-12T09:22:16.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"306380230"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CQB"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2175806295716652"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0302670281535698"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-12T09:22:16.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"306380230"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MDT"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2143790834311274"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0302670281535698"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-12T09:22:16.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"306380230"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MYL"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2509134584133897"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0302670281535698"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
@@ -4145,8 +4245,8 @@ Connection: keep-alive
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-04T04:00:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"263246119"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0302670281535698"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker_return"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0179763739085772"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ticker_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
@@ -4428,8 +4528,8 @@ Connection: keep-alive
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-04T04:00:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"351709067"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0302670281535698"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Technology"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sector_return"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.7500000000000000"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sector_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
@@ -4478,8 +4578,8 @@ Connection: keep-alive
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-04T04:00:00.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17475489"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="err">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0302670281535698"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mp_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Technology"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sector_return"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5000000000000000"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sector_rank"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w">
