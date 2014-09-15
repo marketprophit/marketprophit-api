@@ -189,8 +189,8 @@ Returns a complete range of historical intraday records for a given user based o
 Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 user_id | User ID of a Twitter username | yes | none
-start_date | Start date range (MM-DD-YYYY) | no | 1 month ago
-end_date | End date range (MM-DD-YYYY) | no | previous business day
+start_ts | Start date range (MM-DD-YYYY) or ISO-8601 timestamp | no | 1 month ago
+end_ts | End date range (MM-DD-YYYY) or ISO-8601 timestamp | no | previous business day
 ticker | 3-4 character long alphanumeric stock ticker symbol | no | none
 
 
@@ -253,6 +253,6 @@ Returns a complete range of historical intraday records for a given ticker based
 Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 ticker | 3-4 character long alphanumeric stock ticker symbol | yes | none
-start_date | Start date range (MM-DD-YYYY) | no | 1 month ago
-end_date | End date range (MM-DD-YYYY) | no | previous business day
+start_ts | Start date range (MM-DD-YYYY) or ISO-8601 timestamp | no | 1 month ago
+end_ts | End date range (MM-DD-YYYY) or ISO-8601 timestamp | no | previous business day
 user_id | User ID of a Twitter username | no | none
