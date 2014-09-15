@@ -174,5 +174,5 @@ Daily market prophit sentiment z-score moving average historical data
 Parameter | Description | Required | Default
 --------- | ----------- | -------- | -------
 ticker | 3-4 character long alphanumeric stock ticker symbol | yes | none
-start_ts | ISO-8601 timestamp | no | last year from previous biz day
-end_ts | ISO-8601 timestamp | no | yesterday
+start_date | Start date range (MM-DD-YYYY) | no | last year from previous biz day
+end_date | End date range (MM-DD-YYYY) | no | previous business day
